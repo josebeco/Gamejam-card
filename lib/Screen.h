@@ -1,5 +1,5 @@
 #include "RGB.h"
-void start(int, char **);
+void startScreen(int, char **);
 struct RGB getPixel();
 void setPixel(int, int , struct RGB);
-void init(int , int, int, int);
+void initScreen(int , int, int, int);

@@ -1,6 +1,6 @@
 #include <GL/glut.h>
 #include "RGB.h"
-#include <Main.h>
+#include "Main.h"
 using namespace std;
 
 int WIDTH = 0;
@@ -24,14 +24,6 @@ void setPixel(int i, int j, struct RGB rgb)
     pixels[i * WIDTH + j] = rgb;
 }
 
-void display()
-{
-    cycle();
-    glClear(GL_COLOR_BUFFER_BIT);
-    glDrawPixels(WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, realScreen);
-    glutSwapBuffers();
-}
-
 void makeScreen()
 {
     int position = 0;
@@ -50,6 +42,15 @@ void makeScreen()
             }
         }
     }
+}
+
+void display()
+{
+    cycle();
+    makeScreen();
+    glClear(GL_COLOR_BUFFER_BIT);
+    glDrawPixels(WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, realScreen);
+    glutSwapBuffers();
 }
 
 void keyboard(unsigned char key, int x, int y)
@@ -71,7 +72,7 @@ void timer(int extra)
     glutTimerFunc(20, timer, 0); // 50 fps 1000 / 20
 }
 
-void start(int argc, char **argv)
+void startScreen(int argc, char **argv)
 {
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
@@ -85,7 +86,7 @@ void start(int argc, char **argv)
     glutMainLoop();
 }
 
-void init(int width, int height, int multipliar_heigth, int multipliar_width)
+void initScreen(int width, int height, int multipliar_width, int multipliar_heigth)
 {
     WIDTH = width;
     HEIGHT = height;

@@ -1,5 +1,10 @@
+all: build run
+
 build:
-	gcc lib/SoundPlayer.cpp -o teste -lSDL
+	g++ -o game Main.cpp lib/Screen.cpp -lglut -lGLU -lGL 
+
+run: build
+	./game
 
 git:
 	git config --global user.name josebeco
