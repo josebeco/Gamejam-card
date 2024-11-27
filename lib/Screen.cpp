@@ -77,7 +77,7 @@ void startScreen(int argc, char **argv)
     glutInit(&argc, argv);
     glutInitDisplayMode(GLUT_DOUBLE | GLUT_RGB);
 
-    glutInitWindowSize(WIDTH, HEIGHT);
+    glutInitWindowSize(WIDTH * MULTIPLIAR_WIDTH, HEIGHT * MULTIPLIAR_HEIGTH);
     glutCreateWindow("game");
     initGL();
     glutDisplayFunc(display);
