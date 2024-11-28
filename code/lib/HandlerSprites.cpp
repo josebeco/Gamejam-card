@@ -65,7 +65,7 @@ void readSprites(string fileName, struct RGB sprites[])
  
     qtd = stoi(aux);
 
-    sprites = new struct RGB[(qtd * witdh) + height];
+    sprites = new struct RGB[qtd * witdh * height];
 
     for (int i = 0; getline(reader, str); i++)
     {
