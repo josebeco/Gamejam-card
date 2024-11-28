@@ -1,0 +1,2 @@
+void cycle();
+void initGame();

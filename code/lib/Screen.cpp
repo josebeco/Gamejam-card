@@ -1,6 +1,6 @@
 #include <GL/glut.h>
 #include "RGB.h"
-#include "Main.h"
+#include "Game.h"
 using namespace std;
 
 int WIDTH = 0;
