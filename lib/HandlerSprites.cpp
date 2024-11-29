@@ -43,14 +43,13 @@ struct Sprite *readSprites(string fileName)
     {
         aux += str[i];
     }
-
     qtd = stoi(aux);
 
     struct Sprite *sprites = new struct Sprite[qtd];
 
     for (int c = 0; c < qtd; c++)
     {
-
+        getline(reader, str);
         aux = "";
         for (int i = 0; i < str.length() && !isSeparator(str[i]); i++)
         {
@@ -66,7 +65,6 @@ struct Sprite *readSprites(string fileName)
             aux += str[j];
             j++;
         }
-
         sprites[c].width = stoi(aux);
 
         sprites[c].pixels = new struct RGB[sprites[c].width * sprites[c].heigth];
