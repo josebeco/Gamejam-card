@@ -1,5 +1,5 @@
 #include <string>
-#include "../lib/Sprite.h"
+#include "Sprite.h"
 using namespace std;
 
 struct Sprite * readSprites(string fileName);

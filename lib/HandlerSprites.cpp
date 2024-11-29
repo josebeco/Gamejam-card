@@ -1,7 +1,7 @@
 #include <string>
 #include <fstream>
-#include "RGB.h"
-#include "Sprite.h"
+#include "fileH/RGB.h"
+#include "fileH/Sprite.h"
 using namespace std;
 
 const struct RGB BLACK = {0, 0, 0};

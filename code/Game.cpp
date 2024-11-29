@@ -1,34 +1,18 @@
-#include "Screen.h"
-#include "HandlerSprites.h"
-#include "../lib/RGB.h"
-#include "SoundPlayer.h"
-#include "../lib/Sprite.h"
+#include "../lib/fileH/Draw.h"
+#include "../lib/fileH/Screen.h"
+#include "../lib/fileH/SoundPlayer.h"
+#include "../lib/fileH/HandlerSprites.h"
+#include "../lib/fileH/RGB.h"
+#include "../lib/fileH/Sprite.h"
 struct Sprite *alfabeto;
 struct Sprite *cartas;
 
-
-void initGame(){
+void initGame()
+{
     alfabeto = readSprites("sprites/alfabeto.txt");
-    //readSprites("sprites/cartas.txt", cartas);
-
+    // readSprites("sprites/cartas.txt", cartas);
 }
 
-void drawRectangle(int lui, int luj, int width, int heigth, struct RGB color){ // left upper corner
-    while (--heigth >= 0)
-    {
-        for (int i = 0; i < width; i++)
-        {
-            setPixel(lui - heigth, luj + i, color);
-        }
-        
-    }   
+void cycle()
+{
 }
-
-void putSprite(int lui, int luj, struct Sprite sprite){ // left upper corner
-
-}
-
-void cycle(){
-    
-}
-

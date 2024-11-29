@@ -1,8 +1,6 @@
 #include <GL/glut.h>
-#include "RGB.h"
-#include "Game.h"
-#include <iostream>
-using namespace std;
+#include "fileH/RGB.h"
+#include "../code/Game.h"
 
 int WIDTH = 0;
 int HEIGHT = 0;

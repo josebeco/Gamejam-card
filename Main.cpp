@@ -1,5 +1,5 @@
-#include "code/Screen.h"
-#include "lib/Game.h"
+#include "lib/fileH/Screen.h"
+#include "code/Game.h"
 
 int main(int argc, char **argv){
     initGame();
