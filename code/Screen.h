@@ -1,4 +1,4 @@
-#include "lib/RGB.h"
+#include "../lib/RGB.h"
 void startScreen(int, char **);
 struct RGB getPixel();
 void setPixel(int, int , struct RGB);

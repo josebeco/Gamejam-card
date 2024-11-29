@@ -1,4 +1,5 @@
 #include <string>
+#include "../lib/Sprite.h"
 using namespace std;
 
-void readSprites(string fileName, struct RGB sprites[]);
+struct Sprite * readSprites(string fileName);

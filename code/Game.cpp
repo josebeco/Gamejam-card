@@ -1,12 +1,13 @@
 #include "Screen.h"
 #include "HandlerSprites.h"
-#include "lib/RGB.h"
+#include "../lib/RGB.h"
 #include "SoundPlayer.h"
-struct RGB *alfabeto;
-struct RGB *cartas;
+#include "../lib/Sprite.h"
+struct Sprite *alfabeto;
+struct Sprite *cartas;
 
 void initGame(){
-    readSprites("sprites/alfabeto.txt", alfabeto);
+    alfabeto = readSprites("sprites/alfabeto.txt");
     //readSprites("sprites/cartas.txt", cartas);
 
 }
