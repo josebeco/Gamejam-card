@@ -1,7 +1,7 @@
 all: build run
 
 build:
-	g++ -o game Main.cpp code/*.cpp lib/*.cpp -lglut -lGLU -lGL -lSDL2
+	g++ -o game Main.cpp code/*.cpp lib/*.cpp simulador/*.cpp -lglut -lGLU -lGL -lSDL2
 
 run: build
 	./game

@@ -20,5 +20,6 @@ struct Carta{
 
     int values[10];
     bool imuneSumir;
-}
+    bool nula = false;
+};
 #endif

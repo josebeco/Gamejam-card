@@ -4,6 +4,7 @@
 #include "../lib/fileH/HandlerSprites.h"
 #include "../lib/fileH/RGB.h"
 #include "../lib/fileH/Sprite.h"
+#include "../simulador/jogo.h"
 struct Sprite *alfabeto;
 struct Sprite *cartas;
 

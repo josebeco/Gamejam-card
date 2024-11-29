@@ -1,11 +1,12 @@
-
+#include "Player.h"
 // ao entrar
-void putInPlay(int ind){
+void putInPlay(int ind, struct Player atual, struct Player oponente){
     // cham metodo
 }
 
-void inPlay(int ind){
+bool inPlay(int ind, struct Player atual, struct Player oponente){
     // cham metodo
+    return false;
 }
 
 
