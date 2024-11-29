@@ -4,7 +4,7 @@
 #include "Sprite.h"
 using namespace std;
 
-const struct RGB BLACK = {255, 255, 255};
+const struct RGB BLACK = {0, 0, 0};
 const struct RGB NONE = {-1, -1, -1};
 
 bool isSeparator(char c)

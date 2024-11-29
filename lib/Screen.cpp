@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include "RGB.h"
 #include "Game.h"
+#include <iostream>
 using namespace std;
 
 int WIDTH = 0;
@@ -15,12 +16,18 @@ void initGL()
     glClearColor(0.0, 0.0, 0.0, 0.0);
 }
 
-struct RGB getPixel(int i, int j){
+struct RGB getPixel(int i, int j)
+{
     return pixels[i * WIDTH + j];
 }
 
 void setPixel(int i, int j, struct RGB rgb)
 {
+    if (rgb.r == -1 && rgb.g == -1 && rgb.b == -1)
+    {
+        return;
+    }
+
     pixels[i * WIDTH + j] = rgb;
 }
 
@@ -49,7 +56,7 @@ void display()
     cycle();
     makeScreen();
     glClear(GL_COLOR_BUFFER_BIT);
-    glDrawPixels(WIDTH, HEIGHT, GL_RGB, GL_UNSIGNED_BYTE, realScreen);
+    glDrawPixels(WIDTH * MULTIPLIAR_WIDTH, HEIGHT * MULTIPLIAR_HEIGTH, GL_RGB, GL_UNSIGNED_BYTE, realScreen);
     glutSwapBuffers();
 }
 

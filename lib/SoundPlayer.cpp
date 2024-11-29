@@ -2,11 +2,11 @@
 #include <string>
 using namespace std;
 
-void init(){
+void initSound(){
     SDL_Init(SDL_INIT_AUDIO);
 }
 
-void close(){
+void closeSound(){
      SDL_Quit();
 }
 
