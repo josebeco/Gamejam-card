@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "simulatorH/Player.h"
 // ao entrar
 void putInPlay(int ind, struct Player atual, struct Player oponente){
     // cham metodo

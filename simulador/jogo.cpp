@@ -1,6 +1,6 @@
-#include "Player.h"
-#include "Carta.h"
-#include "cartas.h"
+#include "simulatorH/Player.h"
+#include "simulatorH/Carta.h"
+#include "simulatorH/cartas.h"
 struct Player jogadores[2];
 struct Player jogadorAtual;
 int indAtual;
