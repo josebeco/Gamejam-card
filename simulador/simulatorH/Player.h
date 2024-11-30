@@ -12,5 +12,6 @@ struct Player{
     struct Carta emJogo[5];
     bool livreEmJogo[5];
     struct Carta descarte[25];
+    int descarteLength = 0;
 };
 #endif

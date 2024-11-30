@@ -1,6 +1,6 @@
 #include "simulatorH/Player.h"
 #include "simulatorH/Carta.h"
-#include "simulatorH/cartas.h"
+#include "simulatorH/efeitosCartas.h"
 struct Player jogadores[2];
 struct Player jogadorAtual;
 int indAtual;
@@ -16,19 +16,26 @@ bool checkDeath()
     return jogadorAtual.adr <= 0 || jogadorAtual.adr >= 100;
 }
 
-void drawCard()
+bool drawCard()
 {
+    if(jogadorAtual.indBaralho < 0){
+        return false;
+    }
+
     jogadorAtual.mao[jogadorAtual.maoLength++] = jogadorAtual.baralho[jogadorAtual.indBaralho--];
+    return true;
 }
 
-void playCard(int indCarta)
+bool espacoLivre()
 {
-    putInPlay(jogadorAtual.mao[indCarta].indFuncPutInPlay, jogadorAtual, jogadores[indAtual ^ 1]);
-    for (int i = indCarta; i < jogadorAtual.maoLength; i++)
+    for (int i = 0; i < 5; i++)
     {
-        jogadorAtual.mao[i] = jogadorAtual.mao[i + 1];
+        if (jogadorAtual.livreEmJogo[i])
+        {
+            return true;
+        }
     }
-    jogadorAtual.maoLength--;
+    return false;
 }
 
 void passTurn()
@@ -39,10 +46,32 @@ void passTurn()
         {
             continue;
         }
-        if (inPlay(jogadorAtual.emJogo[i].indFuncInPlay, jogadorAtual, jogadores[indAtual ^ 1]))
+        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indAtual ^ 1]))
         {
             jogadorAtual.livreEmJogo[i] = true;
             jogadorAtual.emJogo[i].nula = true;
         }
     }
+}
+
+bool playCard(int indCarta)
+{
+    if (!jogadorAtual.mao[indCarta].item && !espacoLivre)
+    {
+        return false;
+    }
+
+    putInPlay(jogadorAtual.mao[indCarta], jogadorAtual, jogadores[indAtual ^ 1]);
+    for (int i = indCarta; i < jogadorAtual.maoLength; i++)
+    {
+        jogadorAtual.mao[i] = jogadorAtual.mao[i + 1];
+    }
+    jogadorAtual.maoLength--;
+
+    if (jogadorAtual.mao[indCarta].mascara)
+    {
+        passTurn();
+    }
+
+    return true;
 }

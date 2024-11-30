@@ -14,6 +14,8 @@ void initGame()
     // readSprites("sprites/cartas.txt", cartas);
 }
 
+
+
 void cycle()
 {
 }
