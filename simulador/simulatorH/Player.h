@@ -5,7 +5,7 @@
 #define PLAYERHEADER
 struct Player{
     int adr = 50;
-    struct Carta baralho[20];
+    struct Carta baralho[25];
     int indBaralho = 19;
     struct Carta mao[25];
     int maoLength = 0;

@@ -1,9 +1,14 @@
 #include "simulatorH/Player.h"
 #include "simulatorH/Carta.h"
 #include "simulatorH/efeitosCartas.h"
+#include <cstdlib> 
+#include <ctime>
+using namespace std;
+
 struct Player jogadores[2];
 struct Player jogadorAtual;
 int indAtual;
+
 
 void setJogadorAtual(int ind)
 {
@@ -74,4 +79,32 @@ bool playCard(int indCarta)
     }
 
     return true;
+}
+
+void embaralharCartas(struct Player jogador){   
+    srand(time(NULL));
+    bool indUsado [jogador.indBaralho + 1];
+    struct Carta mediador[jogador.indBaralho + 1];
+    for (int i = 0; i < jogador.indBaralho + 1; i++)
+    {
+        indUsado[i] = false;
+    }
+    
+    for (int i = 0; i < indBaralho + 1; i++)
+    {
+        int ind;
+        do{
+            ind = rand() % (jogador.indBaralho + 1);
+        }while(indUsado[ind]);
+
+        indUsado[ind] = true;
+        mediador[i] = jogador.baralho[ind];
+    }
+
+    for (int i = 0; i < jogador.indBaralho + 1; i++)
+    {
+        jogador.baralho[i] = mediador[i];
+    }
+    
+    
 }

@@ -54,6 +54,9 @@ void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
         {
             atual.baralho[ind] = atual.baralho[ind + 1];
         }
+        atual.indBaralho--;
+
+        
     }
 }
 
