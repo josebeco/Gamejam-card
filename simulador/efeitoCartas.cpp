@@ -1,6 +1,7 @@
 #include "simulatorH/Player.h"
 #include "simulatorH/Carta.h"
 #include "simulatorH/HandlerCarta.h"
+#include "simulatorH/jogo.h"
 using namespace std;
 // ao entrar
 
@@ -12,6 +13,7 @@ void adrenaline_PutInPlay(struct Carta carta, struct Player atual, struct Player
 
 void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
 {
+    
     // TODO pega carta esoclhida
     int ind = 0;
     oponente.adr += value[0];
@@ -36,7 +38,7 @@ void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
     int ind = 0;
     oponente.adr += value[0];
     atual.adr += value[1];
-    if (value[2] == 1)
+    if (value[2] == 1 && atual.descarteLength > 0)
     {
         // TODO MOSTRAR PILHA DE DESCARTE E PEGAR CARTA
         atual.mao[atual.maoLength++] = atual.descarte[ind];
@@ -46,7 +48,7 @@ void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
         }
         atual.descarteLength--;
     }
-    else if (value[2] == 2)
+    else if (value[2] == 2 && atual.indBaralho > -1)
     {
         // TODO MOSTARR BARALHO E PEGAR CARTA
         atual.mao[atual.maoLength] = atual.baralho[ind];
@@ -55,8 +57,7 @@ void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
             atual.baralho[ind] = atual.baralho[ind + 1];
         }
         atual.indBaralho--;
-
-        
+        embaralharCartas(atual);
     }
 }
 
