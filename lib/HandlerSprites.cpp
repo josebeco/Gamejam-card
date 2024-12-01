@@ -4,8 +4,6 @@
 #include "fileH/Sprite.h"
 using namespace std;
 
-const struct RGB BLACK = {0, 0, 0};
-const struct RGB NONE = {-1, -1, -1};
 
 bool isSeparator(char c)
 {
@@ -75,7 +73,7 @@ struct Sprite *readSprites(string fileName)
 
             for (int j = 0; j < sprites[c].width; j++)
             {
-                sprites[c].pixels[(i * sprites[c].width) + j] = (str[j] == '.') ? NONE : BLACK;
+                sprites[c].pixels[(i * sprites[c].width) + j] = str[j] == '=';
             }
         }
     }

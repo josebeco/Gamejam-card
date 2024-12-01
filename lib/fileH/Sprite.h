@@ -1,11 +1,10 @@
-#include "RGB.h"
 #ifndef SPRITEHEADER
 
 #define SPRITEHEADER
 
 struct Sprite
 {
-    struct RGB *pixels;
+    bool *pixels;
     int heigth;
     int width;
 };
