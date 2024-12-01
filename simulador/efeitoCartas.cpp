@@ -45,14 +45,15 @@ void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
             atual.descarte[ind] = atual.descarte[++ind];
         }
         atual.descarteLength--;
-    }else if(value[2] == 2){
+    }
+    else if (value[2] == 2)
+    {
         // TODO MOSTARR BARALHO E PEGAR CARTA
-       atual.mao[atual.maoLength] = atual.baralho[ind];
-       for (int i = ind; i < atual.indBaralho; i++)
-       {
+        atual.mao[atual.maoLength] = atual.baralho[ind];
+        for (int i = ind; i < atual.indBaralho; i++)
+        {
             atual.baralho[ind] = atual.baralho[ind + 1];
-       }
-       
+        }
     }
 }
 
