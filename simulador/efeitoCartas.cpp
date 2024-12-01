@@ -33,7 +33,7 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
     }
 }
 
-void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente) // 2
+void pegarCarta_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 2
 {
     int ind = 0;
     oponente.adr += value[0];
@@ -61,9 +61,11 @@ void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
     }
 }
 
+void (*funcPutInPlay[3]) (struct Carta, struct Player, struct Player) = {&adrenaline_PutInPlay, &removeCard_PutInPlay, &removeCard_PutInPlay};
+
 void putInPlay(struct Carta carta, struct Player atual, struct Player oponente)
 {
-    // cham metodo
+    funcPutInPlay[carta.indFuncPutInPlay] (carta, atual, oponente);
 }
 
 bool inPlay(struct Carta carta, struct Player atual, struct Player oponente)
