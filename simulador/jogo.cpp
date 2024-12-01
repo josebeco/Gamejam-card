@@ -62,7 +62,7 @@ bool playCard(int indCarta)
     }
 
     putInPlay(jogadorAtual.mao[indCarta], jogadorAtual, jogadores[indAtual ^ 1]);
-    for (int i = indCarta; i < jogadorAtual.maoLength; i++)
+    for (int i = indCarta; i < jogadorAtual.maoLength - 1; i++)
     {
         jogadorAtual.mao[i] = jogadorAtual.mao[i + 1];
     }

@@ -1,20 +1,16 @@
 #include "simulatorH/Player.h"
 #include "simulatorH/Carta.h"
 #include "simulatorH/HandlerCarta.h"
-#define ID_REZA 1
-#define ID_SERINGA 1
-#define ID_FOMO 1
-#define ID_CHAMADA 1
 using namespace std;
 // ao entrar
 
-void adrenaline_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente)
+void adrenaline_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 0
 {
     oponente.adr += carta.values[0];
     atual.adr += carta.valeus[1];
 }
 
-void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente)
+void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
 {
     // TODO pega carta esoclhida
     int ind = 0;
@@ -24,23 +20,23 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
     oponente.emJogo[ind].nula = true;
     oponente.livreEmJogo[ind] = true;
 
-    if (carta.id == ID_REZA)
+    if (value[2] == 1)
     {
         oponente.descarte[oponente.descarteLength++] = oponente.emJogo[ind];
     }
-    else if (carta.id == ID_SERINGA)
+    else if (value[2] == 2)
     {
         struct Carta nova_carta;
         atual.mao[atual.maoLength++] = copiarCarta(nova_carta, oponente.emJogo[ind].id);
     }
 }
 
-void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
+void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente) // 2
 {
     int ind = 0;
     oponente.adr += value[0];
     atual.adr += value[1];
-    if (carta.id == ID_CHAMADA)
+    if (value[2] == 1)
     {
         // TODO MOSTRAR PILHA DE DESCARTE E PEGAR CARTA
         atual.mao[atual.maoLength++] = atual.descarte[ind];
@@ -49,8 +45,14 @@ void pegarCarta(struct Carta carta, struct Player atual, struct Player oponente)
             atual.descarte[ind] = atual.descarte[++ind];
         }
         atual.descarteLength--;
-    }else if(carta.id == ID_FOMO){
+    }else if(value[2] == 2){
         // TODO MOSTARR BARALHO E PEGAR CARTA
+       atual.mao[atual.maoLength] = atual.baralho[ind];
+       for (int i = ind; i < atual.indBaralho; i++)
+       {
+            atual.baralho[ind] = atual.baralho[ind + 1];
+       }
+       
     }
 }
 
