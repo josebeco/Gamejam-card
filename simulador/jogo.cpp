@@ -1,14 +1,13 @@
 #include "simulatorH/Player.h"
 #include "simulatorH/Carta.h"
 #include "simulatorH/efeitosCartas.h"
-#include <cstdlib> 
+#include <cstdlib>
 #include <ctime>
 using namespace std;
 
 struct Player jogadores[2];
 struct Player jogadorAtual;
 int indAtual;
-
 
 void setJogadorAtual(int ind)
 {
@@ -23,7 +22,8 @@ bool checkDeath()
 
 bool drawCard()
 {
-    if(jogadorAtual.indBaralho < 0){
+    if (jogadorAtual.indBaralho < 0)
+    {
         return false;
     }
 
@@ -47,7 +47,20 @@ void passTurn()
 {
     for (int i = 0; i < 5; i++)
     {
-        if (jogadorAtual.livreEmJogo[i])
+        if (jogadorAtual.livreEmJogo[i] || jogadorAtual.emJogo[i].indFuncInPlay == 1) // se for buff
+        {
+            continue;
+        }
+        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indAtual ^ 1]))
+        {
+            jogadorAtual.livreEmJogo[i] = true;
+            jogadorAtual.emJogo[i].nula = true;
+        }
+    }
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (jogadorAtual.livreEmJogo[i] || jogadorAtual.emJogo[i].indFuncInPlay != 1) // se for buff
         {
             continue;
         }
@@ -81,21 +94,23 @@ bool playCard(int indCarta)
     return true;
 }
 
-void embaralharCartas(struct Player jogador){   
+void embaralharCartas(struct Player jogador)
+{
     srand(time(NULL));
-    bool indUsado [jogador.indBaralho + 1];
+    bool indUsado[jogador.indBaralho + 1];
     struct Carta mediador[jogador.indBaralho + 1];
     for (int i = 0; i < jogador.indBaralho + 1; i++)
     {
         indUsado[i] = false;
     }
-    
+
     for (int i = 0; i < indBaralho + 1; i++)
     {
         int ind;
-        do{
+        do
+        {
             ind = rand() % (jogador.indBaralho + 1);
-        }while(indUsado[ind]);
+        } while (indUsado[ind]);
 
         indUsado[ind] = true;
         mediador[i] = jogador.baralho[ind];
@@ -105,6 +120,4 @@ void embaralharCartas(struct Player jogador){
     {
         jogador.baralho[i] = mediador[i];
     }
-    
-    
 }
