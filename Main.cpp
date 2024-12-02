@@ -1,8 +1,8 @@
 #include "lib/fileH/Screen.h"
-#include "code/Game.h"
+#include "lib/fileH/Draw.h"
 
 int main(int argc, char **argv){
-    initGame();
+    initSprites();
     initScreen(320 , 240, 3, 3);
     startScreen(argc, argv);
     return 0;
