@@ -8,7 +8,8 @@ using namespace std;
 
 #define showCardsJ 240
 const struct RGB BLACK = {0, 0, 0};
-const struct RGB WHITE = {255, 255, 255};
+const struct RGB YELLOW_PAGE = {204, 201, 172};
+
 
 struct Sprite *alfabeto;
 struct Sprite *cartas;
@@ -49,18 +50,18 @@ void drawString(string frase, int lui, int luj, struct RGB color)
     for (int i = 0; i < frase.length(); i++)
     {
         if(frase[i] == ' '){
-            luj += 5;
+            luj += 3;
             continue;
         }
 
-        drawSprite(lui, luj + i, alfabeto[frase[i] - 'a'], color);
+        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color);
         luj += alfabeto[frase[i] - 'a'].width + 1;
     }
 }
 
 void showCards(struct Carta cartas[], int length)
 {
-    drawRectangle(240, showCardsJ, 240, 320 - showCardsJ, WHITE);
+    drawRectangle(239, showCardsJ, 240, 360 - showCardsJ, YELLOW_PAGE);
     for (int i = 0; i < length; i++)
     {
        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK);

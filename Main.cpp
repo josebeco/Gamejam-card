@@ -3,7 +3,7 @@
 
 int main(int argc, char **argv){
     initSprites();
-    initScreen(320 , 240, 3, 3);
+    initScreen(360 , 240, 3, 3);
     startScreen(argc, argv);
     return 0;
 }

@@ -5,11 +5,12 @@
 #include "../modelos/Sprite.h"
 #include "../simulador/simulatorH/jogo.h"
 const struct RGB BLACK = {0, 0, 0};
+const struct RGB YELLOW_PAGE = {200, 200, 200};
 
 
 
 void cycle()
 {
-    drawString("cha", 10, 0, BLACK);
     showCards(nullptr, 0);
+    drawString("mascara do cha", 230, 260, BLACK);
 }
