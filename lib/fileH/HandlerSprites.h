@@ -1,5 +1,5 @@
 #include <string>
-#include "Sprite.h"
+#include "../../modelos/Sprite.h"
 using namespace std;
 
 struct Sprite * readSprites(string fileName);

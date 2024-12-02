@@ -1,4 +1,4 @@
-#include "Player.h"
+#include "../../modelos/Player.h"
 void setJogadorAtual(int);
 bool checkDeath();
 bool drawCard();

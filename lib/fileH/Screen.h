@@ -1,4 +1,4 @@
-#include "RGB.h"
+#include "../../modelos/RGB.h"
 void startScreen(int, char **);
 struct RGB getPixel();
 void setPixel(int, int, struct RGB);

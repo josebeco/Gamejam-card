@@ -1,5 +1,5 @@
-#include "simulatorH/Player.h"
-#include "simulatorH/Carta.h"
+#include "../modelos/Player.h"
+#include "../modelos/Carta.h"
 #include "simulatorH/HandlerCarta.h"
 #include "simulatorH/jogo.h"
 using namespace std;

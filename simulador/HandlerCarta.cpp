@@ -1,4 +1,4 @@
-#include "simulatorH/Carta.h"
+#include "../modelos/Carta.h"
 struct Carta *original;
 
 void copiarCarta(struct Carta carta, int ind)

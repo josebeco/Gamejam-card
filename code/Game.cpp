@@ -1,8 +1,8 @@
 #include "../lib/fileH/Draw.h"
 #include "../lib/fileH/Screen.h"
 #include "../lib/fileH/HandlerSprites.h"
-#include "../lib/fileH/RGB.h"
-#include "../lib/fileH/Sprite.h"
+#include "../modelos/RGB.h"
+#include "../modelos/Sprite.h"
 #include "../simulador/simulatorH/jogo.h"
 const struct RGB BLACK = {0, 0, 0};
 

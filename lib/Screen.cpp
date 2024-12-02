@@ -1,5 +1,5 @@
 #include <GL/glut.h>
-#include "fileH/RGB.h"
+#include "../modelos/RGB.h"
 #include "../code/Game.h"
 
 int WIDTH = 0;

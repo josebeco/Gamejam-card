@@ -1,6 +1,6 @@
 #include <string>
 #include <fstream>
-#include "fileH/Sprite.h"
+#include "../modelos/Sprite.h"
 using namespace std;
 
 

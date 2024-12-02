@@ -1,8 +1,8 @@
-#include "fileH/RGB.h"
-#include "fileH/Sprite.h"
+#include "../modelos/RGB.h"
+#include "../modelos/Sprite.h"
 #include "fileH/Screen.h"
 #include "fileH/HandlerSprites.h"
-#include "../simulador/simulatorH/Carta.h"
+#include "../modelos/Carta.h"
 #include <string>
 using namespace std;
 

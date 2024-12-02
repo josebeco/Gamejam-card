@@ -1,6 +1,6 @@
-#include "RGB.h"
-#include "Sprite.h"
-#include "../../simulador/simulatorH/Carta.h"
+#include "../../modelos/RGB.h"
+#include "../../modelos/Sprite.h"
+#include "../../modelos/Carta.h"
 #include <string>
 using namespace std;
 
