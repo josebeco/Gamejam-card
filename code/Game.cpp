@@ -1,6 +1,5 @@
 #include "../lib/fileH/Draw.h"
 #include "../lib/fileH/Screen.h"
-#include "../lib/fileH/SoundPlayer.h"
 #include "../lib/fileH/HandlerSprites.h"
 #include "../lib/fileH/RGB.h"
 #include "../lib/fileH/Sprite.h"
