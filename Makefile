@@ -1,13 +1,13 @@
 all: build run
 
 build:
-	g++ -o game Main.cpp code/*.cpp lib/*.cpp simulador/*.cpp -lglut -lGLU -lGL 
+	g++ -o game Main.cpp code/*.cpp lib/*.cpp simulador/*.cpp   -lGL -Limports/ -lglut
 
 run: build
 	./game
 
 static:
-	g++ -o game Main.cpp code/*.cpp lib/*.cpp simulador/*.cpp  -lGL -lglut -lGLU 
+	g++ -o game Main.cpp code/*.cpp lib/*.cpp simulador/*.cpp  -lGL -Limports/ -lglut  
 
 win:
 	x86_64-w64-mingw32-g++ -o game Main.cpp code/*.cpp lib/*.cpp simulador/*.cpp -lopengl32 -lglu32 -lfreeglut -Wl,--subsystem,windows
