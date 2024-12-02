@@ -19,7 +19,7 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color)
     {
         for (int j = 0; j < sprite.width; j++)
         {
-            if (sprite[i * sprite.width + j])
+            if (sprite.pixels[i * sprite.width + j])
             {
                 setPixel(lui - i, luj + j, color);
             }

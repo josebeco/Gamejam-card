@@ -10,14 +10,14 @@ int added_value_negative_adrenaline = 0;
 void adrenaline_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 0
 {
     oponente.adr += carta.values[0];
-    atual.adr += carta.valeus[1];
+    atual.adr += carta.values[1];
 }
 
 void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
 {
     if (carta.values[3] != -1 && atual.adr < carta.values[3] || carta.values[4] != -1 && atual.adr > carta.values[4])
     {
-        return
+        return;
     }
 
     // TODO pega carta esoclhida
@@ -35,7 +35,8 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
     else if (carta.values[2] == 2)
     {
         struct Carta nova_carta;
-        atual.mao[atual.maoLength++] = copiarCarta(nova_carta, oponente.emJogo[ind].id);
+        copiarCarta(nova_carta, oponente.emJogo[ind].id);
+        atual.mao[atual.maoLength++] = nova_carta;
     }
 }
 
@@ -110,7 +111,7 @@ bool adrenaline_InPlay(struct Carta carta, struct Player atual, struct Player op
         }
 
         oponente.adr += carta.values[5];
-        atual.adr += carta.valeus[6];
+        atual.adr += carta.values[6];
     }
 
     return carta.turnosRestantes == 0;

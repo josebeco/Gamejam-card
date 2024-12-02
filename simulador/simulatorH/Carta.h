@@ -1,4 +1,4 @@
-#include "../lib/fileH/RGB.h"
+#include "../../lib/fileH/RGB.h"
 #include <string>
 using namespace std;
 

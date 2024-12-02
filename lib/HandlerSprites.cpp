@@ -1,6 +1,5 @@
 #include <string>
 #include <fstream>
-#include "fileH/RGB.h"
 #include "fileH/Sprite.h"
 using namespace std;
 
@@ -65,7 +64,7 @@ struct Sprite *readSprites(string fileName)
         }
         sprites[c].width = stoi(aux);
 
-        sprites[c].pixels = new struct RGB[sprites[c].width * sprites[c].heigth];
+        sprites[c].pixels = new bool[sprites[c].width * sprites[c].heigth];
 
         for (int i = 0; i < sprites[c].heigth; i++)
         {

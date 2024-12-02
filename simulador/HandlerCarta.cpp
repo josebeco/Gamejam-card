@@ -1,27 +1,31 @@
 #include "simulatorH/Carta.h"
-struct Carta *cartas;
+struct Carta *original;
 
 void copiarCarta(struct Carta carta, int ind)
 {
-    carta.id = cartas[ind].id;
+    carta.id = original[ind].id;
 
-    carta.mascara = cartas[ind].mascara;
-    carta.ambiente = cartas[ind].ambiente;
-    carta.item = cartas[ind].item;
+    carta.mascara = original[ind].mascara;
+    carta.ambiente = original[ind].ambiente;
+    carta.item = original[ind].item;
 
-    carta.nome = cartas[ind].nome;
-    carta.descricao = carta[ind].descricao;
+    carta.nome = original[ind].nome;
+    carta.descricao = original[ind].descricao;
 
-    carta.turnosRestantes = carta[ind].turnosRestantes;
+    carta.turnosRestantes = original[ind].turnosRestantes;
 
-    carta.indFuncInPlay = carta[ind].indFuncInPlay;
-    carta.indFuncPutInPlay = carta[ind].indFuncPutInPlay;
-    carta.indSprite = carta[ind].indSprite;
+    carta.indFuncInPlay = original[ind].indFuncInPlay;
+    carta.indFuncPutInPlay = original[ind].indFuncPutInPlay;
+    carta.indSprite = original[ind].indSprite;
 
-    carta.jumpscareColor = carta[ind].jumpscareColor;
-    carta.jumpscareSizeMultipliar = carta[ind].jumpscareSizeMultipliar;
+    carta.jumpscareColor = original[ind].jumpscareColor;
+    carta.jumpscareSizeMultipliar = original[ind].jumpscareSizeMultipliar;
 
-    carta.values = carta[ind].values;
-    carta.imuneSumir = carta[ind].imuneSumir;
-    carta.nula = carta[ind].nula;
+    for (int i = 0; i < 10; i++)
+    {
+        carta.values[i] = original[ind].values[i];
+    }
+    
+    carta.imuneSumir = original[ind].imuneSumir;
+    carta.nula = original[ind].nula;
 }

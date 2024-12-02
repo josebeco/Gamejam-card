@@ -104,7 +104,7 @@ void embaralharCartas(struct Player jogador)
         indUsado[i] = false;
     }
 
-    for (int i = 0; i < indBaralho + 1; i++)
+    for (int i = 0; i < jogador.indBaralho + 1; i++)
     {
         int ind;
         do

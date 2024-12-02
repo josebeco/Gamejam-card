@@ -1,4 +1,4 @@
-#include "simulatorH/Player.h"
+#include "Player.h"
 void setJogadorAtual(int);
 bool checkDeath();
 bool drawCard();
