@@ -1,6 +1,7 @@
 #include <GL/glut.h>
 #include "../modelos/RGB.h"
 #include "../code/Game.h"
+bool callCycle = true;
 
 int WIDTH = 0;
 int HEIGHT = 0;
@@ -51,7 +52,9 @@ void makeScreen()
 
 void display()
 {
-    cycle();
+    if(callCycle){
+        cycle();
+    }
     makeScreen();
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawPixels(WIDTH * MULTIPLIAR_WIDTH, HEIGHT * MULTIPLIAR_HEIGTH, GL_RGB, GL_UNSIGNED_BYTE, realScreen);
@@ -84,6 +87,12 @@ void timer(int extra)
 {
     glutPostRedisplay();
     glutTimerFunc(20, timer, 0); // 50 fps 1000 / 20
+}
+
+void timerOverride(){
+    callCycle = false;
+    glutPostRedisplay();
+    callCycle = true;
 }
 
 void startScreen(int argc, char **argv)
