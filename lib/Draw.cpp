@@ -14,6 +14,7 @@ const struct RGB YELLOW_PAGE = {204, 201, 172};
 struct Sprite *alfabeto;
 struct Sprite *cartas;
 
+
 void initSprites()
 {
     alfabeto = readSprites("sprites/alfabeto.txt");

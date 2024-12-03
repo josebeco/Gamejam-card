@@ -22,7 +22,6 @@ void decKi(){
     indKi--;
 }
 
-
 void decKj(){
     indKj--;
 }
