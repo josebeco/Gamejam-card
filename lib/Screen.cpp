@@ -65,8 +65,17 @@ void keyboard(unsigned char key, int x, int y)
     case 27:
         exit(0);
         break;
+    case 'w':
+        incKi();
+        break;
+    case 's':
+        decKi();
+        break;
+    case 'd':
+        incKj();
+        break;
     case 'a':
-        exit(0);
+        decKj();
         break;
     }
 }
