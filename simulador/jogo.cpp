@@ -1,9 +1,11 @@
 #include "../modelos/Player.h"
 #include "../modelos/Carta.h"
 #include "simulatorH/efeitosCartas.h"
+#include "../lib/fileH/Draw.h"
 #include <cstdlib>
 #include <ctime>
 using namespace std;
+
 
 struct Player jogadores[2];
 struct Player jogadorAtual;
@@ -56,6 +58,7 @@ void passTurn()
             jogadorAtual.livreEmJogo[i] = true;
             jogadorAtual.emJogo[i].nula = true;
         }
+        
     }
 
     for (int i = 0; i < 5; i++)
@@ -69,6 +72,7 @@ void passTurn()
             jogadorAtual.livreEmJogo[i] = true;
             jogadorAtual.emJogo[i].nula = true;
         }
+        
     }
 }
 

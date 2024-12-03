@@ -69,3 +69,7 @@ void showCards(struct Carta cartas[], int length)
     }
     
 }
+
+void jumpscare(struct Carta carta){
+    
+}
