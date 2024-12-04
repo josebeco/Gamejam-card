@@ -1,5 +1,12 @@
 #include "../modelos/Carta.h"
+#include <string>
+#include <fstream>
+using namespace std;
 struct Carta *original;
+
+void lerCartas(){
+
+}
 
 void copiarCarta(struct Carta carta, int ind)
 {

@@ -6,7 +6,7 @@
 #include <ctime>
 using namespace std;
 
-
+#define emJogoSize 5
 struct Player jogadores[2];
 struct Player jogadorAtual;
 int indAtual;
@@ -47,7 +47,7 @@ bool espacoLivre()
 
 void passTurn()
 {
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < emJogoSize; i++)
     {
         if (jogadorAtual.livreEmJogo[i] || jogadorAtual.emJogo[i].indFuncInPlay == 1) // se for buff
         {
@@ -58,10 +58,10 @@ void passTurn()
             jogadorAtual.livreEmJogo[i] = true;
             jogadorAtual.emJogo[i].nula = true;
         }
-        
+        jumpscare(jogadorAtual.emJogo[i]);
     }
 
-    for (int i = 0; i < 5; i++)
+    for (int i = 0; i < emJogoSize; i++)
     {
         if (jogadorAtual.livreEmJogo[i] || jogadorAtual.emJogo[i].indFuncInPlay != 1) // se for buff
         {
@@ -72,15 +72,28 @@ void passTurn()
             jogadorAtual.livreEmJogo[i] = true;
             jogadorAtual.emJogo[i].nula = true;
         }
-        
+        jumpscare(jogadorAtual.emJogo[i]);
     }
 }
 
 bool playCard(int indCarta)
 {
-    if (!jogadorAtual.mao[indCarta].item && !espacoLivre)
+    if (!jogadorAtual.mao[indCarta].item && !espacoLivre())
     {
         return false;
+    }
+
+    if (!jogadorAtual.mao[indCarta].item)
+    {
+        for (int i = 0; i < emJogoSize; i++)
+        {
+            if (jogadorAtual.livreEmJogo[i])
+            {
+                jogadorAtual.livreEmJogo[i] = false;
+                jogadorAtual.emJogo[i] = jogadorAtual.mao[indCarta];
+                break;
+            }
+        }
     }
 
     putInPlay(jogadorAtual.mao[indCarta], jogadorAtual, jogadores[indAtual ^ 1]);

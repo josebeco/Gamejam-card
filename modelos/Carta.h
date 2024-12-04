@@ -7,8 +7,8 @@ using namespace std;
 #define CARTAHEADER
 struct Carta{
     int id;
-    bool mascara, ambiente, item;
     string nome, descricao;
+    bool mascara, ambiente, item;
     int turnosRestantes;
 
     int indFuncPutInPlay;
