@@ -3,9 +3,7 @@
 #include "fileH/Screen.h"
 #include "fileH/HandlerSprites.h"
 #include "../modelos/Carta.h"
-#include <GL/freeglut.h>
 #include <string>
-#include <ctime>
 using namespace std;
 
 #define showCardsJ 240
@@ -15,6 +13,8 @@ const struct RGB YELLOW_PAGE = {204, 201, 172};
 
 struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
+struct S
+
 
 void initSprites()
 {
@@ -55,10 +55,7 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int wi
     }
 }
 
-void drawCard(int lui, int luj, struct Carta carta, struct RGB color, int width_multipliar, int heigth_multipliar)
-{ // left upper corner
-    drawSprite(lui, luj, spriteCartas[carta.indSprite], BLACK, 1, 1);
-}
+
 
 void drawString(string frase, int lui, int luj, struct RGB color)
 { // left upper corner
@@ -84,13 +81,7 @@ void showCards(struct Carta *cartas, int length)
     }
 }
 
-bool finishedJumpscare = false;
 
-void showJumpscare(int extra)
-{
-    timerOverride();
-    finishedJumpscare = true;
-}
 
 void jumpscare(struct Carta carta)
 {
@@ -98,11 +89,13 @@ void jumpscare(struct Carta carta)
     for (int i = 1; i <= carta.jumpscareSizeMultipliar; i++)
     {
         drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], carta.jumpscareColor, i, i);
-        finishedJumpscare = false;
-        glutTimerFunc(1000, showJumpscare, 0);
-        while (!finishedJumpscare)
-        {
-        }
         drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], YELLOW_PAGE, i, i);
     }
+}
+
+void drawMenu(int indKi, int indKj){
+    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawSprite()
+    drawString("play" , 130, screenWidth / 2 - (4 * 4), BLACK);
+    drawString("deck" , 110, screenWidth / 2 - (4 * 4), BLACK);
 }
