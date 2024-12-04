@@ -15,3 +15,5 @@ void drawString(string , int , int , struct RGB);
 void showCards(struct Carta *, int);
 void jumpscare(struct Carta);
 void drawMenu();
+void cancelar();
+void confirmar();

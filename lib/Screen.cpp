@@ -81,6 +81,12 @@ void keyboard(unsigned char key, int x, int y)
     case 'a':
         decKj();
         break;
+    case 'i':
+        confirmar();
+        break;
+    case 'o':
+        cancelar();
+        break;
     }
 }
 

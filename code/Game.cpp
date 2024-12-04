@@ -11,8 +11,6 @@ const struct RGB YELLOW_PAGE = {204, 201, 172};
 int state = 0; // 0-menu 1-deck 2-game 
 
 
-
-
 void cycle()
 {
     if(state == 0){

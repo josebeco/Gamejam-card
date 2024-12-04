@@ -17,6 +17,8 @@ struct Sprite * extras;
 
 int indKi = 0;
 int indKj = 0;
+bool confirmado;
+bool cancelado;
 
 void incKi(){
     indKi++;
@@ -32,6 +34,14 @@ void decKi(){
 
 void decKj(){
     indKj--;
+}
+
+void confirmar(){
+    confirmado = true;
+}
+
+void cancelar(){
+    cancelado = true;
 }
 
 void initSprites()
