@@ -3,24 +3,24 @@
 #include "../lib/fileH/HandlerSprites.h"
 #include <string>
 #include <fstream>
-using namespace std;
+
 struct Carta *original;
 string r;
 
 string inBetweenEmpty(int *ind, string str)
 {
-    cout << "a" << endl;
+  
     while (isSeparator(str[(*ind)]))
     {
         (*ind)++;
     }
     string r = "";
-    cout << "a" << endl;
+
     while ((*ind) < str.length() && !isSeparator(str[(*ind)]))
     {
         r += str[(*ind)++];
     }
-    cout << "a" << endl;
+   
     return r;
 }
 
@@ -41,13 +41,12 @@ string cleanString(string str)
 
 void lerCartas(string fileName)
 {
-    cout << "a" << endl;
     ifstream reader(fileName);
     if (!reader)
     {
         return;
     }
-    cout << "a" << endl;
+
     string str, aux;
     int qtd;
     int ind = 0;

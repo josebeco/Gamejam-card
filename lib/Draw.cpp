@@ -59,6 +59,11 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int wi
     }
 }
 
+void drawCard(int lui, int luj, struct Carta carta, struct RGB color, int width_multipliar, int heigth_multipliar)
+{ // left upper corner
+    drawSprite(lui, luj, spriteCartas[carta.indSprite], BLACK, 1, 1);
+}
+
 void drawString(string frase, int lui, int luj, struct RGB color)
 { // left upper corner
     for (int i = 0; i < frase.length(); i++)

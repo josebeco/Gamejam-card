@@ -30,8 +30,10 @@ void decKj(){
 
 void cycle()
 {
+    drawRectangle(239, 0, 220, 220, YELLOW_PAGE);
     struct Carta cafe;
     copiarCarta(cafe, 0);
-    jumpscare(cafe);
+    drawCard(200, 100, cafe, BLACK, 1, 1);
+   // jumpscare(cafe);
 }
 
