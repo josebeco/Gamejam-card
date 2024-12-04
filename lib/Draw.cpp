@@ -8,7 +8,7 @@
 #include <string>
 using namespace std;
 
-#define showCardsJ 240
+#define showCardsJ 220
 #define screenWidth 360
 const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
@@ -109,6 +109,16 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
     }
 }
 
+void drawCardWithDescription(struct Carta carta){
+    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawSprite(120 + spriteCartas[carta.indSprite].width, 20, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2);
+    
+}
+
+void drawGame(){
+
+}
+
 int showCards(struct Carta *cartas, int length)
 {
     if (length < 0)
@@ -118,7 +128,20 @@ int showCards(struct Carta *cartas, int length)
     drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
     for (int i = 0; i < length; i++)
     {
-        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK, 1, 1);
+        drawString(cartas[i].nome, 238 - i * 6 + 1, 231, BLACK, 1, 1);
+    }
+
+    indKi = 0;
+    while(true){
+        timerOverride();
+
+        if
+        if(confirmado){
+            drawCardWithDescription(cartas(indKi))
+        }
+        drawSprite(238 - indKi * 6 + 1, screenWidth - showCardsJ + 1, extras[0], BLACK, 1, 1);
+        confirmado = false;
+        cancelado = false;
     }
 }
 
@@ -185,3 +208,4 @@ void draw()
             }
         }
     }
+}
