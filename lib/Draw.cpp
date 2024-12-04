@@ -23,7 +23,7 @@ void delay(int ms){
 void initSprites()
 {
     alfabeto = readSprites("sprites/alfabeto.txt");
-    // readSprites("sprites/cartas.txt", cartas);
+    spriteCartas = readSprites("sprites/cartas.txt");
 }
 
 void drawRectangle(int lui, int luj, int heigth, int width, struct RGB color)

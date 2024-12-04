@@ -156,3 +156,4 @@ void copiarCarta(struct Carta carta, int ind)
 
     carta.nula = original[ind].nula;
 }
+
