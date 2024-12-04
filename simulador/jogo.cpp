@@ -140,5 +140,7 @@ void initSimulation(){
     srand(time(NULL));
     indOponente = rand() % 2;
     jogadorAtual = jogadores[indOponente ^ 1];
+    embaralharCartas(jogadorAtual);
+    embaralharCartas(jogadores[indOponente]);
 }
 
