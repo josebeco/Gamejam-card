@@ -15,6 +15,7 @@ struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
 struct Sprite * extras;
 
+int state = 0; // 0-menu 1-deck 2-game 
 int indKi = 0;
 int indKj = 0;
 bool confirmado;
@@ -129,8 +130,21 @@ void drawMenu(){
         indKi = -1;
     }
 
+    if(confirmado){
+       state = indKi + 2;
+    }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawSprite(130 + 20 * indKi, screenWidth / 2 - 6 * 4, extras[0], BLACK, 1 , 1);
     drawString("play" , 130, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
     drawString("deck" , 110, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
+    confirmado = false;
+    cancelado = false;
+}
+
+void draw(){
+    if(state == 0){
+        drawMenu();
+    }else if(state == 1){
+        
+    }
 }

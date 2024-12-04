@@ -14,6 +14,6 @@ void drawSprite(int, int, struct Sprite, struct RGB, int, int);
 void drawString(string , int , int , struct RGB);
 void showCards(struct Carta *, int);
 void jumpscare(struct Carta);
-void drawMenu();
+void draw();
 void cancelar();
 void confirmar();

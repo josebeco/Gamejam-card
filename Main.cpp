@@ -11,3 +11,9 @@ int main(int argc, char **argv){
 }
 
 
+void cycle()
+{
+    draw();
+}
+
+
