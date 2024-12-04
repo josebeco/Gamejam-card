@@ -13,12 +13,7 @@ const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
 
 struct Sprite *alfabeto;
-struct Sprite * spriteCartas;
-
-void delay(int ms){
-    clock_t before = clock();
-    while(double((clock() - before)) * 1000 / CLOCKS_PER_SEC < ms){}
-}
+struct Sprite *spriteCartas;
 
 void initSprites()
 {
@@ -44,17 +39,17 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int wi
     {
         for (int ik = 0; ik < heigth_multipliar; ik++)
         {
-            position_i++;
             for (int j = 0; j < sprite.width; j++)
             {
                 if (sprite.pixels[i * sprite.width + j])
                 {
                     for (int jk = 0; jk < width_multipliar; jk++)
                     {
-                        setPixel(lui - position_i, luj + j + jk, color);
+                        setPixel(lui - position_i, luj + j * width_multipliar + jk, color);
                     }
                 }
             }
+            position_i++;
         }
     }
 }
@@ -88,14 +83,13 @@ void showCards(struct Carta *cartas, int length)
     }
 }
 
-
 void jumpscare(struct Carta carta)
 {
-    for (int i = 2; i <= 2; i++)
+
+    for (int i = 1; i <= carta.jumpscareSizeMultipliar; i++)
     {
-        drawSprite( 120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2,spriteCartas[carta.indSprite], carta.jumpscareColor, i, i);
+        drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], carta.jumpscareColor, i, i);
         timerOverride();
-       //drawSprite( 120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2,spriteCartas[carta.indSprite], YELLOW_PAGE, i, i);
-        //delay(500);
+        drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], YELLOW_PAGE, i, i);
     }
 }

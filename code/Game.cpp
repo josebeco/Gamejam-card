@@ -35,7 +35,7 @@ void cycle()
     drawRectangle(239, 0, 220, 360, YELLOW_PAGE);
     struct Carta cafe = copiarCarta(0);
     //impirmirCarta(cafe);
-    drawCard(120, 100, cafe, BLACK, 1, 1);
+    //drawCard(120, 100, cafe, BLACK, 1, 1);
     jumpscare(cafe);
 }
 
