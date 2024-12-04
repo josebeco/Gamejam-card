@@ -2,6 +2,6 @@
 bool checkDeath();
 bool drawCard();
 void passTurn();
-bool playCard(int);
+int playCard(int);
 void embaralharCartas(struct Player);
 void initSimulation();

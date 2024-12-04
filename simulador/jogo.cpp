@@ -12,6 +12,7 @@ struct Player jogadorAtual;
 int indOponente;
 
 
+
 bool checkDeath()
 {
     return jogadorAtual.adr <= 0 || jogadorAtual.adr >= 100;
@@ -73,11 +74,16 @@ void passTurn()
     indOponente ^= 1;
 }
 
-bool playCard(int indCarta)
+int playCard()
 {
+    int indCarta = showCards(jogadorAtual.mao, jogadorAtual.maoLength);
+    if(indCarta < 0){
+        return 2;
+    }
+    
     if (!jogadorAtual.mao[indCarta].item && !espacoLivre())
     {
-        return false;
+        return 1;
     }
 
     if (!jogadorAtual.mao[indCarta].item)
@@ -103,10 +109,10 @@ bool playCard(int indCarta)
 
     if (jogadorAtual.mao[indCarta].mascara)
     {
-        passTurn();
+        return 2;
     }
 
-    return true;
+    return 0;
 }
 
 void embaralharCartas(struct Player jogador)

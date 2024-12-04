@@ -3,6 +3,7 @@
 #include "fileH/Screen.h"
 #include "fileH/HandlerSprites.h"
 #include "../modelos/Carta.h"
+#include "../modelos/Player.h"
 #include "../simulador/simulatorH/jogo.h"
 #include <string>
 using namespace std;
@@ -108,8 +109,12 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
     }
 }
 
-void showCards(struct Carta *cartas, int length)
+int showCards(struct Carta *cartas, int length)
 {
+    if (length < 0)
+    {
+        return -1;
+    }
     drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
     for (int i = 0; i < length; i++)
     {
@@ -162,12 +167,21 @@ void draw()
     }
     else if (state == 1)
     {
-    }else if(state == 2){
-        if(!drawCard()){
+    }
+    else if (state == 2)
+    {
+        if (!drawCard())
+        {
             state == 0;
             drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
             drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
         }
-        
+        while (true)
+        {
+            int resp = playCard();
+            if (resp == 2)
+            {
+                break;
+            }
+        }
     }
-}
