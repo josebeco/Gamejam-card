@@ -86,7 +86,7 @@ void showCards(struct Carta *cartas, int length)
 
 void jumpscare(struct Carta carta)
 {
-    for (int i = 1; i <= 6; i++)
+    for (int i = 1; i <= carta.jumpscareSizeMultipliar; i++)
     {
         drawSprite( 120 + spriteCartas[carta.indSprite].width * i / 2, spriteCartas[carta.indSprite], i, i);
         timerOverride();

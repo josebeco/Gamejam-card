@@ -19,7 +19,6 @@ struct Carta{
     int jumpscareSizeMultipliar;
 
     int values[10]; // 0 - 4 put in play 5 - 9 in pĺay
-    bool imuneSumir;
     bool nula = false;
 };
 #endif

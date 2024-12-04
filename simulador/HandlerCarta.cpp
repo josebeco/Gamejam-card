@@ -4,8 +4,64 @@
 using namespace std;
 struct Carta *original;
 
-void lerCartas(){
+bool isSeparator(char c)
+{
+    return c == ' ' || c == '\n' || c == '\0';
+}
 
+bool isEmpty(string str)
+{
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (!isSeparator(str[i]))
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int inBetweenEmpty(int ind, string str, string r)
+{
+    while (isSeparator(str[ind]))
+    {
+        ind++;
+    }
+
+    string r = "";
+
+    while (ind < str.length() && !isSeparator(str[ind]))
+    {
+        r += str[ind++];
+    }
+    return ind;
+}
+
+void lerCartas(string fileName)
+{
+    ifstream reader(fileName);
+    string str, aux;
+    int qtd, ind = 0;
+    getline(reader, str);
+
+    ind = inBetweenEmpty(ind, str, aux);
+    qtd = stoi(aux);
+
+    original = new struct Carta[qtd];
+    for (int i = 0; i < qtd; i++)
+    {
+        original[i].id = i;
+
+        getline(reader, str);
+        original[i].nome = str;
+
+        getline(reader, str);
+        original[i].descricao = str;
+
+        getline(reader, str);
+
+    }
+    
 }
 
 void copiarCarta(struct Carta carta, int ind)
@@ -32,7 +88,6 @@ void copiarCarta(struct Carta carta, int ind)
     {
         carta.values[i] = original[ind].values[i];
     }
-    
-    carta.imuneSumir = original[ind].imuneSumir;
+
     carta.nula = original[ind].nula;
 }
