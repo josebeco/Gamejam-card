@@ -109,14 +109,23 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
     }
 }
 
-void drawCardWithDescription(struct Carta carta){
+void drawCardWithDescription(struct Carta carta)
+{
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawSprite(120 + spriteCartas[carta.indSprite].width, 20, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2);
-    
 }
 
-void drawGame(){
+void drawGame()
+{
+}
 
+void drawCardArray(struct Carta *cartas, int length)
+{
+    drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
+    for (int i = 0; i < length; i++)
+    {
+        drawString(cartas[i].nome, 238 - i * 6 + 1, 231, BLACK, 1, 1);
+    }
 }
 
 int showCards(struct Carta *cartas, int length)
@@ -125,20 +134,69 @@ int showCards(struct Carta *cartas, int length)
     {
         return -1;
     }
-    drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
-    for (int i = 0; i < length; i++)
-    {
-        drawString(cartas[i].nome, 238 - i * 6 + 1, 231, BLACK, 1, 1);
-    }
+    drawCardArray(cartas, length);
 
     indKi = 0;
-    while(true){
+    while (true)
+    {
         timerOverride();
 
-        if
-        if(confirmado){
-            drawCardWithDescription(cartas(indKi))
+        if (cancelado)
+        {
+            while (true)
+            {
+                timerOverride();
+                if (confirmado)
+                {
+                    confirmado = false;
+                    cancelado = false;
+                    return -1;
+                }
+                else if (cancelado)
+                {
+                    confirmado = false;
+                    cancelado = false;
+                    break;
+                }
+            }
+
+            drawGame();
+            drawCardArray(cartas, length);
         }
+
+        if (indKi < 0)
+        {
+            indKi = 0;
+        }
+        else if (indKi >= length)
+        {
+            indKi = length - 1;
+        }
+
+        if (confirmado)
+        {
+            drawCardWithDescription(cartas(indKi));
+            while (true)
+            {
+                timerOverride();
+                if (confirmado)
+                {
+                    confirmado = false;
+                    cancelado = false;
+                    return indKi;
+                }
+                else if (cancelado)
+                {
+                    confirmado = false;
+                    cancelado = false;
+                    break;
+                }
+            }
+
+            drawGame();
+            drawCardArray(cartas, length);
+        }
+
         drawSprite(238 - indKi * 6 + 1, screenWidth - showCardsJ + 1, extras[0], BLACK, 1, 1);
         confirmado = false;
         cancelado = false;
