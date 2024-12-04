@@ -13,13 +13,32 @@ const struct RGB YELLOW_PAGE = {204, 201, 172};
 
 struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
-struct S
+struct Sprite * extras;
 
+int indKi = 0;
+int indKj = 0;
+
+void incKi(){
+    indKi++;
+}
+
+void incKj(){
+    indKj++;
+}
+
+void decKi(){
+    indKi--;
+}
+
+void decKj(){
+    indKj--;
+}
 
 void initSprites()
 {
     alfabeto = readSprites("sprites/alfabeto.txt");
     spriteCartas = readSprites("sprites/cartas.txt");
+    extras = readSprites("sprites/extras.txt");
 }
 
 void drawRectangle(int lui, int luj, int heigth, int width, struct RGB color)
@@ -57,7 +76,7 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int wi
 
 
 
-void drawString(string frase, int lui, int luj, struct RGB color)
+void drawString(string frase, int lui, int luj, struct RGB color, int width_multipliar, int heigth_multipliar)
 { // left upper corner
     for (int i = 0; i < frase.length(); i++)
     {
@@ -67,7 +86,7 @@ void drawString(string frase, int lui, int luj, struct RGB color)
             continue;
         }
 
-        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, 1, 1);
+        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, width_multipliar, heigth_multipliar);
         luj += alfabeto[frase[i] - 'a'].width + 1;
     }
 }
@@ -77,7 +96,7 @@ void showCards(struct Carta *cartas, int length)
     drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
     for (int i = 0; i < length; i++)
     {
-        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK);
+        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK, 1 , 1);
     }
 }
 
@@ -93,9 +112,15 @@ void jumpscare(struct Carta carta)
     }
 }
 
-void drawMenu(int indKi, int indKj){
+void drawMenu(){
+    if(indKi > 0){
+        indKi = 0;
+    }else if(indKi < -1){
+        indKi = -1;
+    }
+
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawSprite()
-    drawString("play" , 130, screenWidth / 2 - (4 * 4), BLACK);
-    drawString("deck" , 110, screenWidth / 2 - (4 * 4), BLACK);
+    drawSprite(130 + 20 * indKi, screenWidth / 2 - 6 * 4, extras[0], BLACK, 1 , 1);
+    drawString("play" , 130, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
+    drawString("deck" , 110, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
 }
