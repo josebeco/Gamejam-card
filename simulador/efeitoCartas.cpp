@@ -34,9 +34,7 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
     }
     else if (carta.values[2] == 2)
     {
-        struct Carta nova_carta;
-        copiarCarta(nova_carta, oponente.emJogo[ind].id);
-        atual.mao[atual.maoLength++] = nova_carta;
+        atual.mao[atual.maoLength++] = copiarCarta(oponente.emJogo[ind].id);
     }
 }
 

@@ -3,9 +3,21 @@
 #include "../lib/fileH/HandlerSprites.h"
 #include <string>
 #include <fstream>
+#include <iostream>
+using namespace std;
 
 struct Carta *original;
 string r;
+
+void imprirmirCarta(struct Carta c){
+    cout << c.nome << endl;
+    cout << c.descricao << endl;
+    cout << c.mascara << endl;
+    cout << c.ambiente << endl;
+    cout << c.item << endl;
+    cout << c.indFuncPutInPlay << endl;
+    cout << c.indFuncInPlay << endl;
+}
 
 string inBetweenEmpty(int *ind, string str)
 {
@@ -119,11 +131,13 @@ void lerCartas(string fileName)
             aux = inBetweenEmpty(indP, str);
             original[i].values[j] = stoi(aux);
         }
+        imprirmirCarta(original[i]);
     }
 }
 
-void copiarCarta(struct Carta carta, int ind)
+struct Carta copiarCarta(int ind)
 {
+    struct Carta carta;
     carta.id = original[ind].id;
 
     carta.mascara = original[ind].mascara;
@@ -148,4 +162,5 @@ void copiarCarta(struct Carta carta, int ind)
     }
 
     carta.nula = original[ind].nula;
+    return carta;
 }

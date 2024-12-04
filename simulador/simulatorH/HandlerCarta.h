@@ -2,5 +2,5 @@
 #include <string>
 using namespace std;
 
-void copiarCarta(struct Carta, int);
+struct Carta copiarCarta(int);
 void lerCartas(string);
