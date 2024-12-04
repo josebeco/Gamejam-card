@@ -3,6 +3,7 @@
 #include "fileH/Screen.h"
 #include "fileH/HandlerSprites.h"
 #include "../modelos/Carta.h"
+#include <GL/freeglut.h>
 #include <string>
 #include <ctime>
 using namespace std;
@@ -83,13 +84,25 @@ void showCards(struct Carta *cartas, int length)
     }
 }
 
+bool finishedJumpscare = false;
+
+void showJumpscare(int extra)
+{
+    timerOverride();
+    finishedJumpscare = true;
+}
+
 void jumpscare(struct Carta carta)
 {
 
     for (int i = 1; i <= carta.jumpscareSizeMultipliar; i++)
     {
         drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], carta.jumpscareColor, i, i);
-        timerOverride();
+        finishedJumpscare = false;
+        glutTimerFunc(1000, showJumpscare, 0);
+        while (!finishedJumpscare)
+        {
+        }
         drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], YELLOW_PAGE, i, i);
     }
 }

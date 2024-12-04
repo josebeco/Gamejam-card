@@ -1,4 +1,4 @@
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include "../modelos/RGB.h"
 #include "../code/Game.h"
 bool callCycle = true;
