@@ -1,4 +1,5 @@
 #include "../modelos/Carta.h"
+#include "../modelos/RGB.h"
 #include <string>
 #include <fstream>
 using namespace std;
@@ -59,9 +60,32 @@ void lerCartas(string fileName)
         original[i].descricao = str;
 
         getline(reader, str);
+        ind = 0;
 
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].mascara = stoi(aux) == 1;
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].ambiente = stoi(aux) == 1;
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].item = stoi(aux) == 1;
+
+        getline(reader, str);
+        ind = 0;
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].indFuncPutInPlay = stoi(aux);
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].indFuncInPlay = stoi(aux);
+
+        getline(reader, str);
+        ind = 0;
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].indSprite = stoi(aux);
     }
-    
 }
 
 void copiarCarta(struct Carta carta, int ind)
