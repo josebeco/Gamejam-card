@@ -1,41 +1,27 @@
 #include "../modelos/Carta.h"
 #include "../modelos/RGB.h"
+#include "../lib/fileH/HandlerSprites.h"
 #include <string>
 #include <fstream>
 using namespace std;
 struct Carta *original;
+string r;
 
-bool isSeparator(char c)
+string inBetweenEmpty(int *ind, string str)
 {
-    return c == ' ' || c == '\n' || c == '\0';
-}
-
-bool isEmpty(string str)
-{
-    for (int i = 0; i < str.length(); i++)
+    cout << "a" << endl;
+    while (isSeparator(str[(*ind)]))
     {
-        if (!isSeparator(str[i]))
-        {
-            return false;
-        }
+        (*ind)++;
     }
-    return true;
-}
-
-int inBetweenEmpty(int ind, string str, string r)
-{
-    while (isSeparator(str[ind]))
-    {
-        ind++;
-    }
-
     string r = "";
-
-    while (ind < str.length() && !isSeparator(str[ind]))
+    cout << "a" << endl;
+    while ((*ind) < str.length() && !isSeparator(str[(*ind)]))
     {
-        r += str[ind++];
+        r += str[(*ind)++];
     }
-    return ind;
+    cout << "a" << endl;
+    return r;
 }
 
 string cleanString(string str)
@@ -55,12 +41,20 @@ string cleanString(string str)
 
 void lerCartas(string fileName)
 {
+    cout << "a" << endl;
     ifstream reader(fileName);
+    if (!reader)
+    {
+        return;
+    }
+    cout << "a" << endl;
     string str, aux;
-    int qtd, ind = 0;
-    getline(reader, str);
+    int qtd;
+    int ind = 0;
+    int *indP = &ind;
 
-    ind = inBetweenEmpty(ind, str, aux);
+    getline(reader, str);
+    aux = inBetweenEmpty(indP, str);
     qtd = stoi(aux);
 
     original = new struct Carta[qtd];
@@ -77,45 +71,45 @@ void lerCartas(string fileName)
         getline(reader, str);
         ind = 0;
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].mascara = stoi(aux) == 1;
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].ambiente = stoi(aux) == 1;
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].item = stoi(aux) == 1;
 
         getline(reader, str);
         ind = 0;
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].indFuncPutInPlay = stoi(aux);
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].indFuncInPlay = stoi(aux);
 
         getline(reader, str);
         ind = 0;
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].indSprite = stoi(aux);
 
         getline(reader, str);
         ind = 0;
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].jumpscareColor.r = stoi(aux);
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].jumpscareColor.g = stoi(aux);
 
-        ind = inBetweenEmpty(ind, str, aux);
+        aux = inBetweenEmpty(indP, str);
         original[i].jumpscareColor.b = stoi(aux);
 
         getline(reader, str);
         ind = 0;
-
+        aux = inBetweenEmpty(indP, str);
         original[i].jumpscareSizeMultipliar = stoi(aux);
 
         getline(reader, str);
@@ -123,7 +117,7 @@ void lerCartas(string fileName)
 
         for (int j = 0; j < 10; j++)
         {
-            ind = inBetweenEmpty(ind, str, aux);
+            aux = inBetweenEmpty(indP, str);
             original[i].values[j] = stoi(aux);
         }
     }
@@ -156,4 +150,3 @@ void copiarCarta(struct Carta carta, int ind)
 
     carta.nula = original[ind].nula;
 }
-

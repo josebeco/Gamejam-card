@@ -69,7 +69,7 @@ void drawString(string frase, int lui, int luj, struct RGB color)
             continue;
         }
 
-        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color);
+        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, 1, 1);
         luj += alfabeto[frase[i] - 'a'].width + 1;
     }
 }
@@ -79,7 +79,7 @@ void showCards(struct Carta *cartas, int length)
     drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
     for (int i = 0; i < length; i++)
     {
-        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK, 0, 0);
+        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK);
     }
 }
 
@@ -88,7 +88,7 @@ void jumpscare(struct Carta carta)
 {
     for (int i = 1; i <= carta.jumpscareSizeMultipliar; i++)
     {
-        drawSprite( 120 + spriteCartas[carta.indSprite].width * i / 2, spriteCartas[carta.indSprite], i, i);
+        drawSprite( 120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2,spriteCartas[carta.indSprite], carta.jumpscareColor, i, i);
         timerOverride();
         delay(500);
     }
