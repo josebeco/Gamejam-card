@@ -91,10 +91,11 @@ void showCards(struct Carta *cartas, int length)
 
 void jumpscare(struct Carta carta)
 {
-    for (int i = 1; i <= carta.jumpscareSizeMultipliar; i++)
+    for (int i = 2; i <= 2; i++)
     {
         drawSprite( 120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2,spriteCartas[carta.indSprite], carta.jumpscareColor, i, i);
         timerOverride();
-        delay(500);
+       //drawSprite( 120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2,spriteCartas[carta.indSprite], YELLOW_PAGE, i, i);
+        //delay(500);
     }
 }
