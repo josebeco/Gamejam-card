@@ -9,13 +9,8 @@ using namespace std;
 #define emJogoSize 5
 struct Player jogadores[2];
 struct Player jogadorAtual;
-int indAtual;
+int indOponente;
 
-void setJogadorAtual(int ind)
-{
-    jogadorAtual = jogadores[ind];
-    indAtual = ind;
-}
 
 bool checkDeath()
 {
@@ -53,7 +48,7 @@ void passTurn()
         {
             continue;
         }
-        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indAtual ^ 1]))
+        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indOponente]))
         {
             jogadorAtual.livreEmJogo[i] = true;
             jogadorAtual.emJogo[i].nula = true;
@@ -67,13 +62,15 @@ void passTurn()
         {
             continue;
         }
-        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indAtual ^ 1]))
+        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indOponente]))
         {
             jogadorAtual.livreEmJogo[i] = true;
             jogadorAtual.emJogo[i].nula = true;
         }
         jumpscare(jogadorAtual.emJogo[i]);
     }
+    jogadorAtual = jogadores[indOponente];
+    indOponente ^= 1;
 }
 
 bool playCard(int indCarta)
@@ -96,7 +93,7 @@ bool playCard(int indCarta)
         }
     }
 
-    putInPlay(jogadorAtual.mao[indCarta], jogadorAtual, jogadores[indAtual ^ 1]);
+    putInPlay(jogadorAtual.mao[indCarta], jogadorAtual, jogadores[indOponente ^ 1]);
     jumpscare(jogadorAtual.mao[indCarta]);
     for (int i = indCarta; i < jogadorAtual.maoLength - 1; i++)
     {
@@ -114,7 +111,6 @@ bool playCard(int indCarta)
 
 void embaralharCartas(struct Player jogador)
 {
-    srand(time(NULL));
     bool indUsado[jogador.indBaralho + 1];
     struct Carta mediador[jogador.indBaralho + 1];
     for (int i = 0; i < jogador.indBaralho + 1; i++)
@@ -139,3 +135,10 @@ void embaralharCartas(struct Player jogador)
         jogador.baralho[i] = mediador[i];
     }
 }
+
+void initSimulation(){
+    srand(time(NULL));
+    indOponente = rand() % 2;
+    jogadorAtual = jogadores[indOponente ^ 1];
+}
+

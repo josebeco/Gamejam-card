@@ -3,6 +3,7 @@
 #include "fileH/Screen.h"
 #include "fileH/HandlerSprites.h"
 #include "../modelos/Carta.h"
+#include "../simulador/simulatorH/jogo.h"
 #include <string>
 using namespace std;
 
@@ -10,38 +11,45 @@ using namespace std;
 #define screenWidth 360
 const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
+const struct RGB DARK_BACKGROUND = {174, 171, 142};
 
 struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
-struct Sprite * extras;
+struct Sprite *extras;
 
-int state = 0; // 0-menu 1-deck 2-game 
+int state = 0; // 0-menu 1-deck 2-game
 int indKi = 0;
 int indKj = 0;
 bool confirmado;
 bool cancelado;
 
-void incKi(){
+void incKi()
+{
     indKi++;
 }
 
-void incKj(){
+void incKj()
+{
     indKj++;
 }
 
-void decKi(){
+void decKi()
+{
     indKi--;
 }
 
-void decKj(){
+void decKj()
+{
     indKj--;
 }
 
-void confirmar(){
+void confirmar()
+{
     confirmado = true;
 }
 
-void cancelar(){
+void cancelar()
+{
     cancelado = true;
 }
 
@@ -85,8 +93,6 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int wi
     }
 }
 
-
-
 void drawString(string frase, int lui, int luj, struct RGB color, int width_multipliar, int heigth_multipliar)
 { // left upper corner
     for (int i = 0; i < frase.length(); i++)
@@ -107,11 +113,9 @@ void showCards(struct Carta *cartas, int length)
     drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
     for (int i = 0; i < length; i++)
     {
-        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK, 1 , 1);
+        drawString(cartas[i].nome, i * 6 + 1, 241, BLACK, 1, 1);
     }
 }
-
-
 
 void jumpscare(struct Carta carta)
 {
@@ -123,28 +127,47 @@ void jumpscare(struct Carta carta)
     }
 }
 
-void drawMenu(){
-    if(indKi > 0){
+void drawMenu()
+{
+    if (indKi > 0)
+    {
         indKi = 0;
-    }else if(indKi < -1){
+    }
+    else if (indKi < -1)
+    {
         indKi = -1;
     }
 
-    if(confirmado){
-       state = indKi + 2;
+    if (confirmado)
+    {
+        state = indKi + 2;
+        if (state == 2)
+        {
+            initSimulation();
+        }
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawSprite(130 + 20 * indKi, screenWidth / 2 - 6 * 4, extras[0], BLACK, 1 , 1);
-    drawString("play" , 130, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
-    drawString("deck" , 110, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
+    drawSprite(130 + 20 * indKi, screenWidth / 2 - 6 * 4, extras[0], BLACK, 1, 1);
+    drawString("play", 130, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
+    drawString("deck", 110, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
     confirmado = false;
     cancelado = false;
 }
 
-void draw(){
-    if(state == 0){
+void draw()
+{
+    if (state == 0)
+    {
         drawMenu();
-    }else if(state == 1){
+    }
+    else if (state == 1)
+    {
+    }else if(state == 2){
+        if(!drawCard()){
+            state == 0;
+            drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+            drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
+        }
         
     }
 }
