@@ -38,6 +38,21 @@ int inBetweenEmpty(int ind, string str, string r)
     return ind;
 }
 
+string cleanString(string str)
+{
+    string r = "";
+    for (int i = 0; i < str.length(); i++)
+    {
+        if (str[i] == '\n' || str[i] == '\0')
+        {
+            continue;
+        }
+
+        r += str[i];
+    }
+    return r;
+}
+
 void lerCartas(string fileName)
 {
     ifstream reader(fileName);
@@ -54,10 +69,10 @@ void lerCartas(string fileName)
         original[i].id = i;
 
         getline(reader, str);
-        original[i].nome = str;
+        original[i].nome = cleanString(str);
 
         getline(reader, str);
-        original[i].descricao = str;
+        original[i].descricao = cleanString(str);
 
         getline(reader, str);
         ind = 0;
@@ -85,6 +100,32 @@ void lerCartas(string fileName)
 
         ind = inBetweenEmpty(ind, str, aux);
         original[i].indSprite = stoi(aux);
+
+        getline(reader, str);
+        ind = 0;
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].jumpscareColor.r = stoi(aux);
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].jumpscareColor.g = stoi(aux);
+
+        ind = inBetweenEmpty(ind, str, aux);
+        original[i].jumpscareColor.b = stoi(aux);
+
+        getline(reader, str);
+        ind = 0;
+
+        original[i].jumpscareSizeMultipliar = stoi(aux);
+
+        getline(reader, str);
+        ind = 0;
+
+        for (int j = 0; j < 10; j++)
+        {
+            ind = inBetweenEmpty(ind, str, aux);
+            original[i].values[j] = stoi(aux);
+        }
     }
 }
 
