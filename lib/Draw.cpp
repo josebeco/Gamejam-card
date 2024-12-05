@@ -217,6 +217,23 @@ int showCards(struct Carta *cartas, int length)
     }
 }
 
+void drawLost()
+{
+    state == 0;
+    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
+    while (true)
+    {
+        timerOverride();
+        if (confirmado)
+        {
+            confirmado = false;
+            cancelado = false;
+            return;
+        }
+    }
+}
+
 void jumpscare(struct Carta carta)
 {
 
@@ -267,9 +284,8 @@ void draw()
     {
         if (!drawCard())
         {
-            state == 0;
-            drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-            drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
+            drawLost();
+            return;
         }
 
         drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
@@ -285,9 +301,8 @@ void draw()
 
         if (checkDeath())
         {
-            state = 0;
-            drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-            drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
+            drawLost();
+            return;
         }
 
         passTurn();
