@@ -1,7 +1,9 @@
-#include <GL/glut.h>
+#include <GL/freeglut.h>
 #include "../modelos/RGB.h"
 #include "fileH/Draw.h"
-bool callCycle = true;
+#include <iostream>
+using namespace std;
+
 
 int WIDTH = 0;
 int HEIGHT = 0;
@@ -52,17 +54,16 @@ void makeScreen()
 
 void display()
 {
-    if(callCycle){
-        cycle();
-    }
     makeScreen();
     glClear(GL_COLOR_BUFFER_BIT);
     glDrawPixels(WIDTH * MULTIPLIAR_WIDTH, HEIGHT * MULTIPLIAR_HEIGTH, GL_RGB, GL_UNSIGNED_BYTE, realScreen);
     glutSwapBuffers();
+    glFlush();
 }
 
 void keyboard(unsigned char key, int x, int y)
 {
+    cout << "keyboard" << endl;
     switch (key)
     {
     case 27:
@@ -87,18 +88,21 @@ void keyboard(unsigned char key, int x, int y)
         cancelar();
         break;
     }
+   // glutPostRedisplay();
 }
 
 void timer(int extra)
 {
+    cycle();
     glutPostRedisplay();
     glutTimerFunc(20, timer, 0); // 50 fps 1000 / 20
 }
 
+
+
 void timerOverride(){
-    callCycle = false;
     glutPostRedisplay();
-    callCycle = true;
+    glutMainLoopEvent();
 }
 
 void startScreen(int argc, char **argv)
@@ -111,6 +115,7 @@ void startScreen(int argc, char **argv)
     initGL();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
+    glutIdleFunc(display);
     glutTimerFunc(0, timer, 0);
     glutMainLoop();
 }

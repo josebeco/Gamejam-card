@@ -7,6 +7,8 @@
 #include "../simulador/simulatorH/jogo.h"
 #include <string>
 #include <iostream>
+#include <chrono>
+#include <thread>
 using namespace std;
 
 #define showCardsJ 220
@@ -52,6 +54,10 @@ void confirmar()
 void cancelar()
 {
     cancelado = true;
+}
+
+void delay(int ms){
+    this_thread::sleep_for(chrono::milliseconds(ms));
 }
 
 void initSprites()
@@ -144,6 +150,7 @@ void drawCardArray(struct Carta *cartas, int length)
 
 int showCards(struct Carta *cartas, int length)
 {
+    cout << "show card" << endl;
     if (length < 0)
     {
         return -1;
@@ -220,19 +227,12 @@ int showCards(struct Carta *cartas, int length)
 
 void drawLost()
 {
+    cout << "lost game" << endl;
     state = 0;
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
-    while (true)
-    {
-        timerOverride();
-        if (confirmado)
-        {
-            confirmado = false;
-            cancelado = false;
-            return;
-        }
-    }
+    drawString("you lost", 130, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
+    timerOverride();
+    delay(2000);
 }
 
 void jumpscare(struct Carta carta)
@@ -297,7 +297,7 @@ void cycle()
         cout << "draw game" << endl;
         drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
         drawGame();
-        while (true)
+        /*while (true)
         {
             int resp = playCard();
             if (resp == 2)
@@ -312,6 +312,6 @@ void cycle()
             return;
         }
 
-        passTurn();
+        passTurn();*/
     }
 }
