@@ -163,6 +163,9 @@ void initSimulation()
         {
             jogadores[i].livreEmJogo[j] = true;
         }
+        jogadores[i].added_positive_adrenaline = 0;
+        jogadores[i].added_negative_adrenaline = 0;
+        jogadores[i].split_percentage = 0;
     }
     indOponente = rand() % 2;
     jogadorAtual = jogadores[indOponente ^ 1];
