@@ -1,5 +1,6 @@
 #include "../modelos/Player.h"
 #include "../modelos/Carta.h"
+#include "../lib/fileH/Draw.h"
 #include "simulatorH/HandlerCarta.h"
 #include "simulatorH/jogo.h"
 using namespace std;
@@ -46,17 +47,25 @@ void pegarCarta_PutInPlay(struct Carta carta, struct Player atual, struct Player
 
     if (carta.values[2] == 1 && atual.descarteLength > 0)
     {
-        // TODO MOSTRAR PILHA DE DESCARTE E PEGAR CARTA
+        ind = showCards(atual.descarte, atual.descarteLength);
+        if (ind == -1)
+        {
+            return;
+        }
         atual.mao[atual.maoLength++] = atual.descarte[ind];
+        atual.descarteLength--;
         while (ind < atual.descarteLength)
         {
             atual.descarte[ind] = atual.descarte[++ind];
         }
-        atual.descarteLength--;
     }
     else if (carta.values[2] == 2 && atual.indBaralho > -1)
     {
-        // TODO MOSTARR BARALHO E PEGAR CARTA
+        ind = showCards(atual.baralho, atual.indBaralho + 1);
+        if (ind == -1)
+        {
+            return;
+        }
         atual.mao[atual.maoLength] = atual.baralho[ind];
         for (int i = ind; i < atual.indBaralho; i++)
         {
@@ -142,6 +151,5 @@ bool (*funcInPlay[2])(struct Carta, struct Player, struct Player) = {&adrenaline
 
 bool inPlay(struct Carta carta, struct Player atual, struct Player oponente)
 {
-    // cham metodo
-    return false;
+    return funcInPlay[carta.indFuncInPlay](carta, atual, oponente);
 }

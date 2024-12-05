@@ -12,7 +12,6 @@ using namespace std;
 #define screenWidth 360
 const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
-const struct RGB DARK_BACKGROUND = {174, 171, 142};
 
 struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
@@ -117,6 +116,20 @@ void drawCardWithDescription(struct Carta carta)
 
 void drawGame()
 {
+    struct Player atual = getPlayer(true);
+    struct Player oponenete = getPlayer(false);
+
+    for (int i = 0; i < 5; i++)
+    {
+        if (!oponenete.livreEmJogo[i])
+        {
+            drawSprite(196, 12 + i * 42, oponenete.emJogo[i], BLACK, 1, 1);
+        }
+        if (!atual.livreEmJogo[i])
+        {
+            drawSprite(76, 12 + i * 42, atual.emJogo[i], BLACK, 1, 1);
+        }
+    }
 }
 
 void drawCardArray(struct Carta *cartas, int length)
@@ -193,6 +206,7 @@ int showCards(struct Carta *cartas, int length)
                 }
             }
 
+            drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
             drawGame();
             drawCardArray(cartas, length);
         }
@@ -257,6 +271,9 @@ void draw()
             drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
             drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
         }
+
+        drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+        drawGame();
         while (true)
         {
             int resp = playCard();
@@ -265,5 +282,14 @@ void draw()
                 break;
             }
         }
+
+        if (checkDeath())
+        {
+            state = 0;
+            drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+            drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
+        }
+
+        passTurn();
     }
 }

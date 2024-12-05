@@ -11,7 +11,14 @@ struct Player jogadores[2];
 struct Player jogadorAtual;
 int indOponente;
 
-
+struct Player getPlayer(bool atual)
+{
+    if (atual)
+    {
+        return jogadorAtual;
+    }
+    return jogadores[indOponente];
+}
 
 bool checkDeath()
 {
@@ -77,10 +84,11 @@ void passTurn()
 int playCard()
 {
     int indCarta = showCards(jogadorAtual.mao, jogadorAtual.maoLength);
-    if(indCarta < 0){
+    if (indCarta < 0)
+    {
         return 2;
     }
-    
+
     if (!jogadorAtual.mao[indCarta].item && !espacoLivre())
     {
         return 1;
@@ -142,11 +150,11 @@ void embaralharCartas(struct Player jogador)
     }
 }
 
-void initSimulation(){
+void initSimulation()
+{
     srand(time(NULL));
     indOponente = rand() % 2;
     jogadorAtual = jogadores[indOponente ^ 1];
     embaralharCartas(jogadorAtual);
     embaralharCartas(jogadores[indOponente]);
 }
-
