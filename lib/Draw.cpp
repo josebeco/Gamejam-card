@@ -56,7 +56,8 @@ void cancelar()
     cancelado = true;
 }
 
-void delay(int ms){
+void delay(int ms)
+{
     this_thread::sleep_for(chrono::milliseconds(ms));
 }
 
