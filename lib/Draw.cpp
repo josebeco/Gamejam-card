@@ -15,6 +15,7 @@ using namespace std;
 #define screenWidth 360
 const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
+const struct RGB WHITE = {255, 255, 255};
 
 struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
@@ -79,7 +80,7 @@ void drawRectangle(int lui, int luj, int heigth, int width, struct RGB color)
     }
 }
 
-void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int width_multipliar, int heigth_multipliar)
+void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int width_multipliar, int heigth_multipliar, bool drawBackground)
 { // left upper corner
     int position_i = 0;
     for (int i = 0; i < sprite.heigth; i++)
@@ -93,6 +94,13 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int wi
                     for (int jk = 0; jk < width_multipliar; jk++)
                     {
                         setPixel(lui - position_i, luj + j * width_multipliar + jk, color);
+                    }
+                }
+                else if (drawBackground)
+                {
+                    for (int jk = 0; jk < width_multipliar; jk++)
+                    {
+                        setPixel(lui - position_i, luj + j * width_multipliar + jk, WHITE);
                     }
                 }
             }
@@ -111,7 +119,7 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
             continue;
         }
 
-        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, width_multipliar, heigth_multipliar);
+        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, width_multipliar, heigth_multipliar, false);
         luj += alfabeto[frase[i] - 'a'].width + 1;
     }
 }
@@ -119,7 +127,7 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
 void drawCardWithDescription(struct Carta carta)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawSprite(120 + spriteCartas[carta.indSprite].width, 20, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2);
+    drawSprite(120 + spriteCartas[carta.indSprite].width, 20, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2, true);
 }
 
 void drawGame()
@@ -131,11 +139,11 @@ void drawGame()
     {
         if (!oponente.livreEmJogo[i])
         {
-            drawSprite(196, 12 + i * 42, spriteCartas[oponente.emJogo[i].indSprite], BLACK, 1, 1);
+            drawSprite(196, 12 + i * 42, spriteCartas[oponente.emJogo[i].indSprite], BLACK, 1, 1, true);
         }
         if (!atual.livreEmJogo[i])
         {
-            drawSprite(76, 12 + i * 42, spriteCartas[atual.emJogo[i].indSprite], BLACK, 1, 1);
+            drawSprite(76, 12 + i * 42, spriteCartas[atual.emJogo[i].indSprite], BLACK, 1, 1, true);
         }
     }
 }
@@ -220,7 +228,7 @@ int showCards(struct Carta *cartas, int length)
             drawCardArray(cartas, length);
         }
 
-        drawSprite(238 - indKi * 6 + 1, screenWidth - showCardsJ + 1, extras[0], BLACK, 1, 1);
+        drawSprite(238 - indKi * 6 + 1, screenWidth - showCardsJ + 1, extras[0], BLACK, 1, 1, false);
         confirmado = false;
         cancelado = false;
     }
@@ -241,8 +249,12 @@ void jumpscare(struct Carta carta)
 
     for (int i = 1; i <= carta.jumpscareSizeMultipliar; i++)
     {
-        drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], carta.jumpscareColor, i, i);
-        drawSprite(120 + spriteCartas[carta.indSprite].width * i / 2, screenWidth / 2, spriteCartas[carta.indSprite], YELLOW_PAGE, i, i);
+        drawSprite(120 + spriteCartas[carta.indSprite].heigth * i / 2, screenWidth / 2 - spriteCartas[carta.indSprite].width * i / 2,
+                   spriteCartas[carta.indSprite], carta.jumpscareColor, i, i, true);
+        timerOverride();
+        drawRectangle(120 + spriteCartas[carta.indSprite].heigth * i / 2, screenWidth / 2 - spriteCartas[carta.indSprite].width * i / 2,
+                      spriteCartas[carta.indSprite].heigth * i, spriteCartas[carta.indSprite].width * i, YELLOW_PAGE);
+        delay(500);
     }
 }
 
@@ -270,7 +282,7 @@ void drawMenu()
         }
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawSprite(130 + 20 * indKi, screenWidth / 2 - 4 * 5, extras[0], BLACK, 1, 1);
+    drawSprite(130 + 20 * indKi, screenWidth / 2 - 4 * 5, extras[0], BLACK, 1, 1, false);
     drawString("play", 130, screenWidth / 2 - (2 * 5), BLACK, 1, 1);
     drawString("deck", 110, screenWidth / 2 - (2 * 5), BLACK, 1, 1);
     drawString("exit", 90, screenWidth / 2 - (2 * 5), BLACK, 1, 1);
@@ -298,7 +310,7 @@ void cycle()
         cout << "draw game" << endl;
         drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
         drawGame();
-        /*while (true)
+        while (true)
         {
             int resp = playCard();
             if (resp == 2)
@@ -313,6 +325,6 @@ void cycle()
             return;
         }
 
-        passTurn();*/
+        passTurn();
     }
 }
