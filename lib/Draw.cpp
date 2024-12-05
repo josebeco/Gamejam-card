@@ -117,17 +117,17 @@ void drawCardWithDescription(struct Carta carta)
 void drawGame()
 {
     struct Player atual = getPlayer(true);
-    struct Player oponenete = getPlayer(false);
+    struct Player oponente = getPlayer(false);
 
     for (int i = 0; i < 5; i++)
     {
-        if (!oponenete.livreEmJogo[i])
+        if (!oponente.livreEmJogo[i])
         {
-            drawSprite(196, 12 + i * 42, oponenete.emJogo[i], BLACK, 1, 1);
+            drawSprite(196, 12 + i * 42, spriteCartas[oponente.emJogo[i].indSprite], BLACK, 1, 1);
         }
         if (!atual.livreEmJogo[i])
         {
-            drawSprite(76, 12 + i * 42, atual.emJogo[i], BLACK, 1, 1);
+            drawSprite(76, 12 + i * 42, spriteCartas[atual.emJogo[i].indSprite], BLACK, 1, 1);
         }
     }
 }
@@ -188,7 +188,7 @@ int showCards(struct Carta *cartas, int length)
 
         if (confirmado)
         {
-            drawCardWithDescription(cartas(indKi));
+            drawCardWithDescription(cartas[indKi]);
             while (true)
             {
                 timerOverride();
@@ -250,13 +250,17 @@ void drawMenu()
     {
         indKi = 0;
     }
-    else if (indKi < -1)
+    else if (indKi < -2)
     {
-        indKi = -1;
+        indKi = -2;
     }
 
     if (confirmado)
     {
+        if (indKi == -2)
+        {
+            exit(0);
+        }
         state = indKi + 2;
         if (state == 2)
         {
@@ -267,11 +271,12 @@ void drawMenu()
     drawSprite(130 + 20 * indKi, screenWidth / 2 - 6 * 4, extras[0], BLACK, 1, 1);
     drawString("play", 130, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
     drawString("deck", 110, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
+    drawString("exit", 90, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
     confirmado = false;
     cancelado = false;
 }
 
-void draw()
+void cycle()
 {
     if (state == 0)
     {

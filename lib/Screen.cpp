@@ -1,7 +1,6 @@
-#include <GL/freeglut.h>
+#include <GL/glut.h>
 #include "../modelos/RGB.h"
 #include "fileH/Draw.h"
-#include "../Main.h"
 bool callCycle = true;
 
 int WIDTH = 0;
