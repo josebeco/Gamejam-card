@@ -219,7 +219,7 @@ int showCards(struct Carta *cartas, int length)
 
 void drawLost()
 {
-    state == 0;
+    state = 0;
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawString("you lose", 130, screenWidth / 2 - (8 * 4), BLACK, 1, 1);
     while (true)
