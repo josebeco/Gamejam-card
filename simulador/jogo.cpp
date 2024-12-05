@@ -153,6 +153,17 @@ void embaralharCartas(struct Player jogador)
 void initSimulation()
 {
     srand(time(NULL));
+    for (int i = 0; i < 2; i++)
+    {
+        jogadores[i].adr = 50;
+        jogadores[i].descarteLength = 0;
+        jogadores[i].indBaralho = 19;
+        jogadores[i].maoLength = 0;
+        for (int j = 0; j < 5; j++)
+        {
+            jogadores[i].livreEmJogo[j] = true;
+        }
+    }
     indOponente = rand() % 2;
     jogadorAtual = jogadores[indOponente ^ 1];
     embaralharCartas(jogadorAtual);

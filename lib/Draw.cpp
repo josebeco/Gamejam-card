@@ -6,6 +6,7 @@
 #include "../modelos/Player.h"
 #include "../simulador/simulatorH/jogo.h"
 #include <string>
+#include <iostream>
 using namespace std;
 
 #define showCardsJ 220
@@ -287,12 +288,13 @@ void cycle()
     }
     else if (state == 2)
     {
+        cout << "on Game" << endl;
         if (!drawCard())
         {
             drawLost();
             return;
         }
-
+        cout << "draw game" << endl;
         drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
         drawGame();
         while (true)
