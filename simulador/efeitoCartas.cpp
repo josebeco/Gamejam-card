@@ -6,12 +6,14 @@
 using namespace std;
 int added_value_positive_adrenaline = 0;
 int added_value_negative_adrenaline = 0;
+int split_percentage_atual = 0;
+int split_percentage_oponente = 0;
 // ao entrar
 
 void adrenaline_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 0
 {
-    oponente.adr += carta.values[0];
-    atual.adr += carta.values[1];
+    oponente.adr += carta.values[0] * (100 - split_percentage_oponente) / 100 + carta.values[1] * split_percentage_oponente / 100;
+    atual.adr += carta.values[1] * (100 - split_percentage_atual) / 100 + carta.values[0] * split_percentage_atual / 100;
 }
 
 void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
