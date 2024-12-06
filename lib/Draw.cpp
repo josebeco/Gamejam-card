@@ -229,26 +229,29 @@ void drawDeckBuilderMenu(struct Carta *original)
 
 int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
 {
+    cout << "morreu" << endl;
     cancelado = false;
     confirmado = false;
     indKj = qtdO;
+    int medKj;
 
     drawCardWithDescription(carta);
     while (true)
     {
-
         if (cancelado)
         {
             cancelado = false;
             confirmado = false;
+            cout << qtdO << endl;
             return qtdO;
         }
 
         if (confirmado)
         {
+            cout << "confirmei " <<  indKj << endl;
             cancelado = false;
             confirmado = false;
-            return indKi;
+            return indKj;
         }
 
         if (indKj > 2)
@@ -259,12 +262,15 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
         {
             indKj = 0;
         }
+        medKj = indKj;
 
         drawSprite(150, 22, extras[1], BLACK, 1, 1, false);
         drawSprite(150, 32, numbers[indKj], BLACK, 1, 1, false);
-        drawSprite(150, 37, extras[0], BLACK, 1, 1, false);
+        drawSprite(150, 42, extras[0], BLACK, 1, 1, false);
 
         timerOverride();
+
+        drawSprite(150, 32, numbers[medKj], YELLOW_PAGE, 1, 1, false);
     }
     return qtdO;
 }
@@ -276,10 +282,10 @@ void deckBuilder()
     cancelado = false;
     confirmado = false;
 
-    int medKj, medKi;
+    int medKj, medKi, medR;
     struct Carta *original = getCartasOriginal();
-    struct Player player1 = getPlayer(0);
-    struct Player player2 = getPlayer(1);
+    struct Player *jogadores = getJogadores();
+ 
 
     drawDeckBuilderMenu(original);
     while (true)
@@ -295,6 +301,7 @@ void deckBuilder()
         {
             cancelado = false;
             confirmado = false;
+            state = 0;
             return;
         }
 
@@ -311,9 +318,9 @@ void deckBuilder()
         {
             indKi = 0;
         }
-        else if (indKi < -3)
+        else if (indKi < -4)
         {
-            indKi = -3;
+            indKi = -4;
         }
 
         if (confirmado)
@@ -322,18 +329,24 @@ void deckBuilder()
             confirmado = false;
             medKj = indKj;
 
+            cout << indKj % 4 + abs(indKi) * 4 << endl;
             if (indKj < 4)
             {
-                player1.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player1.deck[indKj + abs(indKi) * 4]);
+                medR = deckCardShow(original[indKj % 4 + abs(indKi) * 4],   jogadores[0].deck[indKj % 4 + abs(indKi) * 4]);
+                jogadores[0].deck[indKj % 4 + abs(indKi) * 4] = medR;
+                cout <<   jogadores[0].deck[indKj % 4 + abs(indKi) * 4] << endl;
             }
             else
             {
-                player2.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player2.deck[indKj + abs(indKi) * 4]);
+                medR = deckCardShow(original[indKj % 4 + abs(indKi) * 4],  jogadores[1].deck[indKj % 4 + abs(indKi) * 4]);
+                jogadores[1].deck[indKj % 4 + abs(indKi) * 4] = medR;
+                cout <<  jogadores[1].deck[indKj % 4 + abs(indKi) * 4] << endl;
             }
 
             indKj = medKj;
             cancelado = false;
             confirmado = false;
+            drawDeckBuilderMenu(original);
         }
     }
 }

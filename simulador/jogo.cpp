@@ -12,9 +12,9 @@ struct Player jogadores[2];
 struct Player jogadorAtual;
 int indOponente;
 
-struct Player getPlayer(int ind)
+struct Player *getJogadores()
 {
-    return jogadores[ind];
+    return jogadores;
 }
 
 struct Player getPlayer(bool atual)
