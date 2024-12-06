@@ -221,5 +221,17 @@ bool initSimulation()
 
     embaralharCartas(jogadorAtual);
     embaralharCartas(jogadores[indOponente]);
+
+    drawCard();
+    drawCard();
+    drawCard();
+
+    jogadorAtual = jogadores[indOponente];
+    indOponente ^= 1;
+
+    drawCard();
+    drawCard();
+    drawCard();
+
     return true;
 }

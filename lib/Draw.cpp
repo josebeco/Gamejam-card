@@ -449,8 +449,8 @@ int showCards(struct Carta *cartas, int length)
             drawGame();
             drawCardArray(cartas, length);
         }
-
-        drawSprite(238 - indKi * 6 + 1, screenWidth - showCardsJ + 1, extras[0], BLACK, 1, 1, false);
+        drawRectangle(239, showCardsJ, 240, 1, BLACK);
+        drawSprite(238 - indKi * 6 + 1, showCardsJ + 10, extras[0], BLACK, 1, 1, false);
         confirmado = false;
         cancelado = false;
     }
