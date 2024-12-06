@@ -16,10 +16,12 @@ using namespace std;
 const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
 const struct RGB WHITE = {255, 255, 255};
+const struct RGB RED = {170, 0 ,0};
 
 struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
 struct Sprite *extras;
+struct Sprite *numbers;
 
 int state = 0; // 0-menu 1-deck 2-game
 int indKi = 0;
@@ -67,6 +69,7 @@ void initSprites()
     alfabeto = readSprites("sprites/alfabeto.txt");
     spriteCartas = readSprites("sprites/cartas.txt");
     extras = readSprites("sprites/extras.txt");
+    numbers = readSprites("sprites/numbers.txt");
 }
 
 void drawRectangle(int lui, int luj, int heigth, int width, struct RGB color)
@@ -130,11 +133,17 @@ void drawCardWithDescription(struct Carta carta)
     drawSprite(120 + spriteCartas[carta.indSprite].width, 20, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2, true);
 }
 
+void drawDeckBuilder()
+{
+    
+}
+
 void drawGame()
 {
     struct Player atual = getPlayer(true);
     struct Player oponente = getPlayer(false);
-
+    drawRectangle(239, 0, 10, oponente.adr, RED);
+    drawRectangle(10, 0, 10, atual.adr, RED);
     for (int i = 0; i < 5; i++)
     {
         if (!oponente.livreEmJogo[i])
@@ -298,6 +307,8 @@ void cycle()
     }
     else if (state == 1)
     {
+        indKi = 0;
+        indKj = 0;
     }
     else if (state == 2)
     {
@@ -310,6 +321,7 @@ void cycle()
         cout << "draw game" << endl;
         drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
         drawGame();
+
         while (true)
         {
             int resp = playCard();
