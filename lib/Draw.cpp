@@ -170,15 +170,16 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
 void drawCardWithDescription(struct Carta carta)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawSprite(120 + spriteCartas[carta.indSprite].width, 20, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2, true);
+    drawSprite(230, 10, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2, true);
     // TODO add string
 }
 
-void drawDeckBuilderMenu()
+void drawDeckBuilderMenu(struct Carta * original)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawString("player 1", 230, screenWidth / 2 - getStringLength("player 1") - 50, BLACK, 1, 1);
     drawString("player 2", 230, screenWidth / 2 + 50, BLACK, 1, 1);
+
     /*
             for (int k = 0; k < 2; k++)
             {
@@ -186,10 +187,47 @@ void drawDeckBuilderMenu()
                 {
                     for (int j = 0; j < 4; j++)
                     {
-                        drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[i * 4 + j], BLACK, 1, 1, true);
+                        drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[original[i * 4 + j].indSprite], BLACK, 1, 1, true);
                     }
                 }
             }*/
+}
+
+int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
+{
+    indKj = qtdO;
+
+    drawCardWithDescription(carta);
+    while (true)
+    {
+        if (cancelado)
+        {
+            cancelado = false;
+            confirmado = false;
+            return qtdO;
+        }
+
+        if (confirmado)
+        {
+            cancelado = false;
+            confirmado = false;
+            return indKi;
+        }
+
+        if (indKj > 2)
+        {
+            indKj = 2;
+        }
+        else if (indKj < 0)
+        {
+            indKj = 0;
+        }
+
+        drawSprite(150, 22, extras[1], BLACK, 1, 1);
+        drawSprite(150, 32, numbers[indKj], BLACK, 1, 1);
+        drawSprite(150, 37, extras[1], BLACK, 1, 1);
+    }
+    return qtdO;
 }
 
 void deckBuilder()
@@ -199,9 +237,11 @@ void deckBuilder()
     cancelado = false;
     confirmado = false;
 
+    int medKj;
     struct Carta *original = getCartasOriginal();
     struct Player player1 = getPlayer(0);
     struct Player player2 = getPlayer(1);
+
     drawDeckBuilderMenu();
     while (true)
     {
@@ -212,13 +252,37 @@ void deckBuilder()
             confirmado = false;
             return;
         }
+
+        if (indKj > 7)
+        {
+            indKj = 7;
+        }
+        else if (indKj < 0)
+        {
+            indKj = 0;
+        }
+
+
+        if (indKi > 0)
+        {
+            indKi = 0;
+        }
+        else if (indKi < -3)
+        {
+            indKi = -3;
+        }
+
         if (confirmado)
         {
-            med =
-            drawCardWithDescription();
-            while(true){
-                drawS
+            medKj = indKj;
+            if (indKj < 4){
+                player1.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player1.deck[indKj + abs(indKi) * 4]);
+            }else{
+                player2.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player2.deck[indKj + abs(indKi) * 4]);
             }
+            indKj = medKj;
+            cancelado = false;
+            confirmado = false;
         }
     }
 }
