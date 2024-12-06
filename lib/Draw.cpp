@@ -171,27 +171,56 @@ void drawCardWithDescription(struct Carta carta)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawSprite(120 + spriteCartas[carta.indSprite].width, 20, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2, true);
+    // TODO add string
 }
 
-void drawDeckBuilder()
+void drawDeckBuilderMenu()
 {
-    struct Carta *original = getCartasOriginal();
-    struct Player player1 = getPlayer(0);
-    struct Player player2 = getPlayer(1);
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawString("player 1", 230, screenWidth / 2 - getStringLength("player 1") - 50, BLACK, 1, 1);
     drawString("player 2", 230, screenWidth / 2 + 50, BLACK, 1, 1);
     /*
-        for (int k = 0; k < 2; k++)
-        {
-            for (int i = 0; i < 5; i++)
+            for (int k = 0; k < 2; k++)
             {
-                for (int j = 0; j < 4; j++)
+                for (int i = 0; i < 5; i++)
                 {
-                    drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[i * 4 + j], BLACK, 1, 1, true);
+                    for (int j = 0; j < 4; j++)
+                    {
+                        drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[i * 4 + j], BLACK, 1, 1, true);
+                    }
                 }
+            }*/
+}
+
+void deckBuilder()
+{
+    indKi = 0;
+    indKj = 0;
+    cancelado = false;
+    confirmado = false;
+
+    struct Carta *original = getCartasOriginal();
+    struct Player player1 = getPlayer(0);
+    struct Player player2 = getPlayer(1);
+    drawDeckBuilderMenu();
+    while (true)
+    {
+        timerOverride();
+        if (cancelado)
+        {
+            cancelado = false;
+            confirmado = false;
+            return;
+        }
+        if (confirmado)
+        {
+            med =
+            drawCardWithDescription();
+            while(true){
+                drawS
             }
-        }*/
+        }
+    }
 }
 
 void drawGame()
@@ -366,9 +395,7 @@ void cycle()
     }
     else if (state == 1)
     {
-        indKi = 0;
-        indKj = 0;
-        drawDeckBuilder();
+        deckBuilder();
     }
     else if (state == 2)
     {
