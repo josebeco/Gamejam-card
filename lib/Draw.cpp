@@ -151,8 +151,10 @@ void drawDeckBuilder()
     struct Carta *original = getCartasOriginal();
     struct Player player1 = getPlayer(0);
     struct Player player2 = getPlayer(1);
-   // drawString("player 1", 237, 130 - 8 * 5);
-
+    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawString("player 1", 237, 130 - 8 * 5, BLACK, 1, 1);
+    drawString("player 2", 237, 360 - 8 * 5, BLACK, 1, 1);
+/*
     for (int k = 0; k < 2; k++)
     {
         for (int i = 0; i < 5; i++)
@@ -162,7 +164,7 @@ void drawDeckBuilder()
                 drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[i * 4 + j], BLACK, 1, 1, true);
             }
         }
-    }
+    }*/
 }
 
 void drawGame()
