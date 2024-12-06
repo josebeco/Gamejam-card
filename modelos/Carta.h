@@ -8,11 +8,14 @@ using namespace std;
 struct Carta{
     int id;
     string nome, descricao;
+    
     bool mascara, ambiente, item;
+
     int turnosRestantes;
 
     int indFuncPutInPlay;
     int indFuncInPlay;
+
     int indSprite;
 
     struct RGB jumpscareColor;

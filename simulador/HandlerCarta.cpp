@@ -99,6 +99,12 @@ void lerCartas(string fileName)
         ind = 0;
 
         aux = inBetweenEmpty(indP, str);
+        original[i].turnosRestantes = stoi(aux);
+
+        getline(reader, str);
+        ind = 0;
+
+        aux = inBetweenEmpty(indP, str);
         original[i].indFuncPutInPlay = stoi(aux);
 
         aux = inBetweenEmpty(indP, str);

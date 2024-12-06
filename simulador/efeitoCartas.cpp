@@ -22,11 +22,17 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
 
     // TODO pega carta esoclhida
     int ind = 0;
+
     oponente.adr += carta.values[0] * oponente.split_percentage / 100;
     atual.adr += carta.values[1] + carta.values[0] * (100 - oponente.split_percentage) / 100;
 
     oponente.emJogo[ind].nula = true;
     oponente.livreEmJogo[ind] = true;
+
+    if(oponente.emJogo[ind].indFuncInPlay == 1){
+        oponente.emJogo[ind].turnosRestantes = 0;
+        buff_InPlay(oponente.emJogo[ind], oponente, atual);
+    }
 
     if (carta.values[2] == 1)
     {
@@ -52,7 +58,7 @@ void pegarCarta_PutInPlay(struct Carta carta, struct Player atual, struct Player
         {
             return;
         }
-        atual.mao[atual.maoLength++] = atual.descarte[ind];
+        atual.mao[atual.maoLength++] = copiarCarta(atual.descarte[ind].id);
         atual.descarteLength--;
         while (ind < atual.descarteLength)
         {
@@ -124,7 +130,7 @@ bool adrenaline_InPlay(struct Carta carta, struct Player atual, struct Player op
         atual.adr += carta.values[6] + carta.values[5] * (100 - oponente.split_percentage) / 100;
     }
 
-    return carta.turnosRestantes == 0;
+    return carta.turnosRestantes =< 0;
 }
 
 bool buff_InPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
@@ -139,14 +145,14 @@ bool buff_InPlay(struct Carta carta, struct Player atual, struct Player oponente
 
     carta.turnosRestantes--;
 
-    if (carta.turnosRestantes == 0)
+    if (carta.turnosRestantes =< 0)
     {
-        atual.added_positive_adrenaline -= carta.values[5];
-        atual.added_negative_adrenaline -= carta.values[6];
-        atual.split_percentage -= carta.values[7];
+        atual.added_positive_adrenaline -= carta.values[0];
+        atual.added_negative_adrenaline -= carta.values[1];
+        atual.split_percentage -= carta.values[2];
     }
 
-    return carta.turnosRestantes == 0;
+    return carta.turnosRestantes =< 0;
 }
 
 bool (*funcInPlay[2])(struct Carta, struct Player, struct Player) = {&adrenaline_InPlay, &buff_InPlay};
