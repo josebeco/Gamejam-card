@@ -72,7 +72,7 @@ durante 1 turno 50 por cento de toda adrenalina que seria sofrida e refletida ao
 2
 0 0 -50 -1 -1 0 0 0 -1 -1
 ambiente filme de terror
-durante 3 turnos aumenta sua adrenalina em 10 e a do oponente em 15
+durante 3 turnos aumenta sua adrenalina em 10 e a do oponente em 15 
 0 1 0
 3
 0 0
@@ -144,7 +144,7 @@ dura 1 turno e diminui em 30 a adrenalina do oponente
 3
 0 0 0 0 0 -30 0 -1 -1 0
 ambiente bocejante
-enquanto sua adrenalina for menor que 50 diminui em 10 a adrenalina dos dois jogadores
+enquanto sua adrenalina for menor que 50 essa carta fica em jogo e diminui em 10 a adrenalina dos dois jogadores 
 0 1 0
 1
 0 0
@@ -152,7 +152,33 @@ enquanto sua adrenalina for menor que 50 diminui em 10 a adrenalina dos dois jog
 
 2
 0 0 0 0 0 -10 -10 -1 49 2
+mascara cha
+enquanto sua adrenalina for menor que 50 essa carta fica em jogo e diminui em 15 a adrenalina do oponente e ao jogar diminui em 30 sua adrenalina
+1 0 0
+1
+0 0
+17
+181 201 160
+2
+0 -30 0 0 0 -15 0 -1 49 2
+mascara cafe
+dura 2 turnos e aumenta em 20 a adrenalina do oponente
+1 0 0
+2
+0 0
+18
 
+2
+0 0 0 0 0 20 0 -1 -1 0
+mascara jumpscare
+dura 1 turno e aumenta em 30 a adrenalina do oponente
+1 0 0
+1
+0 0
+19
+
+3
+0 0 0 0 0 30 0 -1 -1 0
 
 
 
