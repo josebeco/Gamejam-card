@@ -174,3 +174,31 @@ struct Carta copiarCarta(int ind)
     carta.nula = original[ind].nula;
     return carta;
 }
+
+void copiarCarta(struct Carta nova, struct Carta velha)
+{
+    nova.id = velha.id;
+
+    nova.mascara = velha.mascara;
+    nova.ambiente = velha.ambiente;
+    nova.item = velha.item;
+
+    nova.nome = velha.nome;
+    nova.descricao = velha.descricao;
+
+    nova.turnosRestantes = velha.turnosRestantes;
+
+    nova.indFuncInPlay = velha.indFuncInPlay;
+    nova.indFuncPutInPlay = velha.indFuncPutInPlay;
+    nova.indSprite = velha.indSprite;
+
+    nova.jumpscareColor = velha.jumpscareColor;
+    nova.jumpscareSizeMultipliar = velha.jumpscareSizeMultipliar;
+
+    for (int i = 0; i < 10; i++)
+    {
+        nova.values[i] = velha.values[i];
+    }
+
+    nova.nula = velha.nula;
+}

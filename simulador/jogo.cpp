@@ -10,15 +10,15 @@ using namespace std;
 
 #define emJogoSize 5
 struct Player jogadores[2];
-struct Player jogadorAtual;
+int indAtual;
 int indOponente;
 
-void printAtual(){
-    for (int i = 0; i < jogadorAtual.maoLength; i++)
+void printAtual()
+{
+    for (int i = 0; i < jogadores[indAtual].maoLength; i++)
     {
-        cout << jogadorAtual.mao[i].nome << endl;
+        // cout << jogadores[indAtual].mao[i].nome << endl;
     }
-    
 }
 
 struct Player *getJogadores()
@@ -30,24 +30,24 @@ struct Player getPlayer(bool atual)
 {
     if (atual)
     {
-        return jogadorAtual;
+        return jogadores[indAtual];
     }
     return jogadores[indOponente];
 }
 
 bool checkDeath()
 {
-    return jogadorAtual.adr <= 0 || jogadorAtual.adr >= 100;
+    return jogadores[indAtual].adr <= 0 || jogadores[indAtual].adr >= 100;
 }
 
 bool drawCard()
 {
-    if (jogadorAtual.indBaralho < 0)
+    if (jogadores[indAtual].indBaralho < 0)
     {
         return false;
     }
 
-    jogadorAtual.mao[jogadorAtual.maoLength++] = jogadorAtual.baralho[jogadorAtual.indBaralho--];
+    copiarCarta(jogadores[indAtual].mao[jogadores[indAtual].maoLength++] , jogadores[indAtual].baralho[jogadores[indAtual].indBaralho--]);
     return true;
 }
 
@@ -55,7 +55,7 @@ bool espacoLivre()
 {
     for (int i = 0; i < 5; i++)
     {
-        if (jogadorAtual.livreEmJogo[i])
+        if (jogadores[indAtual].livreEmJogo[i])
         {
             return true;
         }
@@ -67,71 +67,70 @@ void passTurn()
 {
     for (int i = 0; i < emJogoSize; i++)
     {
-        if (jogadorAtual.livreEmJogo[i] || jogadorAtual.emJogo[i].indFuncInPlay == 1) // se for buff
+        if (jogadores[indAtual].livreEmJogo[i] || jogadores[indAtual].emJogo[i].indFuncInPlay == 1) // se for buff
         {
             continue;
         }
-        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indOponente]))
+        if (inPlay(jogadores[indAtual].emJogo[i], jogadores[indAtual], jogadores[indOponente]))
         {
-            jogadorAtual.livreEmJogo[i] = true;
-            jogadorAtual.emJogo[i].nula = true;
+            jogadores[indAtual].livreEmJogo[i] = true;
+            jogadores[indAtual].emJogo[i].nula = true;
         }
-        jumpscare(jogadorAtual.emJogo[i]);
+        jumpscare(jogadores[indAtual].emJogo[i]);
     }
 
     for (int i = 0; i < emJogoSize; i++)
     {
-        if (jogadorAtual.livreEmJogo[i] || jogadorAtual.emJogo[i].indFuncInPlay != 1) // se for buff
+        if (jogadores[indAtual].livreEmJogo[i] || jogadores[indAtual].emJogo[i].indFuncInPlay != 1) // se for buff
         {
             continue;
         }
-        if (inPlay(jogadorAtual.emJogo[i], jogadorAtual, jogadores[indOponente]))
+        if (inPlay(jogadores[indAtual].emJogo[i], jogadores[indAtual], jogadores[indOponente]))
         {
-            jogadorAtual.livreEmJogo[i] = true;
-            jogadorAtual.emJogo[i].nula = true;
+            jogadores[indAtual].livreEmJogo[i] = true;
+            jogadores[indAtual].emJogo[i].nula = true;
         }
-        jumpscare(jogadorAtual.emJogo[i]);
+        jumpscare(jogadores[indAtual].emJogo[i]);
     }
-    jogadorAtual = jogadores[indOponente];
+    jogadores[indAtual] = jogadores[indOponente];
     indOponente ^= 1;
 }
 
 int playCard()
 {
-    printAtual();
-    int indCarta = showCards(jogadorAtual.mao, jogadorAtual.maoLength);
+    int indCarta = showCards(jogadores[indAtual].mao, jogadores[indAtual].maoLength);
     if (indCarta < 0)
     {
         return 2;
     }
 
-    if (!jogadorAtual.mao[indCarta].item && !espacoLivre())
+    if (!jogadores[indAtual].mao[indCarta].item && !espacoLivre())
     {
         return 1;
     }
 
-    if (!jogadorAtual.mao[indCarta].item)
+    if (!jogadores[indAtual].mao[indCarta].item)
     {
         for (int i = 0; i < emJogoSize; i++)
         {
-            if (jogadorAtual.livreEmJogo[i])
+            if (jogadores[indAtual].livreEmJogo[i])
             {
-                jogadorAtual.livreEmJogo[i] = false;
-                jogadorAtual.emJogo[i] = jogadorAtual.mao[indCarta];
+                jogadores[indAtual].livreEmJogo[i] = false;
+                jogadores[indAtual].emJogo[i] = jogadores[indAtual].mao[indCarta];
                 break;
             }
         }
     }
 
-    putInPlay(jogadorAtual.mao[indCarta], jogadorAtual, jogadores[indOponente ^ 1]);
-    jumpscare(jogadorAtual.mao[indCarta]);
-    for (int i = indCarta; i < jogadorAtual.maoLength - 1; i++)
+    putInPlay(jogadores[indAtual].mao[indCarta], jogadores[indAtual], jogadores[indOponente ^ 1]);
+    jumpscare(jogadores[indAtual].mao[indCarta]);
+    for (int i = indCarta; i < jogadores[indAtual].maoLength - 1; i++)
     {
-        jogadorAtual.mao[i] = jogadorAtual.mao[i + 1];
+        jogadores[indAtual].mao[i] = jogadores[indAtual].mao[i + 1];
     }
-    jogadorAtual.maoLength--;
+    jogadores[indAtual].maoLength--;
 
-    if (jogadorAtual.mao[indCarta].mascara)
+    if (jogadores[indAtual].mao[indCarta].mascara)
     {
         return 2;
     }
@@ -142,7 +141,8 @@ int playCard()
 void embaralharCartas(struct Player jogador)
 {
     bool indUsado[jogador.indBaralho + 1];
-    struct Carta mediador[jogador.indBaralho + 1];
+    struct Carta *mediador;
+    mediador = new struct Carta[20];
     for (int i = 0; i < jogador.indBaralho + 1; i++)
     {
         indUsado[i] = false;
@@ -157,12 +157,15 @@ void embaralharCartas(struct Player jogador)
         } while (indUsado[ind]);
 
         indUsado[ind] = true;
-        mediador[i] = jogador.baralho[ind];
+        copiarCarta(mediador[i], jogador.baralho[ind]);
+        cout << mediador[i].nome << endl;
+        cout << jogador.baralho[ind].nome << endl;
     }
 
     for (int i = 0; i < jogador.indBaralho + 1; i++)
     {
-        jogador.baralho[i] = mediador[i];
+        copiarCarta(jogador.baralho[i], mediador[i]);
+        // cout << mediador[i].nome << endl;
     }
 }
 
@@ -172,7 +175,7 @@ void resetDecks()
     {
         for (int j = 0; j < 20; j++)
         {
-            jogadores[i].deck[j] = 0;
+            jogadores[i].deck[j] = 2;
         }
     }
 }
@@ -181,21 +184,21 @@ bool copyFromDeckToBaralho()
 {
     for (int i = 0; i < 2; i++)
     {
-        struct Player jogadorCopiado = jogadores[i];
-        jogadorCopiado.indBaralho = -1;
+        jogadores[i].indBaralho = -1;
         for (int j = 0; j < 20; j++)
         {
-            for (int k = 0; k < jogadorCopiado.deck[j]; k++)
+            for (int k = 0; k < jogadores[i].deck[j]; k++)
             {
-                if (jogadorCopiado.indBaralho >= 19)
+                if (jogadores[i].indBaralho >= 19)
                 {
                     continue;
                 }
 
-                jogadorCopiado.baralho[++jogadorCopiado.indBaralho] = copiarCarta(j);
+                jogadores[i].baralho[++jogadores[i].indBaralho] = copiarCarta(j);
+                cout << jogadores[i].baralho[jogadores[i].indBaralho].nome << endl;
             }
         }
-        if (jogadorCopiado.indBaralho < 19)
+        if (jogadores[i].indBaralho < 19)
         {
             return false;
         }
@@ -223,21 +226,22 @@ bool initSimulation()
     }
 
     indOponente = rand() % 2;
-    jogadorAtual = jogadores[indOponente ^ 1];
+    indAtual = indOponente ^ 1;
     if (!copyFromDeckToBaralho())
     {
         return false;
     }
 
-    embaralharCartas(jogadorAtual);
-    embaralharCartas(jogadores[indOponente]);
+    //embaralharCartas(jogadores[indAtual]);
+    //embaralharCartas(jogadores[indOponente]);
 
     drawCard();
     drawCard();
     drawCard();
 
-    jogadorAtual = jogadores[indOponente];
+   
     indOponente ^= 1;
+    indAtual ^= 1;
 
     drawCard();
     drawCard();
