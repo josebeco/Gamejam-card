@@ -5,6 +5,8 @@
 #define PLAYERHEADER
 struct Player{
     int adr = 50;
+    struct Carta deck[AMOUNT_CARDS];
+    
     struct Carta baralho[AMOUNT_CARDS + 5];
     int indBaralho = AMOUNT_CARDS - 1;
 

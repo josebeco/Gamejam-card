@@ -5,6 +5,7 @@
 #include "../modelos/Carta.h"
 #include "../modelos/Player.h"
 #include "../simulador/simulatorH/jogo.h"
+#include "../simulador/simulatorH/HandlerCarta.h"
 #include <string>
 #include <iostream>
 #include <chrono>
@@ -135,7 +136,15 @@ void drawCardWithDescription(struct Carta carta)
 
 void drawDeckBuilder()
 {
-    
+    struct Carta original* = getCartasOriginal();
+    for (int i = 0; i < 5; i++)
+    {
+        for (int j = 0; i < 8; j++)
+        {
+            /* code */
+        }
+        
+    }
     
 }
 
