@@ -306,7 +306,7 @@ void drawLost()
     cout << "lost game" << endl;
     state = 0;
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawString("you lost", 130, screenWidth / 2 - getStringLength("you lost"), BLACK, 1, 1);
+    drawString("you lost", 130, screenWidth / 2 - getStringLength("you lost") / 2, BLACK, 1, 1);
     timerOverride();
     delay(2000);
 }
@@ -351,9 +351,9 @@ void drawMenu()
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawSprite(130 + 20 * indKi, screenWidth / 2 - 4 * 5, extras[0], BLACK, 1, 1, false);
-    drawString("play", 130, screenWidth / 2 - getStringLength("play"), BLACK, 1, 1);
-    drawString("deck", 110, screenWidth / 2 - getStringLength("deck"), BLACK, 1, 1);
-    drawString("exit", 90, screenWidth / 2 - getStringLength("exit"), BLACK, 1, 1);
+    drawString("play", 130, screenWidth / 2 - getStringLength("play") / 2, BLACK, 1, 1);
+    drawString("deck", 110, screenWidth / 2 - getStringLength("deck") / 2, BLACK, 1, 1);
+    drawString("exit", 90, screenWidth / 2 - getStringLength("exit") / 2, BLACK, 1, 1);
     confirmado = false;
     cancelado = false;
 }
