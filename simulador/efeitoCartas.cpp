@@ -10,7 +10,7 @@ using namespace std;
 void adrenaline_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 0
 {
     oponente.adr += carta.values[0] * oponente.split_percentage / 100;
-    atual.adr += carta.values[1] +  carta.values[0] * (100 - oponente.split_percentage) / 100;
+    atual.adr += carta.values[1] + carta.values[0] * (100 - oponente.split_percentage) / 100;
 }
 
 void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
@@ -22,8 +22,8 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
 
     // TODO pega carta esoclhida
     int ind = 0;
-    oponente.adr += carta.values[0];
-    atual.adr += carta.values[1];
+    oponente.adr += carta.values[0] * oponente.split_percentage / 100;
+    atual.adr += carta.values[1] + carta.values[0] * (100 - oponente.split_percentage) / 100;
 
     oponente.emJogo[ind].nula = true;
     oponente.livreEmJogo[ind] = true;
