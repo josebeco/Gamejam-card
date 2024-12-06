@@ -174,7 +174,7 @@ void drawCardWithDescription(struct Carta carta)
     // TODO add string
 }
 
-void drawDeckBuilderMenu(struct Carta * original)
+void drawDeckBuilderMenu(struct Carta *original)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawString("player 1", 230, screenWidth / 2 - getStringLength("player 1") - 50, BLACK, 1, 1);
@@ -262,7 +262,6 @@ void deckBuilder()
             indKj = 0;
         }
 
-
         if (indKi > 0)
         {
             indKi = 0;
@@ -275,9 +274,12 @@ void deckBuilder()
         if (confirmado)
         {
             medKj = indKj;
-            if (indKj < 4){
+            if (indKj < 4)
+            {
                 player1.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player1.deck[indKj + abs(indKi) * 4]);
-            }else{
+            }
+            else
+            {
                 player2.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player2.deck[indKj + abs(indKi) * 4]);
             }
             indKj = medKj;
@@ -439,7 +441,8 @@ void drawMenu()
         state = indKi + 2;
         if (state == 2)
         {
-            if(!initSimulation()){
+            if (!initSimulation())
+            {
                 state = 0;
             }
         }
