@@ -6,3 +6,4 @@ int playCard();
 void embaralharCartas(struct Player);
 void initSimulation();
 struct Player getPlayer(bool);
+struct Player getPlayer(int);

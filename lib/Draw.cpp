@@ -17,7 +17,7 @@ using namespace std;
 const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
 const struct RGB WHITE = {255, 255, 255};
-const struct RGB RED = {170, 0 ,0};
+const struct RGB RED = {170, 0, 0};
 
 struct Sprite *alfabeto;
 struct Sprite *spriteCartas;
@@ -136,16 +136,20 @@ void drawCardWithDescription(struct Carta carta)
 
 void drawDeckBuilder()
 {
-    struct Carta original* = getCartasOriginal();
-    for (int i = 0; i < 5; i++)
+    struct Carta original * = getCartasOriginal();
+    struct Player player1 = getPlayer(0);
+    struct Player oponente = getPlayer(false);
+
+    for (int k = 0; k < 2; k++)
     {
-        for (int j = 0; i < 8; j++)
+        for (int i = 0; i < 5; i++)
         {
-            /* code */
+            for (int j = 0; j < 4; j++)
+            {
+                drawSprite(210 - i * 40, 10 + j * 37, spriteCartas[i * 4 + j], BLACK, 1 , 1 , true);
+            }
         }
-        
     }
-    
 }
 
 void drawGame()

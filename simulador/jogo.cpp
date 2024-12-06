@@ -11,6 +11,11 @@ struct Player jogadores[2];
 struct Player jogadorAtual;
 int indOponente;
 
+struct Player getPlayer(int ind)
+{
+    return jogadores[ind];
+}
+
 struct Player getPlayer(bool atual)
 {
     if (atual)
