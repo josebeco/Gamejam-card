@@ -439,7 +439,9 @@ void drawMenu()
         state = indKi + 2;
         if (state == 2)
         {
-            initSimulation();
+            if(!initSimulation()){
+                state = 0;
+            }
         }
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);

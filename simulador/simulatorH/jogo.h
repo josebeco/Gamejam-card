@@ -5,6 +5,6 @@ void passTurn();
 void resetDecks();
 int playCard();
 void embaralharCartas(struct Player);
-void initSimulation();
+bool initSimulation();
 struct Player getPlayer(bool);
 struct Player getPlayer(int);

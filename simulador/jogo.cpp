@@ -1,6 +1,7 @@
 #include "../modelos/Player.h"
 #include "../modelos/Carta.h"
 #include "simulatorH/efeitosCartas.h"
+#include "simulatorH/HandlerCarta.h"
 #include "../lib/fileH/Draw.h"
 #include <cstdlib>
 #include <ctime>
@@ -166,9 +167,33 @@ void resetDecks()
     }
 }
 
-void initSimulation()
+bool copyFromDeckToBaralho()
+{
+    for (int i = 0; i < 2; i++)
+    {
+        struct Player jogadorCopiado = jogadores[i];
+        jogadorCopiado.indBaralho = -1;
+        for (int j = 0; j < 20; j++)
+        {
+            for (int k = 0; k < jogadorCopiado.deck[j]; k++)
+            {
+                if(jogadorCopiado.indBaralho >= 19){
+                    return true;
+                }
+
+                jogadorCopiado.baralho[++jogadorCopiado.indBaralho] = copiarCarta(j);
+            }
+        }
+        if(jogadorCopiado.indBaralho < 19){
+            return false;
+        }
+    }
+}
+
+bool initSimulation()
 {
     srand(time(NULL));
+
     for (int i = 0; i < 2; i++)
     {
         jogadores[i].adr = 50;
@@ -183,8 +208,15 @@ void initSimulation()
         jogadores[i].added_negative_adrenaline = 0;
         jogadores[i].split_percentage = 0;
     }
+
     indOponente = rand() % 2;
     jogadorAtual = jogadores[indOponente ^ 1];
+    if (!copyFromDeckToBaralho())
+    {
+        return false;
+    }
+
     embaralharCartas(jogadorAtual);
     embaralharCartas(jogadores[indOponente]);
+    return true;
 }
