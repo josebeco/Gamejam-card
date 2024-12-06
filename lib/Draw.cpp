@@ -146,23 +146,56 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
     {
         if (frase[i] == ' ')
         {
-            luj += 3;
+            luj += 3 * width_multipliar;
             continue;
         }
         if (frase[i] == '-')
         {
             drawSprite(lui, luj, numbers[9], color, width_multipliar, heigth_multipliar, false);
-            luj += numbers[9].width + 1;
+            luj += (numbers[9].width + 1) * width_multipliar;
         }
         else if (frase[i] >= '0' && frase[i] <= '9')
         {
             drawSprite(lui, luj, numbers[frase[i] - '0'], color, width_multipliar, heigth_multipliar, false);
-            luj += numbers[frase[i] - '0'].width + 1;
+            luj += (numbers[frase[i] - '0'].width + 1) * width_multipliar;
         }
         else
         {
             drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, width_multipliar, heigth_multipliar, false);
-            luj += alfabeto[frase[i] - 'a'].width + 1;
+            luj += (alfabeto[frase[i] - 'a'].width + 1) * width_multipliar;
+        }
+    }
+}
+
+void drawStringLimited(int lui, int luj, int heigth, int width, string frase, struct RGB color, int width_multipliar, int heigth_multipliar)
+{
+    int lujO = luj;
+    for (int i = 0; i < frase.length(); i++)
+    {
+        if (frase[i] == ' ')
+        {
+            luj += 3 * width_multipliar;
+            if (luj + 50 * width_multipliar >= width)
+            {
+                lui -= 6 * heigth_multipliar;
+                luj = lujO;
+            }
+            continue;
+        }
+        if (frase[i] == '-')
+        {
+            drawSprite(lui, luj, numbers[9], color, width_multipliar, heigth_multipliar, false);
+            luj += (numbers[9].width + 1) * width_multipliar;
+        }
+        else if (frase[i] >= '0' && frase[i] <= '9')
+        {
+            drawSprite(lui, luj, numbers[frase[i] - '0'], color, width_multipliar, heigth_multipliar, false);
+            luj += (numbers[frase[i] - '0'].width + 1) * width_multipliar;
+        }
+        else
+        {
+            drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, width_multipliar, heigth_multipliar, false);
+            luj += (alfabeto[frase[i] - 'a'].width + 1) * width_multipliar;
         }
     }
 }
@@ -171,35 +204,39 @@ void drawCardWithDescription(struct Carta carta)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawSprite(230, 10, spriteCartas[carta.indSprite], carta.jumpscareColor, 2, 2, true);
-    // TODO add string
+    drawString(carta.nome, 230, 80, BLACK, 2, 2);
+    drawStringLimited(210, 80, 230, screenWidth - 90, carta.descricao, BLACK, 1, 1);
 }
 
 void drawDeckBuilderMenu(struct Carta *original)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawRectangle(239, screenWidth / 2, 240, 1, BLACK);
     drawString("player 1", 230, screenWidth / 2 - getStringLength("player 1") - 50, BLACK, 1, 1);
     drawString("player 2", 230, screenWidth / 2 + 50, BLACK, 1, 1);
 
-    /*
-            for (int k = 0; k < 2; k++)
+    for (int k = 0; k < 2; k++)
+    {
+        for (int i = 0; i < 5; i++)
+        {
+            for (int j = 0; j < 4; j++)
             {
-                for (int i = 0; i < 5; i++)
-                {
-                    for (int j = 0; j < 4; j++)
-                    {
-                        drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[original[i * 4 + j].indSprite], BLACK, 1, 1, true);
-                    }
-                }
-            }*/
+                drawSprite(220 - i * 45, 5 + j * 46 + k * screenWidth / 2, spriteCartas[original[i * 4 + j].indSprite], BLACK, 1, 1, true);
+            }
+        }
+    }
 }
 
 int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
 {
+    cancelado = false;
+    confirmado = false;
     indKj = qtdO;
 
     drawCardWithDescription(carta);
     while (true)
     {
+
         if (cancelado)
         {
             cancelado = false;
@@ -225,7 +262,9 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
 
         drawSprite(150, 22, extras[1], BLACK, 1, 1, false);
         drawSprite(150, 32, numbers[indKj], BLACK, 1, 1, false);
-        drawSprite(150, 37, extras[1], BLACK, 1, 1, false);
+        drawSprite(150, 37, extras[0], BLACK, 1, 1, false);
+
+        timerOverride();
     }
     return qtdO;
 }
@@ -237,7 +276,7 @@ void deckBuilder()
     cancelado = false;
     confirmado = false;
 
-    int medKj;
+    int medKj, medKi;
     struct Carta *original = getCartasOriginal();
     struct Player player1 = getPlayer(0);
     struct Player player2 = getPlayer(1);
@@ -245,7 +284,13 @@ void deckBuilder()
     drawDeckBuilderMenu(original);
     while (true)
     {
+        medKi = indKi;
+        medKj = indKj;
+
+        drawSprite(185 + indKi * 45, 19 + (indKj % 4) * 46 + (indKj / 4) * screenWidth / 2, extras[2], BLACK, 1, 1, false);
         timerOverride();
+        drawSprite(185 + medKi * 45, 19 + (medKj % 4) * 46 + (medKj / 4) * screenWidth / 2, extras[2], YELLOW_PAGE, 1, 1, false);
+
         if (cancelado)
         {
             cancelado = false;
@@ -273,7 +318,10 @@ void deckBuilder()
 
         if (confirmado)
         {
+            cancelado = false;
+            confirmado = false;
             medKj = indKj;
+
             if (indKj < 4)
             {
                 player1.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player1.deck[indKj + abs(indKi) * 4]);
@@ -282,6 +330,7 @@ void deckBuilder()
             {
                 player2.deck[indKj + abs(indKi) * 4] = deckCardShow(original[indKj + abs(indKi) * 4], player2.deck[indKj + abs(indKi) * 4]);
             }
+
             indKj = medKj;
             cancelado = false;
             confirmado = false;
