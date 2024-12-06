@@ -223,9 +223,9 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
             indKj = 0;
         }
 
-        drawSprite(150, 22, extras[1], BLACK, 1, 1);
-        drawSprite(150, 32, numbers[indKj], BLACK, 1, 1);
-        drawSprite(150, 37, extras[1], BLACK, 1, 1);
+        drawSprite(150, 22, extras[1], BLACK, 1, 1, false);
+        drawSprite(150, 32, numbers[indKj], BLACK, 1, 1, false);
+        drawSprite(150, 37, extras[1], BLACK, 1, 1, false);
     }
     return qtdO;
 }
@@ -242,7 +242,7 @@ void deckBuilder()
     struct Player player1 = getPlayer(0);
     struct Player player2 = getPlayer(1);
 
-    drawDeckBuilderMenu();
+    drawDeckBuilderMenu(original);
     while (true)
     {
         timerOverride();

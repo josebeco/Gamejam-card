@@ -177,17 +177,20 @@ bool copyFromDeckToBaralho()
         {
             for (int k = 0; k < jogadorCopiado.deck[j]; k++)
             {
-                if(jogadorCopiado.indBaralho >= 19){
-                    return true;
+                if (jogadorCopiado.indBaralho >= 19)
+                {
+                    continue;
                 }
 
                 jogadorCopiado.baralho[++jogadorCopiado.indBaralho] = copiarCarta(j);
             }
         }
-        if(jogadorCopiado.indBaralho < 19){
+        if (jogadorCopiado.indBaralho < 19)
+        {
             return false;
         }
     }
+    return true;
 }
 
 bool initSimulation()
