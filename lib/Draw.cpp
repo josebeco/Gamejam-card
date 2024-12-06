@@ -70,7 +70,7 @@ void initSprites()
     alfabeto = readSprites("sprites/alfabeto.txt");
     spriteCartas = readSprites("sprites/cartas.txt");
     extras = readSprites("sprites/extras.txt");
-    numbers = readSprites("sprites/numbers.txt");
+    numbers = readSprites("sprites/numero.txt");
 }
 
 void drawRectangle(int lui, int luj, int heigth, int width, struct RGB color)
@@ -112,7 +112,34 @@ void drawSprite(int lui, int luj, struct Sprite sprite, struct RGB color, int wi
         }
     }
 }
+int getStringLength(string frase)
+{
+    int r = 0;
+    for (int i = 0; i < frase.length(); i++)
+    {
+        if (frase[i] == ' ')
+        {
+            r += 3;
+            continue;
+        }
+        if (frase[i] == '-')
+        {
 
+            r += numbers[9].width + 1;
+        }
+        else if (frase[i] >= '0' && frase[i] <= '9')
+        {
+
+            r += numbers[frase[i] - '0'].width + 1;
+        }
+        else
+        {
+
+            r += alfabeto[frase[i] - 'a'].width + 1;
+        }
+    }
+    return r;
+}
 void drawString(string frase, int lui, int luj, struct RGB color, int width_multipliar, int heigth_multipliar)
 { // left upper corner
     for (int i = 0; i < frase.length(); i++)
@@ -129,8 +156,8 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
         }
         else if (frase[i] >= '0' && frase[i] <= '9')
         {
-            drawSprite(lui, luj, numbers[i - '0'], color, width_multipliar, heigth_multipliar, false);
-            luj += numbers[i - '0'].width + 1;
+            drawSprite(lui, luj, numbers[frase[i] - '0'], color, width_multipliar, heigth_multipliar, false);
+            luj += numbers[frase[i] - '0'].width + 1;
         }
         else
         {
@@ -152,19 +179,19 @@ void drawDeckBuilder()
     struct Player player1 = getPlayer(0);
     struct Player player2 = getPlayer(1);
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawString("player 1", 237, 130 - 8 * 5, BLACK, 1, 1);
-    drawString("player 2", 237, 360 - 8 * 5, BLACK, 1, 1);
-/*
-    for (int k = 0; k < 2; k++)
-    {
-        for (int i = 0; i < 5; i++)
+    drawString("player 1", 230, screenWidth / 2 - getStringLength("player 1") - 50, BLACK, 1, 1);
+    drawString("player 2", 230, screenWidth / 2 + 50, BLACK, 1, 1);
+    /*
+        for (int k = 0; k < 2; k++)
         {
-            for (int j = 0; j < 4; j++)
+            for (int i = 0; i < 5; i++)
             {
-                drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[i * 4 + j], BLACK, 1, 1, true);
+                for (int j = 0; j < 4; j++)
+                {
+                    drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[i * 4 + j], BLACK, 1, 1, true);
+                }
             }
-        }
-    }*/
+        }*/
 }
 
 void drawGame()
@@ -279,7 +306,7 @@ void drawLost()
     cout << "lost game" << endl;
     state = 0;
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawString("you lost", 130, screenWidth / 2 - (4 * 4), BLACK, 1, 1);
+    drawString("you lost", 130, screenWidth / 2 - getStringLength("you lost"), BLACK, 1, 1);
     timerOverride();
     delay(2000);
 }
@@ -324,9 +351,9 @@ void drawMenu()
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawSprite(130 + 20 * indKi, screenWidth / 2 - 4 * 5, extras[0], BLACK, 1, 1, false);
-    drawString("play", 130, screenWidth / 2 - (2 * 5), BLACK, 1, 1);
-    drawString("deck", 110, screenWidth / 2 - (2 * 5), BLACK, 1, 1);
-    drawString("exit", 90, screenWidth / 2 - (2 * 5), BLACK, 1, 1);
+    drawString("play", 130, screenWidth / 2 - getStringLength("play"), BLACK, 1, 1);
+    drawString("deck", 110, screenWidth / 2 - getStringLength("deck"), BLACK, 1, 1);
+    drawString("exit", 90, screenWidth / 2 - getStringLength("exit"), BLACK, 1, 1);
     confirmado = false;
     cancelado = false;
 }
@@ -341,6 +368,7 @@ void cycle()
     {
         indKi = 0;
         indKj = 0;
+        drawDeckBuilder();
     }
     else if (state == 2)
     {
