@@ -23,7 +23,7 @@ se sua adrenalina for menor que 50 descarte uma carta ativa do seu oponente dimi
 0
 1 0
 2
-
+255 252 232
 2
 0 -30 1 -1 49 0 0 -1 -1 0
 ambiente caverna 
@@ -32,7 +32,7 @@ durante 5 turnos suas cartas que aumentao a adrenalina do oponente causam 5 de a
 5
 5 1
 3
-
+77 37 15
 2
 5 0 0 -1 -1 0 0 0 -1 -1
 item chamada
@@ -41,7 +41,7 @@ recupere uma carta da sua pilha de descarte e coloque em sua mão diminui em 20 
 0
 2 0 
 4
-
+172 176 186
 2
 0 -20 1 0 0 0 0 -1 -1 0
 item energetico
@@ -50,7 +50,7 @@ adiciona 40 a sua adrenalina
 0
 0 0
 5
-
+36 225 240
 2
 0 40 0 0 0 0 0 -1 -1 0
 item seringa
@@ -68,7 +68,7 @@ durante 1 turno 50 por cento de toda adrenalina que seria sofrida e refletida ao
 1
 3 1
 7
-
+255 0 90
 2
 0 0 -50 -1 -1 0 0 0 -1 -1
 ambiente filme de terror
@@ -77,7 +77,7 @@ durante 3 turnos aumenta sua adrenalina em 10 e a do oponente em 15
 3
 0 0
 8
-
+146 50 60
 2
 0 0 0 0 0 15 10 -1 -1 0
 item calmante
@@ -86,7 +86,7 @@ diminui em 40 sua adrenalina
 0
 0 0
 9
-
+199 107 152
 2
 0 -40 0 0 0 0 0 -1 -1 0
 mascara da morte
@@ -95,7 +95,7 @@ dura 5 turnos e em seu ultimo turno diminui em 70 a adrenalina do oponente
 5
 0 0
 10
-
+0 0 0
 3
 0 0 0 0 0 -70 0 -1 -1 1
 item carinho
@@ -104,7 +104,7 @@ diminui em 10 sua adrenalina e diminui em 20 a adrenalina do oponente
 0
 0 0
 11
-
+116 157 161
 1
 -20 -10 0 0 0 0 0 -1 -1 0
 item fomo
@@ -113,7 +113,7 @@ procure por uma carta em seu baralho e em seguida o embaralhe adiciona 40 a sua 
 0
 2 0
 12
-
+255 222 52
 2
 0 40 2 0 0 0 0 -1 -1 0
 mascara kamikaze
@@ -122,7 +122,7 @@ dura 1 turno e aumenta em 100 sua adrenalina e aumenta em 110 a arenalina do opo
 1
 0 0
 13
-
+255 0 0
 4
 0 0 0 0 0 110 100 -1 -1 0
 item grito alto
@@ -131,7 +131,7 @@ aumenta em 10 sua adrenalina e aumenta em 15 a adrenalina do oponente
 0
 0 0
 14
-
+90 57 114
 2
 15 10 0 0 0 0 0 -1 -1 0
 mascara sonolencia
@@ -140,7 +140,7 @@ dura 1 turno e diminui em 30 a adrenalina do oponente
 1
 0 0
 15
-
+13 73 80
 3
 0 0 0 0 0 -30 0 -1 -1 0
 ambiente bocejante
@@ -149,7 +149,7 @@ enquanto sua adrenalina for menor que 50 essa carta fica em jogo e diminui em 10
 1
 0 0
 16
-
+169 228 137
 2
 0 0 0 0 0 -10 -10 -1 49 2
 mascara cha
@@ -167,7 +167,7 @@ dura 2 turnos e aumenta em 20 a adrenalina do oponente
 2
 0 0
 18
-
+75 54 33
 2
 0 0 0 0 0 20 0 -1 -1 0
 mascara jumpscare
@@ -176,7 +176,7 @@ dura 1 turno e aumenta em 30 a adrenalina do oponente
 1
 0 0
 19
-
+124 2 0
 3
 0 0 0 0 0 30 0 -1 -1 0
 
