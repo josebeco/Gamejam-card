@@ -6,11 +6,9 @@ build:
 run: build
 	./game
 
-static:
-	g++ -o game Main.cpp  lib/*.cpp simulador/*.cpp  -lGL  -lglut  
 
 win:
-	x86_64-w64-mingw32-g++ -o game Main.cpp  lib/*.cpp simulador/*.cpp -lopengl32 -lfreeglut -Wl,--subsystem,windows
+	g++ -o game Main.cpp  lib/Screen.cpp lib/Draw.cpp lib/HandlerSprites.cpp simulador/jogo.cpp  simulador/efeitoCartas.cpp  simulador/HandlerCarta.cpp -lopengl32 -lfreeglut -lkernel32 -user32
 
 
 git:
