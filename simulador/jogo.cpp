@@ -4,6 +4,7 @@
 #include "simulatorH/HandlerCarta.h"
 #include "../lib/fileH/Draw.h"
 #include <cstdlib>
+#include <iostream>
 #include <ctime>
 using namespace std;
 
@@ -11,6 +12,14 @@ using namespace std;
 struct Player jogadores[2];
 struct Player jogadorAtual;
 int indOponente;
+
+void printAtual(){
+    for (int i = 0; i < jogadorAtual.maoLength; i++)
+    {
+        cout << jogadorAtual.mao[i].nome << endl;
+    }
+    
+}
 
 struct Player *getJogadores()
 {
@@ -89,6 +98,7 @@ void passTurn()
 
 int playCard()
 {
+    printAtual();
     int indCarta = showCards(jogadorAtual.mao, jogadorAtual.maoLength);
     if (indCarta < 0)
     {

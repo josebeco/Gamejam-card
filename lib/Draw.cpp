@@ -242,6 +242,7 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
             cancelado = false;
             confirmado = false;
             cout << qtdO << endl;
+            cout << indKj % 4 + abs(indKi) * 4 << endl;
             return qtdO;
         }
 
@@ -250,6 +251,7 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
             cout << "confirmei " << indKj << endl;
             cancelado = false;
             confirmado = false;
+            cout << indKj % 4 + abs(indKi) * 4 << endl;
             return indKj;
         }
 
@@ -271,6 +273,7 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
 
         drawSprite(150, 32, numbers[medKj], YELLOW_PAGE, 1, 1, false);
     }
+    cout << indKj % 4 + abs(indKi) * 4 << endl;
     return qtdO;
 }
 
@@ -329,7 +332,7 @@ void deckBuilder()
             medKj = indKj;
 
             cout << indKj % 4 + abs(indKi) * 4 << endl;
-            if (indKj < 4)
+            if (medKj < 4)
             {
                 jogadores[0].deck[medKj % 4 + abs(medKi) * 4] = deckCardShow(original[medKj % 4 + abs(medKi) * 4], jogadores[0].deck[medKj % 4 + abs(medKi) * 4]);
                 cout << jogadores[0].deck[medKj % 4 + abs(medKi) * 4] << endl;
@@ -372,25 +375,27 @@ void drawGame()
 
 void drawCardArray(struct Carta *cartas, int length)
 {
-    drawRectangle(239, showCardsJ, 240, screenWidth - showCardsJ, YELLOW_PAGE);
-    for (int i = 0; i < length; i++)
+    for (int i = length - 1; i >= 0; i--)
     {
-        drawString(cartas[i].nome, 238 - i * 6 + 1, 231, BLACK, 1, 1);
+        drawString(cartas[i].nome, 238 - (length - i - 1) * 6 + 1, 231, BLACK, 1, 1);
     }
 }
 
 int showCards(struct Carta *cartas, int length)
 {
+    confirmado = false;
+    cancelado = false;
     cout << "show card" << endl;
     if (length < 0)
     {
         return -1;
     }
-    drawCardArray(cartas, length);
 
-    indKi = 0;
+    indKi = length - 1;
     while (true)
     {
+        drawGame();
+        drawCardArray(cartas, length);
         timerOverride();
 
         if (cancelado)
@@ -411,9 +416,6 @@ int showCards(struct Carta *cartas, int length)
                     break;
                 }
             }
-
-            drawGame();
-            drawCardArray(cartas, length);
         }
 
         if (indKi < 0)
@@ -450,7 +452,7 @@ int showCards(struct Carta *cartas, int length)
             drawCardArray(cartas, length);
         }
         drawRectangle(239, showCardsJ, 240, 1, BLACK);
-        drawSprite(238 - indKi * 6 + 1, showCardsJ + 10, extras[0], BLACK, 1, 1, false);
+        drawSprite(238 - (length - indKi - 1) * 6 + 1, showCardsJ + 10, extras[0], BLACK, 1, 1, false);
         confirmado = false;
         cancelado = false;
     }
@@ -515,7 +517,7 @@ void drawMenu()
 
     drawSprite(130 + 20 * indKi, screenWidth / 2 - 4 * 5, extras[0], BLACK, 1, 1, false);
 
-    drawString("jumpscard" , 230, screenWidth / 2 - getStringLength("jumpscard"), BLACK, 2, 2);
+    drawString("jumpscard", 230, screenWidth / 2 - getStringLength("jumpscard"), BLACK, 2, 2);
     drawString("play", 130, screenWidth / 2 - getStringLength("play") / 2, BLACK, 1, 1);
     drawString("deck", 110, screenWidth / 2 - getStringLength("deck") / 2, BLACK, 1, 1);
     drawString("exit", 90, screenWidth / 2 - getStringLength("exit") / 2, BLACK, 1, 1);
@@ -541,6 +543,7 @@ void cycle()
             drawLost();
             return;
         }
+
         cout << "draw game" << endl;
         drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
         drawGame();
