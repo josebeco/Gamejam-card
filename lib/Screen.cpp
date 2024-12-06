@@ -88,7 +88,6 @@ void keyboard(unsigned char key, int x, int y)
         cancelar();
         break;
     }
-   // glutPostRedisplay();
 }
 
 void timer(int extra)
