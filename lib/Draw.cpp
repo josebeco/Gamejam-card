@@ -122,9 +122,21 @@ void drawString(string frase, int lui, int luj, struct RGB color, int width_mult
             luj += 3;
             continue;
         }
-
-        drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, width_multipliar, heigth_multipliar, false);
-        luj += alfabeto[frase[i] - 'a'].width + 1;
+        if (frase[i] == '-')
+        {
+            drawSprite(lui, luj, numbers[9], color, width_multipliar, heigth_multipliar, false);
+            luj += numbers[9].width + 1;
+        }
+        else if (frase[i] >= '0' && frase[i] <= '9')
+        {
+            drawSprite(lui, luj, numbers[i - '0'], color, width_multipliar, heigth_multipliar, false);
+            luj += numbers[i - '0'].width + 1;
+        }
+        else
+        {
+            drawSprite(lui, luj, alfabeto[frase[i] - 'a'], color, width_multipliar, heigth_multipliar, false);
+            luj += alfabeto[frase[i] - 'a'].width + 1;
+        }
     }
 }
 
@@ -136,9 +148,10 @@ void drawCardWithDescription(struct Carta carta)
 
 void drawDeckBuilder()
 {
-    struct Carta original * = getCartasOriginal();
+    struct Carta *original = getCartasOriginal();
     struct Player player1 = getPlayer(0);
-    struct Player oponente = getPlayer(false);
+    struct Player player2 = getPlayer(1);
+   // drawString("player 1", 237, 130 - 8 * 5);
 
     for (int k = 0; k < 2; k++)
     {
@@ -146,7 +159,7 @@ void drawDeckBuilder()
         {
             for (int j = 0; j < 4; j++)
             {
-                drawSprite(210 - i * 40, 10 + j * 37, spriteCartas[i * 4 + j], BLACK, 1 , 1 , true);
+                drawSprite(210 - i * 40, 10 + j * 37 + k * (4 * 37), spriteCartas[i * 4 + j], BLACK, 1, 1, true);
             }
         }
     }

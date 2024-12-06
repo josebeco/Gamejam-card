@@ -155,6 +155,17 @@ void embaralharCartas(struct Player jogador)
     }
 }
 
+void resetDecks()
+{
+    for (int i = 0; i < 2; i++)
+    {
+        for (int j = 0; j < 20; j++)
+        {
+            jogadores[i].deck[j] = 0;
+        }
+    }
+}
+
 void initSimulation()
 {
     srand(time(NULL));
