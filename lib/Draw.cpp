@@ -229,7 +229,6 @@ void drawDeckBuilderMenu(struct Carta *original)
 
 int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
 {
-    cout << "morreu" << endl;
     cancelado = false;
     confirmado = false;
     indKj = qtdO;
@@ -248,7 +247,7 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
 
         if (confirmado)
         {
-            cout << "confirmei " <<  indKj << endl;
+            cout << "confirmei " << indKj << endl;
             cancelado = false;
             confirmado = false;
             return indKj;
@@ -282,10 +281,9 @@ void deckBuilder()
     cancelado = false;
     confirmado = false;
 
-    int medKj, medKi, medR;
+    int medKj, medKi;
     struct Carta *original = getCartasOriginal();
     struct Player *jogadores = getJogadores();
- 
 
     drawDeckBuilderMenu(original);
     while (true)
@@ -327,23 +325,23 @@ void deckBuilder()
         {
             cancelado = false;
             confirmado = false;
+            medKi = indKi;
             medKj = indKj;
 
             cout << indKj % 4 + abs(indKi) * 4 << endl;
             if (indKj < 4)
             {
-                medR = deckCardShow(original[indKj % 4 + abs(indKi) * 4],   jogadores[0].deck[indKj % 4 + abs(indKi) * 4]);
-                jogadores[0].deck[indKj % 4 + abs(indKi) * 4] = medR;
-                cout <<   jogadores[0].deck[indKj % 4 + abs(indKi) * 4] << endl;
+                jogadores[0].deck[medKj % 4 + abs(medKi) * 4] = deckCardShow(original[medKj % 4 + abs(medKi) * 4], jogadores[0].deck[medKj % 4 + abs(medKi) * 4]);
+                cout << jogadores[0].deck[medKj % 4 + abs(medKi) * 4] << endl;
             }
             else
             {
-                medR = deckCardShow(original[indKj % 4 + abs(indKi) * 4],  jogadores[1].deck[indKj % 4 + abs(indKi) * 4]);
-                jogadores[1].deck[indKj % 4 + abs(indKi) * 4] = medR;
-                cout <<  jogadores[1].deck[indKj % 4 + abs(indKi) * 4] << endl;
+                jogadores[1].deck[medKj % 4 + abs(medKi) * 4] = deckCardShow(original[medKj % 4 + abs(medKi) * 4], jogadores[1].deck[medKj % 4 + abs(medKi) * 4]);
+                cout << jogadores[1].deck[medKj % 4 + abs(medKi) * 4] << endl;
             }
 
             indKj = medKj;
+            indKi = medKi;
             cancelado = false;
             confirmado = false;
             drawDeckBuilderMenu(original);
