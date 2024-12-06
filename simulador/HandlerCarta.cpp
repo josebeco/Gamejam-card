@@ -9,6 +9,10 @@ using namespace std;
 struct Carta *original;
 string r;
 
+struct Carta* getCartasOriginal(){
+    return original;
+}
+
 void imprirmirCarta(struct Carta c){
     cout << c.nome << endl;
     cout << c.descricao << endl;

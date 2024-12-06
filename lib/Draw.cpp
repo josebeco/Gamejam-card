@@ -136,14 +136,17 @@ void drawCardWithDescription(struct Carta carta)
 void drawDeckBuilder()
 {
     
+    
 }
 
 void drawGame()
 {
     struct Player atual = getPlayer(true);
     struct Player oponente = getPlayer(false);
+
     drawRectangle(239, 0, 10, oponente.adr, RED);
     drawRectangle(10, 0, 10, atual.adr, RED);
+
     for (int i = 0; i < 5; i++)
     {
         if (!oponente.livreEmJogo[i])
