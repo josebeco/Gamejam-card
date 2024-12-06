@@ -508,7 +508,14 @@ void drawMenu()
         }
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawSprite(227, 12, extras[4], BLACK, 7, 6, false);
+
+    drawRectangle(235, screenWidth / 2 - getStringLength("jumpscard") - 1, 20, getStringLength("jumpscard") * 2, YELLOW_PAGE);
+    drawRectangle(140, screenWidth / 2 - getStringLength("play"), 60, getStringLength("play") * 2, YELLOW_PAGE);
+
     drawSprite(130 + 20 * indKi, screenWidth / 2 - 4 * 5, extras[0], BLACK, 1, 1, false);
+
+    drawString("jumpscard" , 230, screenWidth / 2 - getStringLength("jumpscard"), BLACK, 2, 2);
     drawString("play", 130, screenWidth / 2 - getStringLength("play") / 2, BLACK, 1, 1);
     drawString("deck", 110, screenWidth / 2 - getStringLength("deck") / 2, BLACK, 1, 1);
     drawString("exit", 90, screenWidth / 2 - getStringLength("exit") / 2, BLACK, 1, 1);
