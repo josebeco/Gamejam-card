@@ -277,6 +277,7 @@ void jumpscare(struct Carta carta)
                       spriteCartas[carta.indSprite].heigth * i, spriteCartas[carta.indSprite].width * i, YELLOW_PAGE);
         delay(500);
     }
+    drawGame();
 }
 
 void drawMenu()
