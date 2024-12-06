@@ -29,7 +29,8 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
     oponente.emJogo[ind].nula = true;
     oponente.livreEmJogo[ind] = true;
 
-    if(oponente.emJogo[ind].indFuncInPlay == 1){
+    if (oponente.emJogo[ind].indFuncInPlay == 1)
+    {
         oponente.emJogo[ind].turnosRestantes = 0;
         buff_InPlay(oponente.emJogo[ind], oponente, atual);
     }
@@ -130,17 +131,22 @@ bool adrenaline_InPlay(struct Carta carta, struct Player atual, struct Player op
         atual.adr += carta.values[6] + carta.values[5] * (100 - oponente.split_percentage) / 100;
     }
 
-    return carta.turnosRestantes =< 0;
+    return carta.turnosRestantes = < 0;
 }
 
 bool buff_InPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
 {
     if (carta.values[8] != -1 && atual.adr < carta.values[8] || carta.values[9] != -1 && atual.adr > carta.values[9])
     {
-        atual.added_positive_adrenaline -= carta.values[5];
-        atual.added_negative_adrenaline -= carta.values[6];
-        atual.split_percentage -= carta.values[7];
+        atual.added_positive_adrenaline -= carta.values[0];
+        atual.added_negative_adrenaline -= carta.values[1];
+        atual.split_percentage -= carta.values[2];
         return true;
+    }
+
+    if (carta.values[7] != 0)
+    {
+        return false;
     }
 
     carta.turnosRestantes--;
@@ -152,7 +158,7 @@ bool buff_InPlay(struct Carta carta, struct Player atual, struct Player oponente
         atual.split_percentage -= carta.values[2];
     }
 
-    return carta.turnosRestantes =< 0;
+    return carta.turnosRestantes = < 0;
 }
 
 bool (*funcInPlay[2])(struct Carta, struct Player, struct Player) = {&adrenaline_InPlay, &buff_InPlay};

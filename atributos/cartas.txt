@@ -117,6 +117,43 @@ procure por uma carta em seu baralho e em seguida o embaralhe adiciona 40 a sua 
 2
 0 40 2 0 0 0 0 -1 -1 0
 mascara kamikaze
+dura 1 turno e aumenta em 100 sua adrenalina e aumenta em 110 a arenalina do oponente
+1 0 0
+1
+0 0
+13
+
+4
+0 0 0 0 0 110 100 -1 -1 0
+item grito alto
+aumenta em 10 sua adrenalina e aumenta em 15 a adrenalina do oponente
+0 0 1
+0
+0 0
+14
+
+2
+15 10 0 0 0 0 0 -1 -1 0
+mascara sonolencia
+dura 1 turno e diminui em 30 a adrenalina do oponente
+1 0 0
+1
+0 0
+15
+
+3
+0 0 0 0 0 -30 0 -1 -1 0
+ambiente bocejante
+enquanto sua adrenalina for menor que 50 diminui em 10 a adrenalina dos dois jogadores
+0 1 0
+1
+0 0
+16
+
+2
+0 0 0 0 0 -10 -10 -1 49 2
+
+
 
 
 
