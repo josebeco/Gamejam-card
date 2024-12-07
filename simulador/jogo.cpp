@@ -122,6 +122,11 @@ int playCard()
 
     putInPlay(jogadores[indAtual].mao[indCarta], jogadores[indAtual], jogadores[indOponente ^ 1]);
     jumpscare(jogadores[indAtual].mao[indCarta]);
+
+    if(jogadores[indAtual].mao[indCarta].item){
+        copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++] , jogadores[indAtual].mao[indCarta]);
+    }
+
     for (int i = indCarta; i < jogadores[indAtual].maoLength - 1; i++)
     {
         jogadores[indAtual].mao[i] = jogadores[indAtual].mao[i + 1];
