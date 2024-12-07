@@ -86,8 +86,8 @@ void removeCard_PutInPlay(struct Carta &carta, struct Player &atual, struct Play
         return;
     }
 
-    // TODO pega carta esoclhida
-    int ind = 0;
+    
+    int ind = showCards(oponente.emJogo, 5);
 
     oponente.adr += carta.values[0] * oponente.split_percentage / 100;
     atual.adr += carta.values[1] + carta.values[0] * (100 - oponente.split_percentage) / 100;

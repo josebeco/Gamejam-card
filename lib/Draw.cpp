@@ -377,9 +377,15 @@ void drawGame()
 
 void drawCardArray(struct Carta *cartas, int length)
 {
+    int less = 0;
     for (int i = length - 1; i >= 0; i--)
     {
-        drawString(cartas[i].nome, 235 - (length - i - 1) * 6 + 1, showCardsJ + 9, BLACK, 1, 1);
+        if (cartas[i].nula)
+        {
+            less++;
+            continue;
+        }
+        drawString(cartas[i].nome, 235 - (length - i - 1 + less) * 6 + 1, showCardsJ + 9, BLACK, 1, 1);
     }
 }
 
@@ -387,6 +393,31 @@ int showCards(struct Carta *cartas, int length)
 {
     confirmado = false;
     cancelado = false;
+
+    if (length < 0)
+    {
+        return -1;
+    }
+
+    int nulls[length];
+    nulls[0] = 0;
+
+    if (cartas[0].nula)
+    {
+        nulls[0] = 1;
+    }
+
+    for (int i = 1; i < length; i++)
+    {
+        nulls[i] = nulls[i - 1];
+        if (cartas[i].nula)
+        {
+            nulls[i] += 1;
+        }
+    }
+
+    length -= nulls[length - 1];
+
     if (length < 0)
     {
         return -1;
@@ -447,7 +478,9 @@ int showCards(struct Carta *cartas, int length)
         {
             confirmado = false;
             cancelado = false;
-            drawCardWithDescription(cartas[indKi]);
+
+            drawCardWithDescription(cartas[indKi + nulls[indKi]]);
+
             while (true)
             {
                 timerOverride();
@@ -455,11 +488,13 @@ int showCards(struct Carta *cartas, int length)
                 {
                     confirmado = false;
                     cancelado = false;
+
                     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
                     drawGame();
                     drawCardArray(cartas, length);
                     drawRectangle(239, showCardsJ, 240, 1, BLACK);
                     drawSprite(235 - (length - indKi - 1) * 6 + 1, showCardsJ + 2, extras[0], BLACK, 1, 1, false);
+
                     return indKi;
                 }
                 else if (cancelado)
