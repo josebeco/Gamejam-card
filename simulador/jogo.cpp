@@ -134,7 +134,7 @@ int playCard()
     return 0;
 }
 
-void embaralharCartas(struct Player jogador&)
+void embaralharCartas(struct Player &jogador)
 {
     bool indUsado[jogador.indBaralho + 1];
     struct Carta *mediador;
@@ -170,7 +170,7 @@ void resetDecks()
     {
         for (int j = 0; j < 20; j++)
         {
-            jogadores[i].deck[j] = 0;
+            jogadores[i].deck[j] = 2;
         }
     }
 }
