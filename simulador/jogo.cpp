@@ -134,7 +134,7 @@ int playCard()
     return 0;
 }
 
-void embaralharCartas(struct Player jogador)
+void embaralharCartas(struct Player jogador&)
 {
     bool indUsado[jogador.indBaralho + 1];
     struct Carta *mediador;
@@ -147,11 +147,14 @@ void embaralharCartas(struct Player jogador)
     for (int i = 0; i < jogador.indBaralho + 1; i++)
     {
         int ind;
+
         do
         {
             ind = rand() % (jogador.indBaralho + 1);
         } while (indUsado[ind]);
+
         indUsado[ind] = true;
+
         copiarCarta(mediador[i], jogador.baralho[ind]);
     }
 
@@ -167,7 +170,7 @@ void resetDecks()
     {
         for (int j = 0; j < 20; j++)
         {
-            jogadores[i].deck[j] = 2;
+            jogadores[i].deck[j] = 0;
         }
     }
 }
