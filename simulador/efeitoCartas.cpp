@@ -121,10 +121,12 @@ void pegarCarta_PutInPlay(struct Carta &carta , struct Player &atual, struct Pla
     if (carta.values[2] == 1 && atual.descarteLength > 0)
     {
         ind = showCards(atual.descarte, atual.descarteLength);
+
         if (ind == -1)
         {
             return;
         }
+        
         atual.mao[atual.maoLength++] = copiarCarta(atual.descarte[ind].id);
         
         atual.descarteLength--;
