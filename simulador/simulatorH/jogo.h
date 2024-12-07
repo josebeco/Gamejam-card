@@ -6,5 +6,5 @@ void resetDecks();
 int playCard();
 void embaralharCartas(struct Player);
 bool initSimulation();
-struct Player getPlayer(bool);
+struct Player& getPlayer(bool);
 struct Player *getJogadores();

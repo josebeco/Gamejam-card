@@ -4,7 +4,6 @@
 #include "simulatorH/HandlerCarta.h"
 #include "../lib/fileH/Draw.h"
 #include <cstdlib>
-#include <iostream>
 #include <ctime>
 using namespace std;
 
@@ -13,20 +12,12 @@ struct Player jogadores[2];
 int indAtual;
 int indOponente;
 
-void printAtual()
-{
-    for (int i = 0; i < jogadores[indAtual].maoLength; i++)
-    {
-        // cout << jogadores[indAtual].mao[i].nome << endl;
-    }
-}
-
 struct Player *getJogadores()
 {
     return jogadores;
 }
 
-struct Player getPlayer(bool atual)
+struct Player& getPlayer(bool atual)
 {
     if (atual)
     {
@@ -71,11 +62,13 @@ void passTurn()
         {
             continue;
         }
+        
         if (inPlay(jogadores[indAtual].emJogo[i], jogadores[indAtual], jogadores[indOponente]))
         {
             jogadores[indAtual].livreEmJogo[i] = true;
             jogadores[indAtual].emJogo[i].nula = true;
         }
+
         jumpscare(jogadores[indAtual].emJogo[i]);
     }
 
@@ -85,14 +78,17 @@ void passTurn()
         {
             continue;
         }
+
         if (inPlay(jogadores[indAtual].emJogo[i], jogadores[indAtual], jogadores[indOponente]))
         {
             jogadores[indAtual].livreEmJogo[i] = true;
             jogadores[indAtual].emJogo[i].nula = true;
         }
+
         jumpscare(jogadores[indAtual].emJogo[i]);
     }
-    jogadores[indAtual] = jogadores[indOponente];
+
+    indAtual ^= 1;
     indOponente ^= 1;
 }
 
@@ -155,17 +151,13 @@ void embaralharCartas(struct Player jogador)
         {
             ind = rand() % (jogador.indBaralho + 1);
         } while (indUsado[ind]);
-
         indUsado[ind] = true;
         copiarCarta(mediador[i], jogador.baralho[ind]);
-        cout << mediador[i].nome << endl;
-        cout << jogador.baralho[ind].nome << endl;
     }
 
     for (int i = 0; i < jogador.indBaralho + 1; i++)
     {
         copiarCarta(jogador.baralho[i], mediador[i]);
-        // cout << mediador[i].nome << endl;
     }
 }
 
@@ -195,7 +187,6 @@ bool copyFromDeckToBaralho()
                 }
 
                 jogadores[i].baralho[++jogadores[i].indBaralho] = copiarCarta(j);
-                cout << jogadores[i].baralho[jogadores[i].indBaralho].nome << endl;
             }
         }
         if (jogadores[i].indBaralho < 19)
@@ -232,8 +223,8 @@ bool initSimulation()
         return false;
     }
 
-    //embaralharCartas(jogadores[indAtual]);
-    //embaralharCartas(jogadores[indOponente]);
+    embaralharCartas(jogadores[indAtual]);
+    embaralharCartas(jogadores[indOponente]);
 
     drawCard();
     drawCard();

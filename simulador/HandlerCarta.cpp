@@ -175,7 +175,7 @@ struct Carta copiarCarta(int ind)
     return carta;
 }
 
-void copiarCarta(struct Carta nova, struct Carta velha)
+void copiarCarta(struct Carta &nova, struct Carta &velha)
 {
     nova.id = velha.id;
 

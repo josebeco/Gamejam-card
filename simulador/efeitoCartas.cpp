@@ -5,7 +5,7 @@
 #include "simulatorH/jogo.h"
 using namespace std;
 
-bool adrenaline_InPlay(struct Carta carta, struct Player atual, struct Player oponente)
+bool adrenaline_InPlay(struct Carta &carta, struct Player &atual, struct Player &oponente)
 { // retorna se a carta morreu, 0
     if (carta.values[7] != -1 && atual.adr < carta.values[7] || carta.values[8] != -1 && atual.adr > carta.values[8])
     {
@@ -37,7 +37,7 @@ bool adrenaline_InPlay(struct Carta carta, struct Player atual, struct Player op
     return carta.turnosRestantes <= 0;
 }
 
-bool buff_InPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
+bool buff_InPlay(struct Carta &carta, struct Player &atual, struct Player &oponente) // 1
 {
     if (carta.values[8] != -1 && atual.adr < carta.values[8] || carta.values[9] != -1 && atual.adr > carta.values[9])
     {
@@ -64,22 +64,22 @@ bool buff_InPlay(struct Carta carta, struct Player atual, struct Player oponente
     return carta.turnosRestantes <= 0;
 }
 
-bool (*funcInPlay[2])(struct Carta, struct Player, struct Player) = {&adrenaline_InPlay, &buff_InPlay};
+bool (*funcInPlay[2])(struct Carta &, struct Player &, struct Player &) = {&adrenaline_InPlay, &buff_InPlay};
 
-bool inPlay(struct Carta carta, struct Player atual, struct Player oponente)
+bool inPlay(struct Carta &carta, struct Player &atual, struct Player &oponente)
 {
     return funcInPlay[carta.indFuncInPlay](carta, atual, oponente);
 }
 
 // ao entrar
 
-void adrenaline_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 0
+void adrenaline_PutInPlay(struct Carta &carta, struct Player &atual, struct Player &oponente) // 0
 {
     oponente.adr += carta.values[0] * oponente.split_percentage / 100;
     atual.adr += carta.values[1] + carta.values[0] * (100 - oponente.split_percentage) / 100;
 }
 
-void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 1
+void removeCard_PutInPlay(struct Carta &carta, struct Player &atual, struct Player &oponente) // 1
 {
     if (carta.values[3] != -1 && atual.adr < carta.values[3] || carta.values[4] != -1 && atual.adr > carta.values[4])
     {
@@ -111,7 +111,7 @@ void removeCard_PutInPlay(struct Carta carta, struct Player atual, struct Player
     }
 }
 
-void pegarCarta_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 2
+void pegarCarta_PutInPlay(struct Carta &carta , struct Player &atual, struct Player &oponente) // 2
 {
     int ind = 0;
     oponente.adr += carta.values[0] * oponente.split_percentage / 100;
@@ -149,7 +149,7 @@ void pegarCarta_PutInPlay(struct Carta carta, struct Player atual, struct Player
     }
 }
 
-void buff_PutInPlay(struct Carta carta, struct Player atual, struct Player oponente) // 3
+void buff_PutInPlay(struct Carta &carta, struct Player &atual, struct Player &oponente) // 3
 {
     if (carta.values[3] != -1 && atual.adr < carta.values[3] || carta.values[4] != -1 && atual.adr > carta.values[4])
     {
@@ -161,9 +161,9 @@ void buff_PutInPlay(struct Carta carta, struct Player atual, struct Player opone
     atual.split_percentage += carta.values[2];
 }
 
-void (*funcPutInPlay[4])(struct Carta, struct Player, struct Player) = {&adrenaline_PutInPlay, &removeCard_PutInPlay, &removeCard_PutInPlay, &buff_PutInPlay};
+void (*funcPutInPlay[4])(struct Carta &, struct Player &, struct Player &) = {&adrenaline_PutInPlay, &removeCard_PutInPlay, &removeCard_PutInPlay, &buff_PutInPlay};
 
-void putInPlay(struct Carta carta, struct Player atual, struct Player oponente)
+void putInPlay(struct Carta &carta, struct Player &atual, struct Player &oponente)
 {
     funcPutInPlay[carta.indFuncPutInPlay](carta, atual, oponente);
 }

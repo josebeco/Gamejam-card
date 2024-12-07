@@ -390,7 +390,6 @@ int showCards(struct Carta *cartas, int length)
     {
         return -1;
     }
-
     indKi = length - 1;
     while (true)
     {
