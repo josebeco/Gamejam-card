@@ -22,12 +22,10 @@ bool adrenaline_InPlay(struct Carta &carta, struct Player &atual, struct Player 
         if (carta.values[5] > 0)
         {
             oponente.adr += atual.added_positive_adrenaline * oponente.split_percentage / 100;
-            atual.adr += atual.added_positive_adrenaline * (100 - oponente.split_percentage) / 100;
         }
         else if (carta.values[5] < 0)
         {
             oponente.adr += atual.added_negative_adrenaline * oponente.split_percentage / 100;
-            atual.adr += atual.added_negative_adrenaline * (100 - oponente.split_percentage) / 100;
         }
 
         oponente.adr += carta.values[5] * oponente.split_percentage / 100;
