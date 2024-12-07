@@ -9,11 +9,13 @@ using namespace std;
 struct Carta *original;
 string r;
 
-struct Carta* getCartasOriginal(){
+struct Carta *getCartasOriginal()
+{
     return original;
 }
 
-void imprirmirCarta(struct Carta c){
+void imprirmirCarta(struct Carta c)
+{
     cout << c.nome << endl;
     cout << c.descricao << endl;
     cout << c.mascara << endl;
@@ -25,7 +27,7 @@ void imprirmirCarta(struct Carta c){
 
 string inBetweenEmpty(int *ind, string str)
 {
-  
+
     while (isSeparator(str[(*ind)]))
     {
         (*ind)++;
@@ -36,7 +38,7 @@ string inBetweenEmpty(int *ind, string str)
     {
         r += str[(*ind)++];
     }
-   
+
     return r;
 }
 
@@ -141,6 +143,7 @@ void lerCartas(string fileName)
             aux = inBetweenEmpty(indP, str);
             original[i].values[j] = stoi(aux);
         }
+        original[i].nula = false;
         imprirmirCarta(original[i]);
     }
 }

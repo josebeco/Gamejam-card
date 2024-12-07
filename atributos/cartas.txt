@@ -63,9 +63,9 @@ se sua adrenalina e maior que 70 escolha uma carta ativa do seu oponente e coloq
 2
 0 30 2 71 -1 0 0 -1 -1 0
 ambiente split
-durante 1 turno 50 por cento de toda adrenalina que seria sofrida e refletida ao seu oponente 
+durante 2 turno 50 por cento de toda adrenalina que seria sofrida e refletida ao seu oponente 
 0 1 0
-1
+2
 3 1
 7
 255 0 90
