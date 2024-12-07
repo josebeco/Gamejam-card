@@ -354,13 +354,57 @@ void deckBuilder()
     }
 }
 
+void drawNumber(int num, int h, int j) // j = end
+{
+    int og = num;
+    num = abs(num);
+
+    while(num != 0){
+        drawSprite(h, j, numbers[num % 10], BLACK, 1, 1, false);
+        j -= 6;
+        num /= 10;
+    }
+
+    if (og < 0)
+    {
+        drawSprite(h, j, numbers[10], BLACK, 1, 1, false);
+    }
+    
+}
 void drawGame()
 {
     struct Player atual = getPlayer(true);
     struct Player oponente = getPlayer(false);
 
-    drawRectangle(239, 0, 10, oponente.adr, RED);
-    drawRectangle(10, 0, 10, atual.adr, RED);
+    if (oponente.adr <= 0)
+    {
+        drawRectangle(239, 50, 10, 0, RED);
+    }
+    else if (oponente.adr >= 100)
+    {
+        drawRectangle(239, 50, 10, 100, RED);
+    }
+    else
+    {
+        drawRectangle(239, 50, 10, oponente.adr, RED);
+    }
+
+    drawNumber(oponente.adr, 237, 40);
+
+    if (atual.adr <= 0)
+    {
+        drawRectangle(10, 50, 10, 0, RED);
+    }
+    else if (atual.adr >= 100)
+    {
+        drawRectangle(10, 50, 10, 100, RED);
+    }
+    else
+    {
+        drawRectangle(10, 50, 10, oponente.adr, RED);
+    }
+
+    drawNumber(atual.adr, 8, 40);
 
     for (int i = 0; i < 5; i++)
     {
