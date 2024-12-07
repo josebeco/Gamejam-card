@@ -120,7 +120,7 @@ int playCard()
         }
     }
 
-    putInPlay(jogadores[indAtual].mao[indCarta], jogadores[indAtual], jogadores[indOponente ^ 1]);
+    putInPlay(jogadores[indAtual].mao[indCarta], jogadores[indAtual], jogadores[indOponente]);
     jumpscare(jogadores[indAtual].mao[indCarta]);
 
     if(jogadores[indAtual].mao[indCarta].item){
