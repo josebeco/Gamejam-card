@@ -438,7 +438,7 @@ int showCards(struct Carta *cartas, int length)
     confirmado = false;
     cancelado = false;
 
-    if (length < 0)
+    if (length <= 0)
     {
         return -1;
     }
@@ -462,7 +462,7 @@ int showCards(struct Carta *cartas, int length)
 
     length -= nulls[length - 1];
 
-    if (length < 0)
+    if (length <= 0)
     {
         return -1;
     }

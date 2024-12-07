@@ -17,7 +17,7 @@ struct Player *getJogadores()
     return jogadores;
 }
 
-struct Player& getPlayer(bool atual)
+struct Player &getPlayer(bool atual)
 {
     if (atual)
     {
@@ -38,7 +38,7 @@ bool drawCard()
         return false;
     }
 
-    copiarCarta(jogadores[indAtual].mao[jogadores[indAtual].maoLength++] , jogadores[indAtual].baralho[jogadores[indAtual].indBaralho--]);
+    copiarCarta(jogadores[indAtual].mao[jogadores[indAtual].maoLength++], jogadores[indAtual].baralho[jogadores[indAtual].indBaralho--]);
     return true;
 }
 
@@ -62,11 +62,12 @@ void passTurn()
         {
             continue;
         }
-        
+
         if (inPlay(jogadores[indAtual].emJogo[i], jogadores[indAtual], jogadores[indOponente]))
         {
             jogadores[indAtual].livreEmJogo[i] = true;
             jogadores[indAtual].emJogo[i].nula = true;
+            copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++], jogadores[indAtual].emJogo[i]);
         }
 
         jumpscare(jogadores[indAtual].emJogo[i]);
@@ -83,6 +84,7 @@ void passTurn()
         {
             jogadores[indAtual].livreEmJogo[i] = true;
             jogadores[indAtual].emJogo[i].nula = true;
+            copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++], jogadores[indAtual].emJogo[i]);
         }
 
         jumpscare(jogadores[indAtual].emJogo[i]);
@@ -234,7 +236,6 @@ bool initSimulation()
     drawCard();
     drawCard();
 
-   
     indOponente ^= 1;
     indAtual ^= 1;
 
