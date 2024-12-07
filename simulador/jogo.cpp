@@ -172,7 +172,7 @@ void resetDecks()
     {
         for (int j = 0; j < 20; j++)
         {
-            jogadores[i].deck[j] = 2;
+            jogadores[i].deck[j] = 0;
         }
     }
 }
