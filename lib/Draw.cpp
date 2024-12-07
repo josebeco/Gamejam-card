@@ -177,7 +177,7 @@ void drawStringLimited(int lui, int luj, int heigth, int width, string frase, st
             luj += 3 * width_multipliar;
             if (luj + 50 * width_multipliar >= width)
             {
-                lui -= 6 * heigth_multipliar;
+                lui -= 8 * heigth_multipliar;
                 luj = lujO;
             }
             continue;
