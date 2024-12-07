@@ -12,7 +12,7 @@
 #include <thread>
 using namespace std;
 
-#define showCardsJ 220
+#define showCardsJ 200
 #define screenWidth 360
 const struct RGB BLACK = {0, 0, 0};
 const struct RGB YELLOW_PAGE = {204, 201, 172};
@@ -295,7 +295,9 @@ void deckBuilder()
         medKj = indKj;
 
         drawSprite(185 + indKi * 45, 19 + (indKj % 4) * 46 + (indKj / 4) * screenWidth / 2, extras[2], BLACK, 1, 1, false);
+
         timerOverride();
+
         drawSprite(185 + medKi * 45, 19 + (medKj % 4) * 46 + (medKj / 4) * screenWidth / 2, extras[2], YELLOW_PAGE, 1, 1, false);
 
         if (cancelado)
@@ -364,11 +366,11 @@ void drawGame()
     {
         if (!oponente.livreEmJogo[i])
         {
-            drawSprite(196, 12 + i * 42, spriteCartas[oponente.emJogo[i].indSprite], BLACK, 1, 1, true);
+            drawSprite(196, 10 + i * 37, spriteCartas[oponente.emJogo[i].indSprite], BLACK, 1, 1, true);
         }
         if (!atual.livreEmJogo[i])
         {
-            drawSprite(76, 12 + i * 42, spriteCartas[atual.emJogo[i].indSprite], BLACK, 1, 1, true);
+            drawSprite(76, 10 + i * 37, spriteCartas[atual.emJogo[i].indSprite], BLACK, 1, 1, true);
         }
     }
 }
@@ -377,7 +379,7 @@ void drawCardArray(struct Carta *cartas, int length)
 {
     for (int i = length - 1; i >= 0; i--)
     {
-        drawString(cartas[i].nome, 235 - (length - i - 1) * 6 + 1, 231, BLACK, 1, 1);
+        drawString(cartas[i].nome, 235 - (length - i - 1) * 6 + 1, showCardsJ + 9, BLACK, 1, 1);
     }
 }
 
@@ -385,11 +387,11 @@ int showCards(struct Carta *cartas, int length)
 {
     confirmado = false;
     cancelado = false;
-    cout << "show card " << length << endl;
     if (length < 0)
     {
         return -1;
     }
+
     indKi = length - 1;
     while (true)
     {
@@ -397,19 +399,30 @@ int showCards(struct Carta *cartas, int length)
         drawGame();
         drawCardArray(cartas, length);
         drawRectangle(239, showCardsJ, 240, 1, BLACK);
-        drawSprite(235 - (length - indKi - 1) * 6 + 1, showCardsJ + 10, extras[0], BLACK, 1, 1, false);
+        drawSprite(235 - (length - indKi - 1) * 6 + 1, showCardsJ + 2, extras[0], BLACK, 1, 1, false);
 
         timerOverride();
 
         if (cancelado)
         {
+            confirmado = false;
+            cancelado = false;
+            drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+            drawString("pass turn", 120, screenWidth / 2 - getStringLength("pass turn") / 2, BLACK, 1, 1);
+
             while (true)
             {
                 timerOverride();
+
                 if (confirmado)
                 {
                     confirmado = false;
                     cancelado = false;
+                    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+                    drawGame();
+                    drawCardArray(cartas, length);
+                    drawRectangle(239, showCardsJ, 240, 1, BLACK);
+                    drawSprite(235 - (length - indKi - 1) * 6 + 1, showCardsJ + 2, extras[0], BLACK, 1, 1, false);
                     return -1;
                 }
                 else if (cancelado)
@@ -432,6 +445,8 @@ int showCards(struct Carta *cartas, int length)
 
         if (confirmado)
         {
+            confirmado = false;
+            cancelado = false;
             drawCardWithDescription(cartas[indKi]);
             while (true)
             {
@@ -440,6 +455,11 @@ int showCards(struct Carta *cartas, int length)
                 {
                     confirmado = false;
                     cancelado = false;
+                    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+                    drawGame();
+                    drawCardArray(cartas, length);
+                    drawRectangle(239, showCardsJ, 240, 1, BLACK);
+                    drawSprite(235 - (length - indKi - 1) * 6 + 1, showCardsJ + 2, extras[0], BLACK, 1, 1, false);
                     return indKi;
                 }
                 else if (cancelado)
@@ -449,7 +469,6 @@ int showCards(struct Carta *cartas, int length)
                     break;
                 }
             }
-
         }
         confirmado = false;
         cancelado = false;
@@ -476,7 +495,7 @@ void jumpscare(struct Carta carta)
         timerOverride();
         drawRectangle(120 + spriteCartas[carta.indSprite].heigth * i / 2, screenWidth / 2 - spriteCartas[carta.indSprite].width * i / 2,
                       spriteCartas[carta.indSprite].heigth * i, spriteCartas[carta.indSprite].width * i, YELLOW_PAGE);
-        delay(500);
+        delay(700);
     }
     drawGame();
 }

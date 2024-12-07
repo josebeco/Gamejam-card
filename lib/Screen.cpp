@@ -114,7 +114,6 @@ void startScreen(int argc, char **argv)
     initGL();
     glutDisplayFunc(display);
     glutKeyboardFunc(keyboard);
-    glutIdleFunc(display);
     glutTimerFunc(0, timer, 0);
     glutMainLoop();
 }
