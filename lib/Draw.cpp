@@ -7,7 +7,6 @@
 #include "../simulador/simulatorH/jogo.h"
 #include "../simulador/simulatorH/HandlerCarta.h"
 #include <string>
-#include <iostream>
 #include <chrono>
 #include <thread>
 using namespace std;
@@ -298,17 +297,15 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
         {
             cancelado = false;
             confirmado = false;
-            cout << qtdO << endl;
-            cout << indKj % 4 + abs(indKi) * 4 << endl;
+           
             return qtdO;
         }
 
         if (confirmado)
         {
-            cout << "confirmei " << indKj << endl;
             cancelado = false;
             confirmado = false;
-            cout << indKj % 4 + abs(indKi) * 4 << endl;
+            
             return indKj;
         }
 
@@ -330,7 +327,7 @@ int deckCardShow(struct Carta carta, int qtdO) // retorna qtd
 
         drawSprite(150, 32, numbers[medKj], YELLOW_PAGE, 1, 1, false);
     }
-    cout << indKj % 4 + abs(indKi) * 4 << endl;
+  
     return qtdO;
 }
 
@@ -390,16 +387,13 @@ void deckBuilder()
             medKi = indKi;
             medKj = indKj;
 
-            cout << indKj % 4 + abs(indKi) * 4 << endl;
             if (medKj < 4)
             {
                 jogadores[0].deck[medKj % 4 + abs(medKi) * 4] = deckCardShow(original[medKj % 4 + abs(medKi) * 4], jogadores[0].deck[medKj % 4 + abs(medKi) * 4]);
-                cout << jogadores[0].deck[medKj % 4 + abs(medKi) * 4] << endl;
             }
             else
             {
                 jogadores[1].deck[medKj % 4 + abs(medKi) * 4] = deckCardShow(original[medKj % 4 + abs(medKi) * 4], jogadores[1].deck[medKj % 4 + abs(medKi) * 4]);
-                cout << jogadores[1].deck[medKj % 4 + abs(medKi) * 4] << endl;
             }
 
             indKj = medKj;
@@ -650,12 +644,13 @@ void drawMenu()
                 state = 0;
                 drawStringBlankCenter("algum deck nao esta com a quantidade de cartas certas", 1, 1);
                 timerOverride();
-                delay(4000);
+                delay(3500);
             }
         }
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawNumber(1004, 6, 10);
+    drawString("versao", 6, 10, BLACK, 1, 1);
+    drawNumber(1004, 6, 70);
 
     drawSprite(227, 12, extras[4], BLACK, 7, 6, false);
 
@@ -686,14 +681,13 @@ void cycle()
     }
     else if (state == 2)
     {
-        cout << "on Game" << endl;
+       
         if (!drawCard())
         {
             drawLost();
             return;
         }
 
-        cout << "draw game" << endl;
         drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
         drawGame();
 

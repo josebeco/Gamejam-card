@@ -3,7 +3,6 @@
 #include "../lib/fileH/Draw.h"
 #include "simulatorH/HandlerCarta.h"
 #include "simulatorH/jogo.h"
-#include <iostream>
 using namespace std;
 
 bool adrenaline_InPlay(struct Carta &carta, struct Player &atual, struct Player &oponente)

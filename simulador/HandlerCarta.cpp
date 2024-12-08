@@ -3,7 +3,6 @@
 #include "../lib/fileH/HandlerSprites.h"
 #include <string>
 #include <fstream>
-#include <iostream>
 using namespace std;
 
 struct Carta *original;
@@ -14,7 +13,7 @@ struct Carta *getCartasOriginal()
     return original;
 }
 
-void imprirmirCarta(struct Carta c)
+/*void imprirmirCarta(struct Carta c)
 {
     cout << c.nome << endl;
     cout << c.descricao << endl;
@@ -23,7 +22,7 @@ void imprirmirCarta(struct Carta c)
     cout << c.item << endl;
     cout << c.indFuncPutInPlay << endl;
     cout << c.indFuncInPlay << endl;
-}
+}*/
 
 string inBetweenEmpty(int *ind, string str)
 {
@@ -145,7 +144,7 @@ void lerCartas(string fileName)
         }
         
         original[i].nula = false;
-        imprirmirCarta(original[i]);
+      //  imprirmirCarta(original[i]);
     }
 }
 
