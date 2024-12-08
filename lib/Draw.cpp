@@ -411,10 +411,15 @@ void drawGame()
         if (!oponente.livreEmJogo[i])
         {
             drawSprite(196, 10 + i * 37, spriteCartas[oponente.emJogo[i].indSprite], BLACK, 1, 1, true);
+        }else{
+            drawSprite(196, 10 + i * 37, extras[5], BLACK, 1, 1, true);
         }
+
         if (!atual.livreEmJogo[i])
         {
             drawSprite(76, 10 + i * 37, spriteCartas[atual.emJogo[i].indSprite], BLACK, 1, 1, true);
+        }else{
+              drawSprite(76, 10 + i * 37, extras[5], BLACK, 1, 1, true);
         }
     }
 }
