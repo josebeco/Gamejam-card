@@ -12,6 +12,16 @@ struct Player jogadores[2];
 int indAtual;
 int indOponente;
 
+int getQtdCardDeck(int ind)
+{
+    int qtd = 0;
+    for (int i = 0; i < 20; i++)
+    {
+        qtd += jogadores[ind].deck[i];
+    }
+    return qtd;
+}
+
 struct Player *getJogadores()
 {
     return jogadores;

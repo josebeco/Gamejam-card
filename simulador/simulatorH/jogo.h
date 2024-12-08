@@ -1,4 +1,5 @@
 #include "../../modelos/Player.h"
+int getQtdCardDeck(int);
 bool checkDeath();
 bool drawCard();
 void passTurn();

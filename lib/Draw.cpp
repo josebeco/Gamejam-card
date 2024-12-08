@@ -200,13 +200,42 @@ void drawStringLimited(int lui, int luj, int heigth, int width, string frase, st
     }
 }
 
+void drawNumber(int num, int h, int j) // j = end
+{
+    int og = num;
+    num = abs(num);
+
+    if (num == 0)
+    {
+        drawSprite(h, j, numbers[num % 10], BLACK, 1, 1, false);
+        return;
+    }
+
+    while (num != 0)
+    {
+        drawSprite(h, j, numbers[num % 10], BLACK, 1, 1, false);
+        j -= 6;
+        num /= 10;
+    }
+
+    if (og < 0)
+    {
+        drawSprite(h, j, numbers[10], BLACK, 1, 1, false);
+    }
+}
+
+void drawStringBlankCenter(string frase, int wm, int hm)
+{
+    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawString(frase, 120 + 5 * hm / 2, screenWidth / 2 - getStringLength(frase) * wm / 2, BLACK, wm, hm);
+}
+
 void drawWaitingPlayer(int v)
 {
     confirmado = false;
     cancelado = false;
 
-    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawString("player " + to_string(v), 125, screenWidth / 2 - getStringLength("player 1"), BLACK, 2, 2);
+    drawStringBlankCenter("player " + to_string(v), 2, 2);
 
     while (true)
     {
@@ -234,8 +263,14 @@ void drawDeckBuilderMenu(struct Carta *original)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
     drawRectangle(239, screenWidth / 2, 240, 1, BLACK);
+
+    drawString("qtd", 230, screenWidth / 2 - getStringLength("player 1") - getStringLength("qtd") - 70, BLACK, 1, 1);
     drawString("player 1", 230, screenWidth / 2 - getStringLength("player 1") - 50, BLACK, 1, 1);
-    drawString("player 2", 230, screenWidth / 2 + 50, BLACK, 1, 1);
+    drawNumber(getQtdCardDeck(0), 230, screenWidth / 2 - getStringLength("player 1") - 60);
+
+    drawString("player 2", 230, screenWidth - getStringLength("player 2") - 50, BLACK, 1, 1);
+    drawNumber(getQtdCardDeck(1), 230, screenWidth - getStringLength("player 2") - 60);
+    drawString("qtd", 230, screenWidth - getStringLength("player 2") - getStringLength("qtd") - 70, BLACK, 1, 1);
 
     for (int k = 0; k < 2; k++)
     {
@@ -376,23 +411,6 @@ void deckBuilder()
     }
 }
 
-void drawNumber(int num, int h, int j) // j = end
-{
-    int og = num;
-    num = abs(num);
-
-    while (num != 0)
-    {
-        drawSprite(h, j, numbers[num % 10], BLACK, 1, 1, false);
-        j -= 6;
-        num /= 10;
-    }
-
-    if (og < 0)
-    {
-        drawSprite(h, j, numbers[10], BLACK, 1, 1, false);
-    }
-}
 void drawGame()
 {
     struct Player atual = getPlayer(true);
@@ -587,10 +605,8 @@ int showCards(struct Carta *cartas, int length)
 
 void drawLost()
 {
-    cout << "lost game" << endl;
     state = 0;
-    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawString("you lost", 125, screenWidth / 2 - getStringLength("you lost"), BLACK, 2, 2);
+    drawStringBlankCenter("you lost", 2, 2);
     timerOverride();
     delay(2000);
 }
@@ -632,6 +648,9 @@ void drawMenu()
             if (!initSimulation())
             {
                 state = 0;
+                drawStringBlankCenter("algum deck nao esta com a quantidade de cartas certas", 1, 1);
+                timerOverride();
+                delay(4000);
             }
         }
     }
