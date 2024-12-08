@@ -1,7 +1,6 @@
 #include <GL/freeglut.h>
 #include "../modelos/RGB.h"
 #include "fileH/Draw.h"
-#include <iostream>
 using namespace std;
 
 
@@ -63,7 +62,6 @@ void display()
 
 void keyboard(unsigned char key, int x, int y)
 {
-    cout << "keyboard" << endl;
     switch (key)
     {
     case 27:
