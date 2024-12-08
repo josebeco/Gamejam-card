@@ -118,7 +118,7 @@ void pegarCarta_PutInPlay(struct Carta &carta , struct Player &atual, struct Pla
     oponente.adr += carta.values[0] * oponente.split_percentage / 100;
     atual.adr += carta.values[0] * (100 - oponente.split_percentage) / 100;
     atual.adr += carta.values[1];
-    
+
     if (carta.values[2] == 1 && atual.descarteLength > 0)
     {
         ind = showCards(atual.descarte, atual.descarteLength);
@@ -144,7 +144,7 @@ void pegarCarta_PutInPlay(struct Carta &carta , struct Player &atual, struct Pla
             return;
         }
 
-        copiarCarta(atual.mao[atual.maoLength] , atual.baralho[ind]);
+        copiarCarta(atual.mao[atual.maoLength++], atual.baralho[ind]);
 
         for (int i = ind; i < atual.indBaralho; i++)
         {
