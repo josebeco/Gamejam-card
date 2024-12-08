@@ -56,6 +56,8 @@ bool espacoLivre()
 
 void passTurn()
 {
+    drawWaitingPlayer(indOponente + 1);
+    
     for (int i = 0; i < emJogoSize; i++)
     {
         if (jogadores[indAtual].livreEmJogo[i] || jogadores[indAtual].emJogo[i].indFuncInPlay == 1) // se for buff
@@ -92,8 +94,6 @@ void passTurn()
 
     indAtual ^= 1;
     indOponente ^= 1;
-
-    drawWaitingPlayer(indAtual);
 }
 
 int playCard()
@@ -253,6 +253,6 @@ bool initSimulation()
     drawCard();
     drawCard();
 
-    drawWaitingPlayer(indAtual);
+    drawWaitingPlayer(indAtual + 1);
     return true;
 }
