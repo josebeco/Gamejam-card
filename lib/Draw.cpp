@@ -359,7 +359,8 @@ void drawNumber(int num, int h, int j) // j = end
     int og = num;
     num = abs(num);
 
-    while(num != 0){
+    while (num != 0)
+    {
         drawSprite(h, j, numbers[num % 10], BLACK, 1, 1, false);
         j -= 6;
         num /= 10;
@@ -369,7 +370,6 @@ void drawNumber(int num, int h, int j) // j = end
     {
         drawSprite(h, j, numbers[10], BLACK, 1, 1, false);
     }
-    
 }
 void drawGame()
 {
@@ -411,15 +411,19 @@ void drawGame()
         if (!oponente.livreEmJogo[i])
         {
             drawSprite(196, 10 + i * 37, spriteCartas[oponente.emJogo[i].indSprite], BLACK, 1, 1, true);
-        }else{
+        }
+        else
+        {
             drawSprite(196, 10 + i * 37, extras[5], BLACK, 1, 1, true);
         }
 
         if (!atual.livreEmJogo[i])
         {
             drawSprite(76, 10 + i * 37, spriteCartas[atual.emJogo[i].indSprite], BLACK, 1, 1, true);
-        }else{
-              drawSprite(76, 10 + i * 37, extras[5], BLACK, 1, 1, true);
+        }
+        else
+        {
+            drawSprite(76, 10 + i * 37, extras[5], BLACK, 1, 1, true);
         }
     }
 }
