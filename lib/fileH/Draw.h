@@ -17,3 +17,4 @@ void jumpscare(struct Carta);
 void cycle();
 void cancelar();
 void confirmar();
+void drawWaitingPlayer(int v);

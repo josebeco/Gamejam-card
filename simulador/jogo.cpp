@@ -92,6 +92,8 @@ void passTurn()
 
     indAtual ^= 1;
     indOponente ^= 1;
+
+    drawWaitingPlayer(indAtual);
 }
 
 int playCard()
@@ -110,7 +112,7 @@ int playCard()
 
     if (!jogadores[indAtual].mao[indCarta].item)
     {
-        
+
         if (jogadores[indAtual].mao[indCarta].mascara)
         {
             retorno = 2;
@@ -251,5 +253,6 @@ bool initSimulation()
     drawCard();
     drawCard();
 
+    drawWaitingPlayer(indAtual);
     return true;
 }

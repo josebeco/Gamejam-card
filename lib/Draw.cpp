@@ -200,6 +200,28 @@ void drawStringLimited(int lui, int luj, int heigth, int width, string frase, st
     }
 }
 
+void drawWaitingPlayer(int v)
+{
+    confirmado = false;
+    cancelado = false;
+
+    drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawString("player " + to_string(v), 125, screenWidth / 2 - getStringLength("player 1"), BLACK, 2, 2);
+
+    while (true)
+    {
+        timerOverride();
+
+        if (confirmado)
+        {
+            break;
+        }
+    }
+
+    confirmado = false;
+    cancelado = false;
+}
+
 void drawCardWithDescription(struct Carta carta)
 {
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
@@ -414,7 +436,7 @@ void drawGame()
         }
         else
         {
-            drawSprite(196, 10 + i * 37, extras[5], BLACK, 1, 1, true);
+            drawSprite(196, 10 + i * 37, extras[5], BLACK, 1, 1, false);
         }
 
         if (!atual.livreEmJogo[i])
@@ -423,7 +445,7 @@ void drawGame()
         }
         else
         {
-            drawSprite(76, 10 + i * 37, extras[5], BLACK, 1, 1, true);
+            drawSprite(76, 10 + i * 37, extras[5], BLACK, 1, 1, false);
         }
     }
 }
@@ -568,7 +590,7 @@ void drawLost()
     cout << "lost game" << endl;
     state = 0;
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
-    drawString("you lost", 130, screenWidth / 2 - getStringLength("you lost") / 2, BLACK, 1, 1);
+    drawString("you lost", 125, screenWidth / 2 - getStringLength("you lost"), BLACK, 2, 2);
     timerOverride();
     delay(2000);
 }
