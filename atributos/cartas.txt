@@ -115,7 +115,7 @@ procure por uma carta em seu baralho e em seguida o embaralhe adiciona 40 a sua 
 12
 255 222 52
 2
-0 40 2 0 0 0 0 -1 -1 0
+0 40 2 -1 -1 0 0 -1 -1 0
 mascara kamikaze
 dura 1 turno e aumenta em 100 sua adrenalina e aumenta em 110 a arenalina do oponente
 1 0 0
