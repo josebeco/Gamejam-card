@@ -96,6 +96,7 @@ void passTurn()
 
 int playCard()
 {
+    int retorno = 0;
     int indCarta = showCards(jogadores[indAtual].mao, jogadores[indAtual].maoLength);
     if (indCarta < 0)
     {
@@ -109,12 +110,18 @@ int playCard()
 
     if (!jogadores[indAtual].mao[indCarta].item)
     {
+        
+        if (jogadores[indAtual].mao[indCarta].mascara)
+        {
+            retorno = 2;
+        }
+
         for (int i = 0; i < emJogoSize; i++)
         {
             if (jogadores[indAtual].livreEmJogo[i])
             {
                 jogadores[indAtual].livreEmJogo[i] = false;
-                jogadores[indAtual].emJogo[i] = jogadores[indAtual].mao[indCarta];
+                copiarCarta(jogadores[indAtual].emJogo[i], jogadores[indAtual].mao[indCarta]);
                 break;
             }
         }
@@ -123,8 +130,9 @@ int playCard()
     putInPlay(jogadores[indAtual].mao[indCarta], jogadores[indAtual], jogadores[indOponente]);
     jumpscare(jogadores[indAtual].mao[indCarta]);
 
-    if(jogadores[indAtual].mao[indCarta].item){
-        copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++] , jogadores[indAtual].mao[indCarta]);
+    if (jogadores[indAtual].mao[indCarta].item)
+    {
+        copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++], jogadores[indAtual].mao[indCarta]);
     }
 
     for (int i = indCarta; i < jogadores[indAtual].maoLength - 1; i++)
@@ -133,12 +141,7 @@ int playCard()
     }
     jogadores[indAtual].maoLength--;
 
-    if (jogadores[indAtual].mao[indCarta].mascara)
-    {
-        return 2;
-    }
-
-    return 0;
+    return retorno;
 }
 
 void embaralharCartas(struct Player &jogador)

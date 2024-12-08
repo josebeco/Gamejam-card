@@ -142,7 +142,9 @@ void pegarCarta_PutInPlay(struct Carta &carta , struct Player &atual, struct Pla
         {
             return;
         }
-        atual.mao[atual.maoLength] = atual.baralho[ind];
+        
+        copiarCarta(atual.mao[atual.maoLength] , atual.baralho[ind]);
+
         for (int i = ind; i < atual.indBaralho; i++)
         {
             atual.baralho[ind] = atual.baralho[ind + 1];
