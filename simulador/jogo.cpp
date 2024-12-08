@@ -57,7 +57,7 @@ bool espacoLivre()
 void passTurn()
 {
     drawWaitingPlayer(indOponente + 1);
-    
+
     for (int i = 0; i < emJogoSize; i++)
     {
         if (jogadores[indAtual].livreEmJogo[i] || jogadores[indAtual].emJogo[i].indFuncInPlay == 1) // se for buff
@@ -67,9 +67,9 @@ void passTurn()
 
         if (inPlay(jogadores[indAtual].emJogo[i], jogadores[indAtual], jogadores[indOponente]))
         {
+            copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++], jogadores[indAtual].emJogo[i]);
             jogadores[indAtual].livreEmJogo[i] = true;
             jogadores[indAtual].emJogo[i].nula = true;
-            copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++], jogadores[indAtual].emJogo[i]);
         }
 
         jumpscare(jogadores[indAtual].emJogo[i]);
@@ -84,9 +84,9 @@ void passTurn()
 
         if (inPlay(jogadores[indAtual].emJogo[i], jogadores[indAtual], jogadores[indOponente]))
         {
+            copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++], jogadores[indAtual].emJogo[i]);
             jogadores[indAtual].livreEmJogo[i] = true;
             jogadores[indAtual].emJogo[i].nula = true;
-            copiarCarta(jogadores[indAtual].descarte[jogadores[indAtual].descarteLength++], jogadores[indAtual].emJogo[i]);
         }
 
         jumpscare(jogadores[indAtual].emJogo[i]);
