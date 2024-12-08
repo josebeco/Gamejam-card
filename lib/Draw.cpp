@@ -655,6 +655,8 @@ void drawMenu()
         }
     }
     drawRectangle(239, 0, 240, screenWidth, YELLOW_PAGE);
+    drawNumber(1004, 6, 10);
+
     drawSprite(227, 12, extras[4], BLACK, 7, 6, false);
 
     drawRectangle(235, screenWidth / 2 - getStringLength("jumpscard") - 1, 20, getStringLength("jumpscard") * 2, YELLOW_PAGE);
@@ -666,6 +668,8 @@ void drawMenu()
     drawString("play", 130, screenWidth / 2 - getStringLength("play") / 2, BLACK, 1, 1);
     drawString("deck", 110, screenWidth / 2 - getStringLength("deck") / 2, BLACK, 1, 1);
     drawString("exit", 90, screenWidth / 2 - getStringLength("exit") / 2, BLACK, 1, 1);
+
+
     confirmado = false;
     cancelado = false;
 }
