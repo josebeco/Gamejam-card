@@ -143,6 +143,7 @@ void lerCartas(string fileName)
             aux = inBetweenEmpty(indP, str);
             original[i].values[j] = stoi(aux);
         }
+        
         original[i].nula = false;
         imprirmirCarta(original[i]);
     }

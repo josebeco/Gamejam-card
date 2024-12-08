@@ -3,6 +3,7 @@
 #include "../lib/fileH/Draw.h"
 #include "simulatorH/HandlerCarta.h"
 #include "simulatorH/jogo.h"
+#include <iostream>
 using namespace std;
 
 bool adrenaline_InPlay(struct Carta &carta, struct Player &atual, struct Player &oponente)
@@ -117,7 +118,7 @@ void pegarCarta_PutInPlay(struct Carta &carta , struct Player &atual, struct Pla
     oponente.adr += carta.values[0] * oponente.split_percentage / 100;
     atual.adr += carta.values[0] * (100 - oponente.split_percentage) / 100;
     atual.adr += carta.values[1];
-
+    
     if (carta.values[2] == 1 && atual.descarteLength > 0)
     {
         ind = showCards(atual.descarte, atual.descarteLength);
@@ -142,7 +143,7 @@ void pegarCarta_PutInPlay(struct Carta &carta , struct Player &atual, struct Pla
         {
             return;
         }
-        
+
         copiarCarta(atual.mao[atual.maoLength] , atual.baralho[ind]);
 
         for (int i = ind; i < atual.indBaralho; i++)
@@ -166,7 +167,7 @@ void buff_PutInPlay(struct Carta &carta, struct Player &atual, struct Player &op
     atual.split_percentage += carta.values[2];
 }
 
-void (*funcPutInPlay[4])(struct Carta &, struct Player &, struct Player &) = {&adrenaline_PutInPlay, &removeCard_PutInPlay, &removeCard_PutInPlay, &buff_PutInPlay};
+void (*funcPutInPlay[4])(struct Carta &, struct Player &, struct Player &) = {&adrenaline_PutInPlay, &removeCard_PutInPlay, &pegarCarta_PutInPlay, &buff_PutInPlay};
 
 void putInPlay(struct Carta &carta, struct Player &atual, struct Player &oponente)
 {
